@@ -38,6 +38,10 @@ public class ParentService {
             log.error("비밀번호가 비어있습니다");
             throw new NullPwException();
         }
+        if (parent.getCity().isBlank()) {
+            log.error("도시가 비어있습니다");
+            throw new NullCityException();
+        }
     }
 
     private void validateParent(LoginParentDTO parent) {
@@ -46,8 +50,12 @@ public class ParentService {
             throw new InvalidIdException();
         }
         if (parent.getPhone_number().length() != 11 || !parent.getPhone_number().matches("^[0-9]+$")) {
-            log.error("유효하지 않는 번호입니다.");
+            log.error("유효하지 않는 전화번호입니다.");
             throw new InvalidPhoneNumberException();
+        }
+        if (!parent.getPw().matches("^[a-zA-Z0-9]+$")) {
+            log.error("유효하지 않는 비밀번호입니다.");
+            throw new InvalidPwException();
         }
     }
 

@@ -31,7 +31,9 @@ public class ParentApiController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("유효하지 않은 아이디");
         } catch (InvalidPhoneNumberException e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("유효하지 않은 전화번호");
-        } catch (DuplicateIdException e) {
+        } catch (InvalidPwException e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("유효하지 않은 비밀번호");
+        }catch (DuplicateIdException e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("중복된 아이디");
         } catch (DuplicatePhoneNumberException e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("중복된 전화번호");
@@ -39,6 +41,8 @@ public class ParentApiController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("이름 공백");
         } catch (NullPwException e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("비밀번호 공백");
+        } catch (NullCityException e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("도시 공백");
         }
     }
 

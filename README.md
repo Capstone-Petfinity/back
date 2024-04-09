@@ -22,4 +22,4 @@ String city;
 
 # AddressApiController
 
-## address/city: GET
+## /address/city: GET

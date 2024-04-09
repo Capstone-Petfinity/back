@@ -16,15 +16,13 @@ public class LoginParentDTO {
     private String pw;
     private String name;
     private String phone_number;
-    private Boolean login_status;
     private Address address;
 
-    public LoginParentDTO(String id, String pw, String name, String phone_number, Boolean login_status, Address address) {
+    public LoginParentDTO(String id, String pw, String name, String phone_number, Address address) {
         this.id = id;
         this.pw = pw;
         this.name = name;
         this.phone_number = phone_number;
-        this.login_status = login_status;
         this.address = address;
     }
 }

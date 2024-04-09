@@ -18,6 +18,12 @@ public class ParentRepository {
     public void save(LoginParentDTO parentDTO) {
         Parent parent = new Parent();
 
+        parent.setId(parent.getId());
+        parent.setName(parentDTO.getName());
+        parent.setPw(parentDTO.getPw());
+        parent.setPhone_number(parentDTO.getPhone_number());
+        parent.setAddress(parentDTO.getAddress());
+
         em.persist(parent);
     }
 
@@ -36,9 +42,9 @@ public class ParentRepository {
 
     }
 
-//    public List<Parent> findByPhoneNumber(String phoneNumber) {
-//        return em.createQuery("select p from Parent p where p.phone_number = :phoneNumber", Parent.class)
-//                .setParameter("id", phoneNumber)
-//                .getResultList();
-//    }
+    public List<Parent> findByPhoneNumber(String phoneNumber) {
+        return em.createQuery("select p from Parent p where p.phone_number = :phoneNumber", Parent.class)
+                .setParameter("phoneNumber", phoneNumber)
+                .getResultList();
+    }
 }

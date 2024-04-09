@@ -36,10 +36,10 @@ public class ParentService {
         if (!findParentsId.isEmpty()) {
             throw new IllegalStateException("이미 존재하는 회원입니다.");
         }
-//        List<Parent> findParentsPhoneNumber = parentRepository.findByPhoneNumber(parent.getId());
-//        if (!findParentsPhoneNumber.isEmpty()) {
-//            throw new IllegalStateException("이미 존재하는 번호입니다.");
-//        }
+        List<Parent> findParentsPhoneNumber = parentRepository.findByPhoneNumber(parent.getId());
+        if (!findParentsPhoneNumber.isEmpty()) {
+            throw new IllegalStateException("이미 존재하는 번호입니다.");
+        }
     }
 
 //    @Transactional

@@ -1,5 +1,6 @@
 package Capstone.Petfinity.service;
 
+import Capstone.Petfinity.DTO.LoginParentDTO;
 import Capstone.Petfinity.domain.Parent;
 import Capstone.Petfinity.repository.ParentRepository;
 import jakarta.persistence.EntityManager;
@@ -22,10 +23,11 @@ class ParentServiceTest {
     ParentRepository parentRepository;
     @Autowired
     EntityManager em;
-/*
+
+    /*
     @Test
     public void 회원가입() throws Exception {
-        Parent parent = new Parent();
+        LoginParentDTO parent = new LoginParentDTO();
         parent.setId("asdf");
         parent.setName("홍히지");
 
@@ -68,5 +70,5 @@ class ParentServiceTest {
 
         fail("예외가 발생해야 한다.");
     }
-    */
+     */
 }

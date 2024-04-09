@@ -1,6 +1,7 @@
 package Capstone.Petfinity.domain;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import org.hibernate.annotations.GenericGenerator;
 
@@ -14,20 +15,23 @@ import java.util.UUID;
 public class Pet {
 
     @Id
-    @GeneratedValue(generator = "uuid2")
-    @GenericGenerator(name = "uuid2", strategy = "uuid2")
     @Column(name = "pet_id")
-    private UUID uuid;
-
+    private String uuid;
+    @NotNull
     private String name;
+    @NotNull
     private LocalDateTime birth;
+    @NotNull
     private String gender;
+    @NotNull
     private String kind;
 
+    @NotNull
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "parent_id")
     private Parent parent;
 
+    @NotNull
     @OneToMany(mappedBy = "pet")
     private List<Reservation> reservations = new ArrayList<>();
 }

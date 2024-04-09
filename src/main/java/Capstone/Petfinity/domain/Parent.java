@@ -1,9 +1,9 @@
 package Capstone.Petfinity.domain;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
-import org.antlr.v4.runtime.misc.NotNull;
 import org.hibernate.annotations.GenericGenerator;
 
 import java.util.ArrayList;
@@ -16,24 +16,29 @@ import java.util.UUID;
 public class Parent {
 
     @Id
-    @GeneratedValue(generator = "uuid2")
-    @GenericGenerator(name = "uuid2", strategy = "uuid2")
     @Column(name = "parent_id")
-    private UUID uuid;
-
+    private String uuid;
+    @NotNull
     private String id;
+    @NotNull
     private String pw;
+    @NotNull
     private String name;
+    @NotNull
     private String phone_number;
+    @NotNull
     private Boolean login_status;
 
+    @NotNull
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "address_id")
     private Address address;
 
+    @NotNull
     @OneToMany(mappedBy = "parent")
     private List<Pet> pets = new ArrayList<>();
 
+    @NotNull
     @OneToMany(mappedBy = "parent")
     private List<Reservation> reservations = new ArrayList<>();
 }

@@ -1,6 +1,8 @@
 package Capstone.Petfinity.domain;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
@@ -13,15 +15,14 @@ import java.util.UUID;
 public class Address {
 
     @Id
-    @GeneratedValue(generator = "uuid2")
-    @GenericGenerator(name = "uuid2", strategy = "uuid2")
     @Column(name = "address_id")
-    private UUID uuid;
+    private String uuid;;
 
     @OneToOne(mappedBy = "address", fetch = FetchType.LAZY)
+    @NotNull
     private Parent parent;
-
+    @NotNull
     private String region;
-
+    @NotNull
     private String city;
 }

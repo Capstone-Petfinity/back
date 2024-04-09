@@ -16,4 +16,10 @@ String region;
 
 String city;
 
-## register
+### signupVet
+#### /signup/vet: POST
+
+
+# AddressApiController
+
+## /address/city: GET

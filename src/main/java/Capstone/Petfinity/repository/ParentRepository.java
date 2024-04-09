@@ -35,4 +35,10 @@ public class ParentRepository {
         parent.setLogin_status(true);
 
     }
+
+//    public List<Parent> findByPhoneNumber(String phoneNumber) {
+//        return em.createQuery("select p from Parent p where p.phone_number = :phoneNumber", Parent.class)
+//                .setParameter("id", phoneNumber)
+//                .getResultList();
+//    }
 }

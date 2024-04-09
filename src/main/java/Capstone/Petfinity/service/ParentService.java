@@ -32,10 +32,14 @@ public class ParentService {
     }
 
     private void validateDuplicateParent(LoginParentDTO parent) {
-        List<Parent> findParents = parentRepository.findById(parent.getId());
-        if (!findParents.isEmpty()) {
+        List<Parent> findParentsId = parentRepository.findById(parent.getId());
+        if (!findParentsId.isEmpty()) {
             throw new IllegalStateException("이미 존재하는 회원입니다.");
         }
+//        List<Parent> findParentsPhoneNumber = parentRepository.findByPhoneNumber(parent.getId());
+//        if (!findParentsPhoneNumber.isEmpty()) {
+//            throw new IllegalStateException("이미 존재하는 번호입니다.");
+//        }
     }
 
 //    @Transactional

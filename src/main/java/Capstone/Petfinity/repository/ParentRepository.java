@@ -22,7 +22,7 @@ public class ParentRepository {
         parent.setName(parentDTO.getName());
         parent.setPw(parentDTO.getPw());
         parent.setPhone_number(parentDTO.getPhone_number());
-        parent.setAddress(parentDTO.getAddress());
+        //parent.setAddress(parentDTO.getAddress());
 
         em.persist(parent);
     }

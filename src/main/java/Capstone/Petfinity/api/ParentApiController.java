@@ -23,10 +23,10 @@ public class ParentApiController {
     private final ParentService parentService;
 
     @PostMapping("/user/signup/parent")
-    public ResponseEntity<?> registerParent(@RequestBody LoginParentDTO request) {
+    public ResponseEntity<?> signupParent(@RequestBody LoginParentDTO request) {
 
         try {
-            parentService.register(request);
+            parentService.signup(request);
             return ResponseEntity.ok("Login successful");
         } catch (IllegalStateException e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
@@ -35,19 +35,5 @@ public class ParentApiController {
 //        parent.setName(request.getName());
 //        UUID uuid = parentService.register(parent);
 //        return new RegisterParentResponse(uuid);
-    }
-
-    @Data
-    static class RegisterParentRequest {
-        private String name;
-
-    }
-    @Data
-    static class RegisterParentResponse {
-        private UUID uuid;
-
-        public RegisterParentResponse(UUID uuid) {
-            this.uuid = uuid;
-        }
     }
 }

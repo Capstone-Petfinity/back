@@ -20,7 +20,7 @@ public class ParentService {
 
     // 회원 가입
     @Transactional
-    public void register(LoginParentDTO parent) {
+    public void signup(LoginParentDTO parent) {
         validateDuplicateParent(parent); // 아이디 중복 확인
         validateParent(parent); // 아이디 형식 확인
         parentRepository.save(parent);

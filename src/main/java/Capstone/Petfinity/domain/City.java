@@ -1,20 +1,14 @@
-package Capstone.Petfinity.domain.address;
+package Capstone.Petfinity.domain;
 
 import jakarta.persistence.*;
 import lombok.Getter;
 
-import java.util.List;
-
 @Entity
 @Getter
-public class Region {
-
+public class City {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String name;
-
-    @OneToMany(mappedBy = "region")
-    private List<City> cities;
 }

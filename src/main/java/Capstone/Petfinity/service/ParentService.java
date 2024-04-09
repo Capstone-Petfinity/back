@@ -2,49 +2,67 @@ package Capstone.Petfinity.service;
 
 import Capstone.Petfinity.DTO.LoginParentDTO;
 import Capstone.Petfinity.domain.Parent;
+import Capstone.Petfinity.exception.signup.*;
 import Capstone.Petfinity.repository.ParentRepository;
 import lombok.RequiredArgsConstructor;
-import org.apache.commons.lang3.StringUtils;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.UUID;
 
 @Service
 @Transactional(readOnly = true)
 @RequiredArgsConstructor
+@Slf4j
 public class ParentService {
 
     private final ParentRepository parentRepository;
 
-    // 회원 가입
     @Transactional
+    // 회원 가입
     public void signup(LoginParentDTO parent) {
-        validateDuplicateParent(parent); // 아이디 중복 확인
         validateParent(parent); // 아이디 형식 확인
+        validateDuplicateParent(parent); // 아이디 중복 확인
+        nullParent(parent);
         parentRepository.save(parent);
+        log.info("회원가입 성공");
+    }
+
+    private void nullParent(LoginParentDTO parent) {
+        if (parent.getName().isBlank()) {
+            log.error("이름이 비어있습니다");
+            throw new NullNameException();
+        }
+        if (parent.getPw().isBlank()) {
+            log.error("비밀번호가 비어있습니다");
+            throw new NullPwException();
+        }
     }
 
     private void validateParent(LoginParentDTO parent) {
-        if (parent.getId().length() < 8 || !parent.getId().matches("^[a-zA-Z0-9]+$"))
-            throw new IllegalStateException("아이디의 형식이 올바르지 않습니다.");
+        if (parent.getId().length() < 8 || !parent.getId().matches("^[a-zA-Z0-9]+$")) {
+            log.error("유효하지 않는 아이디입니다");
+            throw new InvalidIdException();
+        }
+        if (parent.getPhone_number().length() != 11 || !parent.getPhone_number().matches("^[0-9]+$")) {
+            log.error("유효하지 않는 번호입니다.");
+            throw new InvalidPhoneNumberException();
+        }
     }
 
     private void validateDuplicateParent(LoginParentDTO parent) {
         List<Parent> findParentsId = parentRepository.findById(parent.getId());
         if (!findParentsId.isEmpty()) {
-            throw new IllegalStateException("이미 존재하는 회원입니다.");
+            log.error("이미 존재하는 회원입니다");
+            throw new DuplicateIdException();
         }
-        List<Parent> findParentsPhoneNumber = parentRepository.findByPhoneNumber(parent.getId());
+        List<Parent> findParentsPhoneNumber = parentRepository.findByPhoneNumber(parent.getPhone_number());
         if (!findParentsPhoneNumber.isEmpty()) {
-            throw new IllegalStateException("이미 존재하는 번호입니다.");
+            log.error("이미 존재하는 번호입니다");
+            throw new DuplicatePhoneNumberException();
         }
     }
 
-//    @Transactional
-//    public UUID login(Parent parent) {
-//
-//    }
-
+    // 지영아 로그인 코드 여기 밑에다가 짜줭!
 }

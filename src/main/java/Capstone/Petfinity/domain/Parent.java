@@ -18,6 +18,7 @@ public class Parent {
     @Id
     @Column(name = "parent_id")
     private String uuid;
+
     @NotNull
     private String id;
     @NotNull
@@ -27,18 +28,12 @@ public class Parent {
     @NotNull
     private String phone_number;
     @NotNull
+    private String city;
     private Boolean login_status;
 
-    @NotNull
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "address_id")
-    private Address address;
-
-    @NotNull
     @OneToMany(mappedBy = "parent")
     private List<Pet> pets = new ArrayList<>();
 
-    @NotNull
     @OneToMany(mappedBy = "parent")
     private List<Reservation> reservations = new ArrayList<>();
 }

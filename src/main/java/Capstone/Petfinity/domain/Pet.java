@@ -17,6 +17,7 @@ public class Pet {
     @Id
     @Column(name = "pet_id")
     private String uuid;
+
     @NotNull
     private String name;
     @NotNull

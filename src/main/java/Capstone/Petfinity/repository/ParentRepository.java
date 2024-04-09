@@ -1,7 +1,6 @@
 package Capstone.Petfinity.repository;
 
 import Capstone.Petfinity.DTO.LoginParentDTO;
-import Capstone.Petfinity.domain.Address;
 import Capstone.Petfinity.domain.Parent;
 import jakarta.persistence.EntityManager;
 import lombok.RequiredArgsConstructor;
@@ -19,17 +18,13 @@ public class ParentRepository {
     public void save(LoginParentDTO parentDTO) {
         Parent parent = new Parent();
 
-        parent.setId(parent.getId());
+        parent.setUuid(UUID.randomUUID().toString());
+        parent.setId(parentDTO.getId());
         parent.setName(parentDTO.getName());
         parent.setPw(parentDTO.getPw());
         parent.setPhone_number(parentDTO.getPhone_number());
+        parent.setCity(parentDTO.getCity());
 
-        Address address = new Address();
-        address.setRegion(parentDTO.getRegion());
-        address.setCity(parentDTO.getCity());
-        parent.setAddress(address);
-
-        em.persist(address);
         em.persist(parent);
     }
 
@@ -42,15 +37,13 @@ public class ParentRepository {
                 .setParameter("id", id)
                 .getResultList();
     }
-
-    public void success_login_status(Parent parent) {
-        parent.setLogin_status(true);
-
-    }
-
     public List<Parent> findByPhoneNumber(String phoneNumber) {
         return em.createQuery("select p from Parent p where p.phone_number = :phoneNumber", Parent.class)
                 .setParameter("phoneNumber", phoneNumber)
                 .getResultList();
+    }
+    public void success_login_status(Parent parent) {
+        parent.setLogin_status(true);
+
     }
 }

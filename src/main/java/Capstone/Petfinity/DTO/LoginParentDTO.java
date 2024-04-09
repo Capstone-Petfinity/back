@@ -7,7 +7,6 @@ import jakarta.persistence.OneToOne;
 import lombok.*;
 
 @Getter
-@AllArgsConstructor
 @NoArgsConstructor
 @ToString
 @Builder

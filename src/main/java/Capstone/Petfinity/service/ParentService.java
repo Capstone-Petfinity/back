@@ -20,11 +20,10 @@ public class ParentService {
 
     // 회원 가입
     @Transactional
-    public UUID register(LoginParentDTO parent) {
+    public void register(LoginParentDTO parent) {
         validateDuplicateParent(parent); // 아이디 중복 확인
         validateParent(parent); // 아이디 형식 확인
         parentRepository.save(parent);
-        return parent.getUuid();
     }
 
     private void validateParent(LoginParentDTO parent) {

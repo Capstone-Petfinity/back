@@ -1,5 +1,6 @@
 package Capstone.Petfinity.api;
 
+import Capstone.Petfinity.DTO.LoginParentDTO;
 import Capstone.Petfinity.domain.Parent;
 import Capstone.Petfinity.service.ParentService;
 import lombok.Data;
@@ -16,15 +17,16 @@ public class ParentApiController {
 
     private final ParentService parentService;
 
+    /* 미완성
     @PostMapping("/register/parent")
-    // 미완성
-    public RegisterParentResponse registerParent(@RequestBody RegisterParentRequest request) {
+    public RegisterParentResponse registerParent(@RequestBody LoginParentDTO request) {
 
         Parent parent = new Parent();
         parent.setName(request.getName());
         UUID uuid = parentService.register(parent);
         return new RegisterParentResponse(uuid);
     }
+     */
 
     @Data
     static class RegisterParentRequest {

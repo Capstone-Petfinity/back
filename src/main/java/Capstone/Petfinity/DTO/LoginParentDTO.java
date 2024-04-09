@@ -16,13 +16,15 @@ public class LoginParentDTO {
     private String pw;
     private String name;
     private String phone_number;
-    private Address address;
+    private String region;
+    private String city;
 
-    public LoginParentDTO(String id, String pw, String name, String phone_number, Address address) {
+    public LoginParentDTO(String id, String pw, String name, String phone_number, String region, String city) {
         this.id = id;
         this.pw = pw;
         this.name = name;
         this.phone_number = phone_number;
-        this.address = address;
+        this.region = region;
+        this.city = city;
     }
 }

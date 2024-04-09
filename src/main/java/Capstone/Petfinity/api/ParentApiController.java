@@ -22,7 +22,7 @@ public class ParentApiController {
     @Autowired
     private final ParentService parentService;
 
-    @PostMapping("/register/parent")
+    @PostMapping("/user/signup/parent")
     public ResponseEntity<?> registerParent(@RequestBody LoginParentDTO request) {
 
         try {

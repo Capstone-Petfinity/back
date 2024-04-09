@@ -29,6 +29,7 @@ public class ParentRepository {
         address.setCity(parentDTO.getCity());
         parent.setAddress(address);
 
+        em.persist(address);
         em.persist(parent);
     }
 

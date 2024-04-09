@@ -1,9 +1,9 @@
-#ParentApiController
+# ParentApiController
 
-##/user
+## /user
 
-###signupParent
-####/signup/parent: POST
+### signupParent
+#### /signup/parent: POST
 String id;
 String pw;
 String name;
@@ -11,4 +11,4 @@ String phone_number;
 String region;
 String city;
 
-##register
+## register

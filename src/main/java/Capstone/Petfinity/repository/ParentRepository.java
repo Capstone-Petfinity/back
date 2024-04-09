@@ -1,6 +1,7 @@
 package Capstone.Petfinity.repository;
 
 import Capstone.Petfinity.DTO.LoginParentDTO;
+import Capstone.Petfinity.domain.Address;
 import Capstone.Petfinity.domain.Parent;
 import jakarta.persistence.EntityManager;
 import lombok.RequiredArgsConstructor;
@@ -22,7 +23,11 @@ public class ParentRepository {
         parent.setName(parentDTO.getName());
         parent.setPw(parentDTO.getPw());
         parent.setPhone_number(parentDTO.getPhone_number());
-        //parent.setAddress(parentDTO.getAddress());
+
+        Address address = new Address();
+        address.setRegion(parentDTO.getRegion());
+        address.setCity(parentDTO.getCity());
+        parent.setAddress(address);
 
         em.persist(parent);
     }

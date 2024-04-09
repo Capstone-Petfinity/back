@@ -24,9 +24,9 @@ public class ParentApiController {
     public ResponseEntity<?> signupParent(@RequestBody LoginParentDTO request) {
 
         try {
-            log.info("start signup");
+            log.info("Start Signup");
             parentService.signup(request);
-            return ResponseEntity.ok("Login successful");
+            return ResponseEntity.ok("Login Successful");
         } catch (InvalidIdException e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("유효하지 않은 아이디");
         } catch (InvalidPhoneNumberException e) {
@@ -41,4 +41,6 @@ public class ParentApiController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("비밀번호 공백");
         }
     }
+
+    // 지영아 여기다가 로그인 코드 작성해조!
 }

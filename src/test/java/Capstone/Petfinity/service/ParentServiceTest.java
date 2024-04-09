@@ -22,7 +22,7 @@ class ParentServiceTest {
     ParentRepository parentRepository;
     @Autowired
     EntityManager em;
-    /*
+/*
     @Test
     public void 회원가입() throws Exception {
         Parent parent = new Parent();
@@ -68,5 +68,5 @@ class ParentServiceTest {
 
         fail("예외가 발생해야 한다.");
     }
-     */
+    */
 }

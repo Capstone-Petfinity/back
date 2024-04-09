@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class HelloController {
 
-    @GetMapping("/hello/yezi")
+    @GetMapping("/")
     public String hello() {
 //        model.addAttribute("data", "hello!!");
         return "민식이바보";

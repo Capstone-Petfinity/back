@@ -15,7 +15,9 @@ public class ParentRepository {
 
     private final EntityManager em;
 
-    public void save(LoginParentDTO parent) {
+    public void save(LoginParentDTO parentDTO) {
+        Parent parent = new Parent();
+
         em.persist(parent);
     }
 

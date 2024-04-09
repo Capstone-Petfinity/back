@@ -12,6 +12,6 @@ public class HelloController {
     @GetMapping("/hello/yezi")
     public String hello() {
 //        model.addAttribute("data", "hello!!");
-        return "ㄹㄴㅇㄹㅇㄴㄹ";
+        return "민식이바보";
     }
 }

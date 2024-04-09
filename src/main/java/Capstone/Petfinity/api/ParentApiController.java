@@ -4,7 +4,6 @@ import Capstone.Petfinity.domain.Parent;
 import Capstone.Petfinity.service.ParentService;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.core.parameters.P;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -19,7 +18,7 @@ public class ParentApiController {
 
     @PostMapping("/register/parent")
     // 미완성
-    public RegisterParentResponse saveParent(@RequestBody RegisterParentRequest request) {
+    public RegisterParentResponse registerParent(@RequestBody RegisterParentRequest request) {
 
         Parent parent = new Parent();
         parent.setName(request.getName());

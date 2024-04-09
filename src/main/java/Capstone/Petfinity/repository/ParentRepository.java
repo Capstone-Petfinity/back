@@ -1,5 +1,6 @@
 package Capstone.Petfinity.repository;
 
+import Capstone.Petfinity.DTO.LoginParentDTO;
 import Capstone.Petfinity.domain.Parent;
 import jakarta.persistence.EntityManager;
 import lombok.RequiredArgsConstructor;
@@ -14,7 +15,7 @@ public class ParentRepository {
 
     private final EntityManager em;
 
-    public void save(Parent parent) {
+    public void save(LoginParentDTO parent) {
         em.persist(parent);
     }
 

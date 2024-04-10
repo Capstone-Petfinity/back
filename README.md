@@ -5,34 +5,24 @@
 ### signupParent
 #### /signup/parent: POST
 **Header**
-
-String auth;
+- String auth;
 
 **Body**
-
-String id;
-
-String pw;
-
-String name;
-
-String phone_number;
-
-String city;
+- String id;
+- String pw;
+- String name;
+- String phone_number;
+- String city;
 
 ### signupVet
 #### /signup/vet: POST
 **Header**
-
-String auth;
+- String auth;
 
 **Body**
-
-String id;
-
-String pw;
-
-String name;
+- String id;
+- String pw;
+- String name;
 
 #### possible error
 null
@@ -53,5 +43,4 @@ duplicate
 
 ## /address/city: GET
 **Header**
-
-String auth;
+- String auth;

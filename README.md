@@ -4,6 +4,9 @@
 
 ### signupParent
 #### /signup/parent: POST
+
+String auth;
+
 String id;
 
 String pw;
@@ -35,4 +38,6 @@ duplicate
 
 # AddressApiController
 
-## /address/city: GET
+## /address/city: POST
+
+String auth;

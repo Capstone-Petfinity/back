@@ -14,12 +14,12 @@ import java.util.List;
 @Builder
 public class AddressResponseDto {
 
-    private String errorCode;
+    private String statusCode;
     private String errorMessage;
     private List<City> cityList;
 
-    public AddressResponseDto(String errorCode, String errorMessage, List<City> cityList) {
-        this.errorCode = errorCode;
+    public AddressResponseDto(String statusCode, String errorMessage, List<City> cityList) {
+        this.statusCode = statusCode;
         this.errorMessage = errorMessage;
         this.cityList = cityList;
     }

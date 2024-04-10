@@ -22,9 +22,9 @@ public class ParentService {
     @Transactional
     // 회원 가입
     public void signup(LoginParentDTO parent) {
-        validateParent(parent); // 아이디 형식 확인
-        validateDuplicateParent(parent); // 아이디 중복 확인
-        nullParent(parent);
+        validateParent(parent); // 형식 확인
+        validateDuplicateParent(parent); // 중복 확인
+        nullParent(parent); // null 확인
         parentRepository.save(parent);
         log.info("회원가입 성공");
     }

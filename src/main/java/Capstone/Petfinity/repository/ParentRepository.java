@@ -24,6 +24,7 @@ public class ParentRepository {
         parent.setPw(parentDTO.getPw());
         parent.setPhone_number(parentDTO.getPhone_number());
         parent.setCity(parentDTO.getCity());
+        parent.setLogin_status(Boolean.FALSE);
 
         em.persist(parent);
     }

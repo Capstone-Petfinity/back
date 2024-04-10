@@ -29,6 +29,7 @@ public class Parent {
     private String phone_number;
     @NotNull
     private String city;
+    @NotNull
     private Boolean login_status;
 
     @OneToMany(mappedBy = "parent")

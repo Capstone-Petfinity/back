@@ -34,7 +34,7 @@ public class ParentApiController {
         try {
             log.info("Start Signup");
             parentService.signup(request);
-            result = new SignupParentResponseDto("200", "Login Success");
+            result = new SignupParentResponseDto("200", "Signup Success");
             return result;
         } catch (InvalidIdException e) {
             result = new SignupParentResponseDto("400", "유효하지 않는 아이디");

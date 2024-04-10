@@ -34,7 +34,7 @@ public class VetApiController {
         try {
             log.info("Start Signup");
             vetService.signup(request);
-            result = new SignupVetResponseDto("200", "Login Success");
+            result = new SignupVetResponseDto("200", "Sign Success");
             return result;
         } catch (InvalidIdException e) {
             result = new SignupVetResponseDto("400", "유효하지 않는 아이디");

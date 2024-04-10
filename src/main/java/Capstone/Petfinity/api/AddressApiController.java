@@ -1,14 +1,11 @@
 package Capstone.Petfinity.api;
 
-import Capstone.Petfinity.dto.address.AddressRequestDto;
 import Capstone.Petfinity.dto.address.AddressResponseDto;
 import Capstone.Petfinity.repository.AddressRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
@@ -19,11 +16,11 @@ public class AddressApiController {
     AddressRepository addressRepository;
 
     AddressResponseDto addressResponseDto;
-    @PostMapping("/address/city")
+    @GetMapping("/address/city")
 
-    public AddressResponseDto returnCityList(@RequestBody AddressRequestDto addressRequestDto) {
+    public AddressResponseDto returnCityList(@RequestHeader("auth") String auth) {
         log.info("auth 확인");
-        if (!addressRequestDto.getAuth().equals("bVAtkPtiVGpWuO3dWEnvr51cEb6r7oF8")) {
+        if (!auth.equals("bVAtkPtiVGpWuO3dWEnvr51cEb6r7oF8")) {
             log.error("권한이 없습니다");
             addressResponseDto = new AddressResponseDto("401", "권한이 없습니다", null);
             return addressResponseDto;

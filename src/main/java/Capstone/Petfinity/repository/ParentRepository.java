@@ -45,6 +45,5 @@ public class ParentRepository {
     }
     public void success_login_status(Parent parent) {
         parent.setLogin_status(true);
-
     }
 }

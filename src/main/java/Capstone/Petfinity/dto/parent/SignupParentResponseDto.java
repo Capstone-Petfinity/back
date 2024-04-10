@@ -7,11 +7,11 @@ import lombok.*;
 @ToString
 @Builder
 public class SignupParentResponseDto {
-    private String errorCode;
+    private String statusCode;
     private String errorMessage;
 
     public SignupParentResponseDto(String errorCode, String errorMessage) {
-        this.errorCode = errorCode;
+        this.statusCode = errorCode;
         this.errorMessage = errorMessage;
     }
 }

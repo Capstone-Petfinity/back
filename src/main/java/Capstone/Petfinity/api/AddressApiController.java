@@ -1,7 +1,7 @@
 package Capstone.Petfinity.api;
 
-import Capstone.Petfinity.dto.AddressRequestDto;
-import Capstone.Petfinity.dto.AddressResponseDto;
+import Capstone.Petfinity.dto.address.AddressRequestDto;
+import Capstone.Petfinity.dto.address.AddressResponseDto;
 import Capstone.Petfinity.repository.AddressRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

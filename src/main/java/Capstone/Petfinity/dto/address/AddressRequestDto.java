@@ -1,4 +1,4 @@
-package Capstone.Petfinity.dto;
+package Capstone.Petfinity.dto.address;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;

@@ -1,6 +1,6 @@
 package Capstone.Petfinity.repository;
 
-import Capstone.Petfinity.dto.SignupParentRequestDto;
+import Capstone.Petfinity.dto.parent.SignupParentRequestDto;
 import Capstone.Petfinity.domain.Parent;
 import jakarta.persistence.EntityManager;
 import lombok.RequiredArgsConstructor;

@@ -1,4 +1,4 @@
-package Capstone.Petfinity.dto;
+package Capstone.Petfinity.dto.parent;
 
 import lombok.*;
 

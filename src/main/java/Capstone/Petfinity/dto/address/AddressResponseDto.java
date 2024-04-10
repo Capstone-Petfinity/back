@@ -1,4 +1,4 @@
-package Capstone.Petfinity.dto;
+package Capstone.Petfinity.dto.address;
 
 import Capstone.Petfinity.domain.City;
 import lombok.Builder;

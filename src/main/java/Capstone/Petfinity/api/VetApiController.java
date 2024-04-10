@@ -1,11 +1,8 @@
 package Capstone.Petfinity.api;
 
-import Capstone.Petfinity.dto.parent.SignupParentRequestDto;
-import Capstone.Petfinity.dto.parent.SignupParentResponseDto;
 import Capstone.Petfinity.dto.vet.SignupVetRequestDto;
 import Capstone.Petfinity.dto.vet.SignupVetResponseDto;
 import Capstone.Petfinity.exception.signup.*;
-import Capstone.Petfinity.service.ParentService;
 import Capstone.Petfinity.service.VetService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -37,7 +34,7 @@ public class VetApiController {
         try {
             log.info("Start Signup");
             vetService.signup(request);
-            result = new SignupVetResponseDto("200", "Login Success");
+            result = new SignupVetResponseDto("200", "Sign Success");
             return result;
         } catch (InvalidIdException e) {
             result = new SignupVetResponseDto("400", "유효하지 않는 아이디");

@@ -9,6 +9,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -22,9 +23,10 @@ public class ParentApiController {
     SignupParentResponseDto result;
 
     @PostMapping("/user/signup/parent")
-    public SignupParentResponseDto signupParent(@RequestBody SignupParentRequestDto request) {
+    public SignupParentResponseDto signupParent(@RequestHeader("auth") String auth,
+                                                @RequestBody SignupParentRequestDto request) {
 
-        if (!request.getAuth().equals("bVAtkPtiVGpWuO3dWEnvr51cEb6r7oF8")) {
+        if (!auth.equals("bVAtkPtiVGpWuO3dWEnvr51cEb6r7oF8")) {
             result = new SignupParentResponseDto("401", "권한이 없습니다.");
             return result;
         }
@@ -32,7 +34,7 @@ public class ParentApiController {
         try {
             log.info("Start Signup");
             parentService.signup(request);
-            result = new SignupParentResponseDto("200", "Login Success");
+            result = new SignupParentResponseDto("200", "Signup Success");
             return result;
         } catch (InvalidIdException e) {
             result = new SignupParentResponseDto("400", "유효하지 않는 아이디");

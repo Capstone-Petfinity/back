@@ -1,8 +1,6 @@
 package Capstone.Petfinity.service;
 
-import Capstone.Petfinity.domain.Parent;
 import Capstone.Petfinity.domain.Vet;
-import Capstone.Petfinity.dto.parent.SignupParentRequestDto;
 import Capstone.Petfinity.dto.vet.SignupVetRequestDto;
 import Capstone.Petfinity.exception.signup.*;
 import Capstone.Petfinity.repository.VetRepository;
@@ -43,7 +41,7 @@ public class VetService {
     }
 
     private void validateParent(SignupVetRequestDto vet) {
-        if (vet.getId().length() < 8 || !vet.getId().matches("^[a-zA-Z0-9]+$")) {
+        if (vet.getId().length() != 5 || !vet.getId().matches("^[0-9]+$")) {
             log.error("유효하지 않는 아이디입니다");
             throw new InvalidIdException();
         }

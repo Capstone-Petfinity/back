@@ -1,10 +1,7 @@
 package Capstone.Petfinity.repository;
 
-import Capstone.Petfinity.domain.Parent;
 import Capstone.Petfinity.domain.Vet;
-import Capstone.Petfinity.dto.parent.SignupParentRequestDto;
 import Capstone.Petfinity.dto.vet.SignupVetRequestDto;
-import Capstone.Petfinity.service.PwEncoderService;
 import jakarta.persistence.EntityManager;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;

@@ -4,29 +4,25 @@
 
 ### signupParent
 #### /signup/parent: POST
+**Header**
+- String auth;
 
-String auth;
-
-String id;
-
-String pw;
-
-String name;
-
-String phone_number;
-
-String city;
+**Body**
+- String id;
+- String pw;
+- String name;
+- String phone_number;
+- String city;
 
 ### signupVet
 #### /signup/vet: POST
+**Header**
+- String auth;
 
-String auth;
-
-String id;
-
-String pw;
-
-String name;
+**Body**
+- String id;
+- String pw;
+- String name;
 
 #### possible error
 null
@@ -43,12 +39,8 @@ duplicate
 - DuplicateIdException(): 아이디 중복
 - DuplicatePhoneNumberException(): 전화번호 중복
 
-### signupVet
-#### /signup/vet: POST
-
-
 # AddressApiController
 
-## /address/city: POST
-
-String auth;
+## /address/city: GET
+**Header**
+- String auth;

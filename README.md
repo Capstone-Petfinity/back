@@ -12,8 +12,6 @@ String name;
 
 String phone_number;
 
-String region;
-
 String city;
 
 ### signupVet

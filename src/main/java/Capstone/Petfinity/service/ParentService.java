@@ -1,6 +1,6 @@
 package Capstone.Petfinity.service;
 
-import Capstone.Petfinity.DTO.LoginParentDTO;
+import Capstone.Petfinity.dto.SignupParentRequestDto;
 import Capstone.Petfinity.domain.Parent;
 import Capstone.Petfinity.exception.signup.*;
 import Capstone.Petfinity.repository.ParentRepository;
@@ -21,15 +21,15 @@ public class ParentService {
 
     @Transactional
     // 회원 가입
-    public void signup(LoginParentDTO parent) {
+    public void signup(SignupParentRequestDto parent) {
         validateParent(parent); // 형식 확인
-        validateDuplicateParent(parent); // 중복 확인
+        duplicateParent(parent); // 중복 확인
         nullParent(parent); // null 확인
         parentRepository.save(parent);
         log.info("회원가입 성공");
     }
 
-    private void nullParent(LoginParentDTO parent) {
+    private void nullParent(SignupParentRequestDto parent) {
         if (parent.getName().isBlank()) {
             log.error("이름이 비어있습니다");
             throw new NullNameException();
@@ -44,7 +44,7 @@ public class ParentService {
         }
     }
 
-    private void validateParent(LoginParentDTO parent) {
+    private void validateParent(SignupParentRequestDto parent) {
         if (parent.getId().length() < 8 || !parent.getId().matches("^[a-zA-Z0-9]+$")) {
             log.error("유효하지 않는 아이디입니다");
             throw new InvalidIdException();
@@ -59,7 +59,7 @@ public class ParentService {
         }
     }
 
-    private void validateDuplicateParent(LoginParentDTO parent) {
+    private void duplicateParent(SignupParentRequestDto parent) {
         List<Parent> findParentsId = parentRepository.findById(parent.getId());
         if (!findParentsId.isEmpty()) {
             log.error("이미 존재하는 회원입니다");

@@ -1,17 +1,10 @@
 package Capstone.Petfinity.service;
 
-import Capstone.Petfinity.DTO.LoginParentDTO;
-import Capstone.Petfinity.domain.Parent;
 import Capstone.Petfinity.repository.ParentRepository;
 import jakarta.persistence.EntityManager;
-import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.UUID;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 @Transactional

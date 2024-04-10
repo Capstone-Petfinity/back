@@ -1,13 +1,12 @@
 package Capstone.Petfinity.api;
 
-import Capstone.Petfinity.DTO.LoginParentDTO;
+import Capstone.Petfinity.dto.SignupParentRequestDto;
+import Capstone.Petfinity.dto.SignupParentResponseDto;
 import Capstone.Petfinity.exception.signup.*;
 import Capstone.Petfinity.service.ParentService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -20,29 +19,45 @@ public class ParentApiController {
     @Autowired
     private final ParentService parentService;
 
+    SignupParentResponseDto result;
+
     @PostMapping("/user/signup/parent")
-    public ResponseEntity<?> signupParent(@RequestBody LoginParentDTO request) {
+    public SignupParentResponseDto signupParent(@RequestBody SignupParentRequestDto request) {
+
+        if (!request.getAuth().equals("bVAtkPtiVGpWuO3dWEnvr51cEb6r7oF8")) {
+            result = new SignupParentResponseDto("401", "권한이 없습니다.");
+            return result;
+        }
 
         try {
             log.info("Start Signup");
             parentService.signup(request);
-            return ResponseEntity.ok("Login Successful");
+            result = new SignupParentResponseDto("200", "Login Success");
+            return result;
         } catch (InvalidIdException e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("유효하지 않은 아이디");
+            result = new SignupParentResponseDto("400", "유효하지 않는 아이디");
+            return result;
         } catch (InvalidPhoneNumberException e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("유효하지 않은 전화번호");
+            result = new SignupParentResponseDto("400", "유효하지 않는 전화번호");
+            return result;
         } catch (InvalidPwException e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("유효하지 않은 비밀번호");
-        }catch (DuplicateIdException e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("중복된 아이디");
+            result = new SignupParentResponseDto("400", "유효하지 않는 비밀번호");
+            return result;
+        } catch (DuplicateIdException e) {
+            result = new SignupParentResponseDto("400", "중복된 아이디");
+            return result;
         } catch (DuplicatePhoneNumberException e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("중복된 전화번호");
+            result = new SignupParentResponseDto("400", "중복된 전화번호");
+            return result;
         } catch (NullNameException e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("이름 공백");
+            result = new SignupParentResponseDto("400", "이름 공백");
+            return result;
         } catch (NullPwException e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("비밀번호 공백");
+            result = new SignupParentResponseDto("400", "비밀번호 공백");
+            return result;
         } catch (NullCityException e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("도시 공백");
+            result = new SignupParentResponseDto("400", "도시 공백");
+            return result;
         }
     }
 

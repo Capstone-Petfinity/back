@@ -1,12 +1,13 @@
-package Capstone.Petfinity.DTO;
+package Capstone.Petfinity.dto;
 
 import lombok.*;
 
 @Getter
 @NoArgsConstructor
 @ToString
-public class LoginParentDTO {
+public class SignupParentRequestDto {
 
+    private String auth;
     private String id;
     private String pw;
     private String name;

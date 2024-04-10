@@ -1,6 +1,6 @@
 package Capstone.Petfinity.repository;
 
-import Capstone.Petfinity.DTO.LoginParentDTO;
+import Capstone.Petfinity.dto.SignupParentRequestDto;
 import Capstone.Petfinity.domain.Parent;
 import jakarta.persistence.EntityManager;
 import lombok.RequiredArgsConstructor;
@@ -15,7 +15,7 @@ public class ParentRepository {
 
     private final EntityManager em;
 
-    public void save(LoginParentDTO parentDTO) {
+    public void save(SignupParentRequestDto parentDTO) {
         Parent parent = new Parent();
 
         parent.setUuid(UUID.randomUUID().toString());

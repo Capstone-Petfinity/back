@@ -1,11 +1,8 @@
 package Capstone.Petfinity.api;
 
-import Capstone.Petfinity.dto.parent.SignupParentRequestDto;
-import Capstone.Petfinity.dto.parent.SignupParentResponseDto;
 import Capstone.Petfinity.dto.vet.SignupVetRequestDto;
 import Capstone.Petfinity.dto.vet.SignupVetResponseDto;
 import Capstone.Petfinity.exception.signup.*;
-import Capstone.Petfinity.service.ParentService;
 import Capstone.Petfinity.service.VetService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

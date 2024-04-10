@@ -17,6 +17,17 @@ String phone_number;
 
 String city;
 
+### signupVet
+#### /signup/vet: POST
+
+String auth;
+
+String id;
+
+String pw;
+
+String name;
+
 #### possible error
 null
 - NullNameException(): 이름 공백

@@ -15,12 +15,12 @@ import java.util.List;
 public class AddressResponseDto {
 
     private String statusCode;
-    private String errorMessage;
+    private String message;
     private List<City> cityList;
 
-    public AddressResponseDto(String statusCode, String errorMessage, List<City> cityList) {
+    public AddressResponseDto(String statusCode, String message, List<City> cityList) {
         this.statusCode = statusCode;
-        this.errorMessage = errorMessage;
+        this.message = message;
         this.cityList = cityList;
     }
 }

@@ -8,10 +8,10 @@ import lombok.*;
 @Builder
 public class SignupParentResponseDto {
     private String statusCode;
-    private String errorMessage;
+    private String message;
 
-    public SignupParentResponseDto(String errorCode, String errorMessage) {
-        this.statusCode = errorCode;
-        this.errorMessage = errorMessage;
+    public SignupParentResponseDto(String statusCode, String message) {
+        this.statusCode = statusCode;
+        this.message = message;
     }
 }

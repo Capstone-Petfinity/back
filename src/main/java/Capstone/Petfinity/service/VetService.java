@@ -1,8 +1,6 @@
 package Capstone.Petfinity.service;
 
-import Capstone.Petfinity.domain.Parent;
 import Capstone.Petfinity.domain.Vet;
-import Capstone.Petfinity.dto.parent.SignupParentRequestDto;
 import Capstone.Petfinity.dto.vet.SignupVetRequestDto;
 import Capstone.Petfinity.exception.signup.*;
 import Capstone.Petfinity.repository.VetRepository;

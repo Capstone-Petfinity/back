@@ -11,10 +11,10 @@ import lombok.ToString;
 @Builder
 public class SignupVetResponseDto {
     private String statusCode;
-    private String errorMessage;
+    private String message;
 
-    public SignupVetResponseDto(String statusCode, String errorMessage) {
+    public SignupVetResponseDto(String statusCode, String message) {
         this.statusCode = statusCode;
-        this.errorMessage = errorMessage;
+        this.message = message;
     }
 }

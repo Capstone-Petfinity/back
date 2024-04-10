@@ -4,9 +4,10 @@
 
 ### signupParent
 #### /signup/parent: POST
-
+**Header**
 String auth;
 
+**Body**
 String id;
 
 String pw;
@@ -19,9 +20,10 @@ String city;
 
 ### signupVet
 #### /signup/vet: POST
-
+**Header**
 String auth;
 
+**Body**
 String id;
 
 String pw;
@@ -45,10 +47,18 @@ duplicate
 
 ### signupVet
 #### /signup/vet: POST
+**Header**
+String auth;
 
+**Body**
+String id;
+
+String pw;
+
+String name;
 
 # AddressApiController
 
-## /address/city: POST
-
+## /address/city: GET
+**Header**
 String auth;

@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RestController;
 @Slf4j
 public class ParentApiController {
 
-    @Autowired
     private final ParentService parentService;
 
     SignupParentResponseDto result;
@@ -24,10 +23,10 @@ public class ParentApiController {
     @PostMapping("/user/signup/parent")
     public SignupParentResponseDto signupParent(@RequestBody SignupParentRequestDto request) {
 
-//        if (!request.getAuth().equals("bVAtkPtiVGpWuO3dWEnvr51cEb6r7oF8")) {
-//            result = new SignupParentResponseDto("401", "권한이 없습니다.");
-//            return result;
-//        }
+        if (!request.getAuth().equals("bVAtkPtiVGpWuO3dWEnvr51cEb6r7oF8")) {
+            result = new SignupParentResponseDto("401", "권한이 없습니다.");
+            return result;
+        }
 
         try {
             log.info("Start Signup");

@@ -3,11 +3,13 @@ package Capstone.Petfinity.service;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 public class PwEncoderService {
+    BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
-    public String Encode(String pw) {
-        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-        String hashedPw = passwordEncoder.encode(pw);
+    public String encode(String pw) {
+        return passwordEncoder.encode(pw);
+    }
 
-        return hashedPw;
+    public boolean isPwMatch(String pw, String dbPw) {
+        return passwordEncoder.matches(pw, dbPw);
     }
 }

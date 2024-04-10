@@ -2,6 +2,7 @@ package Capstone.Petfinity.repository;
 
 import Capstone.Petfinity.dto.parent.SignupParentRequestDto;
 import Capstone.Petfinity.domain.Parent;
+import Capstone.Petfinity.service.PwEncoderService;
 import jakarta.persistence.EntityManager;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
@@ -17,11 +18,16 @@ public class ParentRepository {
 
     public void save(SignupParentRequestDto parentDTO) {
         Parent parent = new Parent();
+        PwEncoderService pwEncoderService = new PwEncoderService();
 
         parent.setUuid(UUID.randomUUID().toString());
         parent.setId(parentDTO.getId());
         parent.setName(parentDTO.getName());
-        parent.setPw(parentDTO.getPw());
+
+        String pw = parentDTO.getPw();
+        parent.setPw(pwEncoderService.encode(pw));
+        System.out.println("pwEncoderService.isPwMatch(pw, parentDTO.getPw()) = " + pwEncoderService.isPwMatch(pw, parentDTO.getPw()));
+
         parent.setPhone_number(parentDTO.getPhone_number());
         parent.setCity(parentDTO.getCity());
         parent.setLogin_status(Boolean.FALSE);

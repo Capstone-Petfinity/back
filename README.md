@@ -14,7 +14,7 @@
 - String phone_number;
 - String city;
 
-## duplicate Id
+## duplicateId
 #### /signup/parent/id: POST
 **Header**
 - String auth;

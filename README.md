@@ -2,7 +2,7 @@
 
 ## /user
 
-### <signupParent>
+## signupParent
 #### /signup/parent: POST
 **Header**
 - String auth;
@@ -14,7 +14,7 @@
 - String phone_number;
 - String city;
 
-### <duplicate Id>
+## duplicate Id
 #### /signup/parent/id: POST
 **Headers**
 - String auth;
@@ -22,7 +22,7 @@
 **body**
 - String id;
 
-### <signupVet>
+## signupVet
 #### /signup/vet: POST
 **Header**
 - String auth;
@@ -32,7 +32,7 @@
 - String pw;
 - String name;
 
-### <possible error>
+## possible error
 
 auth(400): 권한이 없음
 

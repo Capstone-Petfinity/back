@@ -34,7 +34,7 @@
 
 ## possible error
 
-auth(400): 권한이 없음
+auth(400): 권한 없음
 
 validate(401)
 - InvalidIdException(): 유효하지 않는 아이디

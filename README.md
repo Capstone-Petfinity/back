@@ -16,10 +16,10 @@
 
 ## duplicate Id
 #### /signup/parent/id: POST
-**Headers**
+**Header**
 - String auth;
 
-**body**
+**Body**
 - String id;
 
 ## signupVet

@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
 
 import java.util.List;
 
@@ -48,6 +49,10 @@ public class VetService {
         if (!vet.getPw().matches("^[a-zA-Z0-9]+$")) {
             log.error("유효하지 않는 비밀번호입니다.");
             throw new InvalidPwException();
+        }
+        if (StringUtils.containsWhitespace(vet.getName())) {
+            log.error("유효하지 않는 이름입니다.");
+            throw new InvalidNameException();
         }
     }
 

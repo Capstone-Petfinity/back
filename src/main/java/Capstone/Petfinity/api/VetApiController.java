@@ -42,6 +42,9 @@ public class VetApiController {
         } catch (InvalidPwException e) {
             result = new SignupVetResponseDto("401", "유효하지 않는 비밀번호");
             return result;
+        } catch (InvalidNameException e) {
+            result = new SignupVetResponseDto("401", "유효하지 않는 이름");
+            return result;
         } catch (DuplicateIdException e) {
             result = new SignupVetResponseDto("402", "중복된 아이디");
             return result;

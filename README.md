@@ -36,7 +36,7 @@
 
 auth(400): 권한 없음
 
-validate(401)
+invalid(401)
 - InvalidIdException(): 유효하지 않는 아이디
 - InvalidPhoneNumberException(): 유효하지 않는 전화번호
 - InvalidPwException(): 유효하지 않는 비밀번호

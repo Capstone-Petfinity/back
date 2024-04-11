@@ -2,9 +2,7 @@ package Capstone.Petfinity.api;
 
 import Capstone.Petfinity.dto.parent.SignupParentRequestDto;
 import Capstone.Petfinity.dto.parent.SignupParentResponseDto;
-import Capstone.Petfinity.exception.signup.DuplicateIdException;
 import Capstone.Petfinity.repository.ParentRepository;
-import Capstone.Petfinity.service.ParentService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

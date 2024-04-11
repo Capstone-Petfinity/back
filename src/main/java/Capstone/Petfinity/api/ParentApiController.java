@@ -27,7 +27,7 @@ public class ParentApiController {
                                                 @RequestBody SignupParentRequestDto request) {
 
         if (!auth.equals("bVAtkPtiVGpWuO3dWEnvr51cEb6r7oF8")) {
-            result = new SignupParentResponseDto("401", "권한이 없습니다.");
+            result = new SignupParentResponseDto("400", "권한이 없습니다.");
             return result;
         }
 
@@ -37,28 +37,28 @@ public class ParentApiController {
             result = new SignupParentResponseDto("200", "Signup Success");
             return result;
         } catch (InvalidIdException e) {
-            result = new SignupParentResponseDto("400", "유효하지 않는 아이디");
+            result = new SignupParentResponseDto("401", "유효하지 않는 아이디");
             return result;
         } catch (InvalidPhoneNumberException e) {
-            result = new SignupParentResponseDto("400", "유효하지 않는 전화번호");
+            result = new SignupParentResponseDto("401", "유효하지 않는 전화번호");
             return result;
         } catch (InvalidPwException e) {
-            result = new SignupParentResponseDto("400", "유효하지 않는 비밀번호");
+            result = new SignupParentResponseDto("401", "유효하지 않는 비밀번호");
             return result;
-        } catch (DuplicateIdException e) {
-            result = new SignupParentResponseDto("400", "중복된 아이디");
+        } catch (InvalidNameException e) {
+            result = new SignupParentResponseDto("401", "유효하지 않는 이름");
             return result;
-        } catch (DuplicatePhoneNumberException e) {
-            result = new SignupParentResponseDto("400", "중복된 전화번호");
+        }catch (DuplicatePhoneNumberException e) {
+            result = new SignupParentResponseDto("402", "중복된 전화번호");
             return result;
         } catch (NullNameException e) {
-            result = new SignupParentResponseDto("400", "이름 공백");
+            result = new SignupParentResponseDto("403", "이름 공백");
             return result;
         } catch (NullPwException e) {
-            result = new SignupParentResponseDto("400", "비밀번호 공백");
+            result = new SignupParentResponseDto("403", "비밀번호 공백");
             return result;
         } catch (NullCityException e) {
-            result = new SignupParentResponseDto("400", "도시 공백");
+            result = new SignupParentResponseDto("403", "도시 공백");
             return result;
         }
     }

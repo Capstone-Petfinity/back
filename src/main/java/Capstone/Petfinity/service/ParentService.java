@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
 
 import java.util.List;
 
@@ -30,15 +31,15 @@ public class ParentService {
     }
 
     private void nullParent(SignupParentRequestDto parent) {
-        if (parent.getName().isBlank()) {
+        if (parent.getName().isEmpty()) {
             log.error("이름이 비어있습니다");
             throw new NullNameException();
         }
-        if (parent.getPw().isBlank()) {
+        if (parent.getPw().isEmpty()) {
             log.error("비밀번호가 비어있습니다");
             throw new NullPwException();
         }
-        if (parent.getCity().isBlank()) {
+        if (parent.getCity().isEmpty()) {
             log.error("도시가 비어있습니다");
             throw new NullCityException();
         }
@@ -56,6 +57,10 @@ public class ParentService {
         if (!parent.getPw().matches("^[a-zA-Z0-9]+$")) {
             log.error("유효하지 않는 비밀번호입니다.");
             throw new InvalidPwException();
+        }
+        if (StringUtils.containsWhitespace(parent.getName())) {
+            log.error("유효하지 않는 이름입니다.");
+            throw new InvalidNameException();
         }
     }
 

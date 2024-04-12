@@ -1,5 +1,6 @@
 package Capstone.Petfinity.repository;
 
+import Capstone.Petfinity.domain.Parent;
 import Capstone.Petfinity.domain.Vet;
 import Capstone.Petfinity.dto.vet.SignupVetRequestDto;
 import jakarta.persistence.EntityManager;
@@ -29,6 +30,10 @@ public class VetRepository {
 
     public Vet findOneByUuid(String uuid) {
         return em.find(Vet.class, uuid);
+    }
+
+    public Vet findOneById(String id) {
+        return em.find(Vet.class, id);
     }
 
     public List<Vet> findById(String id) {

@@ -29,7 +29,7 @@
 - String pw; 알파벳/숫자만, 공백/NULL x
 - String name; 공백/NULL x
 
-## possible error
+### possible error
 
 auth(400): 권한 없음
 
@@ -55,7 +55,7 @@ null(403)
 - String id;
 - String pw;
 
-## possible error
+### possible error
 
 ## Logout
 #### /logout: Get
@@ -64,7 +64,7 @@ null(403)
 - String uuid;
 - Boolean isParent;
 
-## possible error
+### possible error
 
 auth(400): 권한 없음
 

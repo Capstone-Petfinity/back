@@ -24,9 +24,8 @@ public class LoginController {
             return result;
         }
 
-        try{
+        try {
             log.info("Start login");
-
         }
     }
 }

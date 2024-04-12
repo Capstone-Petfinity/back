@@ -44,7 +44,6 @@ public class ParentRepository {
         return em.find(Parent.class, uuid);
     }
 
-
     public List<Parent> findById(String id) {
         return em.createQuery("select p from Parent p where p.id = :id", Parent.class)
                 .setParameter("id", id)
@@ -55,9 +54,9 @@ public class ParentRepository {
                 .setParameter("phoneNumber", phoneNumber)
                 .getResultList();
     }
-    public void changeLoginStatus(LogoutRequestDto parentDto) {
+    public void changeLoginStatus(Parent parent) {
 
-        if (!parentDto.getLogin_status()) {
+        if (!parent.getLogin_status()) {
             parent.setLogin_status(Boolean.TRUE);
         } else {
             parent.setLogin_status(Boolean.FALSE);

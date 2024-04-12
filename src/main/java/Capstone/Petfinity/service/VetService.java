@@ -63,4 +63,13 @@ public class VetService {
             throw new DuplicateIdException();
         }
     }
+
+    public void changeLoginStatus(Vet vet) {
+
+        if (!vet.getLogin_status()) {
+            vet.setLogin_status(Boolean.TRUE);
+        } else {
+            vet.setLogin_status(Boolean.FALSE);
+        }
+    }
 }

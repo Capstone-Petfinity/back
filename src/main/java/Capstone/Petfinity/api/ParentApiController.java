@@ -71,7 +71,7 @@ public class ParentApiController {
 //    public Parent loginParent(Parent parent){
 //
 //    }
-
+// 로그인 후 : user uuid, 수의사인지 보호자인지 보내기
 
     // 지영아 여기다가 로그인 코드 작성해조!
 }

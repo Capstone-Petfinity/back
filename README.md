@@ -8,10 +8,10 @@
 - String auth;
 
 **Body**
-- String id;
-- String pw;
-- String name;
-- String phone_number;
+- String id; 8자 이상, 알파벳/숫자만, 공백/NULL x
+- String pw; 알파벳/숫자만, 공백/NULL x
+- String name; 공백/NULL x
+- String phone_number; 숫자만, 공백/NULL x
 - String city;
 
 ## duplicate Id
@@ -20,7 +20,7 @@
 - String auth;
 
 **Body**
-- String id;
+- String id; 8자 이상, 알파벳/숫자만, 공백/NULL x
 
 ## signupVet
 #### /signup/vet: POST
@@ -28,9 +28,9 @@
 - String auth;
 
 **Body**
-- String id;
-- String pw;
-- String name;
+- String id; 5자, 숫자만, 공백/NULL x
+- String pw; 알파벳/숫자만, 공백/NULL x
+- String name; 공백/NULL x
 
 ## possible error
 

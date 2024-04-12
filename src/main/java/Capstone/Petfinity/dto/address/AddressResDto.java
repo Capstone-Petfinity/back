@@ -12,13 +12,13 @@ import java.util.List;
 @NoArgsConstructor
 @ToString
 @Builder
-public class AddressResponseDto {
+public class AddressResDto {
 
     private String statusCode;
     private String message;
     private List<City> cityList;
 
-    public AddressResponseDto(String statusCode, String message, List<City> cityList) {
+    public AddressResDto(String statusCode, String message, List<City> cityList) {
         this.statusCode = statusCode;
         this.message = message;
         this.cityList = cityList;

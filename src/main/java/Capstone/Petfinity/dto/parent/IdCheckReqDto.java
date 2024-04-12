@@ -7,7 +7,7 @@ import lombok.ToString;
 @Getter
 @NoArgsConstructor
 @ToString
-public class IdCheckRequestDto {
+public class IdCheckReqDto {
     
     String auth;
     String id;

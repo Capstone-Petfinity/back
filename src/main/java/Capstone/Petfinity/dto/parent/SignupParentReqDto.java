@@ -5,7 +5,7 @@ import lombok.*;
 @Getter
 @NoArgsConstructor
 @ToString
-public class SignupParentRequestDto {
+public class SignupParentReqDto {
 
     private String auth;
     private String id;

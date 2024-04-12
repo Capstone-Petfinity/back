@@ -1,7 +1,7 @@
 package Capstone.Petfinity.repository;
 
 import Capstone.Petfinity.domain.Vet;
-import Capstone.Petfinity.dto.vet.SignupVetRequestDto;
+import Capstone.Petfinity.dto.vet.SignupVetReqDto;
 import jakarta.persistence.EntityManager;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
@@ -15,7 +15,7 @@ public class VetRepository {
 
     private final EntityManager em;
 
-    public void save(SignupVetRequestDto vetDTO) {
+    public void save(SignupVetReqDto vetDTO) {
         Vet vet = new Vet();
 
         vet.setUuid(UUID.randomUUID().toString());
@@ -27,9 +27,28 @@ public class VetRepository {
         em.persist(vet);
     }
 
+    public Vet findOneByUuid(String uuid) {
+        return em.find(Vet.class, uuid);
+    }
+
+    public Vet findOneById(String id) {
+        return em.find(Vet.class, id);
+    }
+
     public List<Vet> findById(String id) {
         return em.createQuery("select v from Vet v where v.id = :id", Vet.class)
                 .setParameter("id", id)
                 .getResultList();
+    }
+
+    public void changeLoginStatus(Vet vet) {
+
+        if (!vet.getLogin_status()) {
+            vet.setLogin_status(Boolean.TRUE);
+        } else {
+            vet.setLogin_status(Boolean.FALSE);
+        }
+
+        em.persist(vet);
     }
 }

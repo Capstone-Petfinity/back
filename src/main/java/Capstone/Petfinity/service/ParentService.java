@@ -1,7 +1,7 @@
 package Capstone.Petfinity.service;
 
-import Capstone.Petfinity.dto.parent.IdCheckRequestDto;
-import Capstone.Petfinity.dto.parent.SignupParentRequestDto;
+import Capstone.Petfinity.dto.parent.IdCheckReqDto;
+import Capstone.Petfinity.dto.parent.SignupParentReqDto;
 import Capstone.Petfinity.domain.Parent;
 import Capstone.Petfinity.exception.signup.*;
 import Capstone.Petfinity.repository.ParentRepository;
@@ -10,8 +10,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;
 
@@ -25,7 +23,7 @@ public class ParentService {
 
     @Transactional
     // 회원 가입
-    public void signup(SignupParentRequestDto parent) {
+    public void signup(SignupParentReqDto parent) {
         validateParent(parent); // 형식 확인
         duplicateParent(parent); // 중복 확인
         nullParent(parent); // null 확인
@@ -33,12 +31,12 @@ public class ParentService {
         log.info("회원가입 성공");
     }
     @Transactional
-    public void idCheck(IdCheckRequestDto parent) {
+    public void idCheck(IdCheckReqDto parent) {
         idCheckParent(parent);
         log.info("아이디 중복 확인");
     }
 
-    private void nullParent(SignupParentRequestDto parent) {
+    private void nullParent(SignupParentReqDto parent) {
         if (parent.getName().isEmpty()) {
             log.error("이름이 비어있습니다");
             throw new NullNameException();
@@ -53,7 +51,7 @@ public class ParentService {
         }
     }
 
-    private void validateParent(SignupParentRequestDto parent) {
+    private void validateParent(SignupParentReqDto parent) {
         if (parent.getPhone_number().length() != 11 || !parent.getPhone_number().matches("^[0-9]+$")) {
             log.error("유효하지 않는 전화번호입니다.");
             throw new InvalidPhoneNumberException();
@@ -68,7 +66,7 @@ public class ParentService {
         }
     }
 
-    private void duplicateParent(SignupParentRequestDto parent) {
+    private void duplicateParent(SignupParentReqDto parent) {
         List<Parent> findParentsId = parentRepository.findById(parent.getId());
         if (!findParentsId.isEmpty()) {
             log.error("이미 존재하는 회원입니다");
@@ -81,7 +79,7 @@ public class ParentService {
         }
     }
 
-    private void idCheckParent(IdCheckRequestDto parent) {
+    private void idCheckParent(IdCheckReqDto parent) {
         if (parent.getId().length() < 8 || !parent.getId().matches("^[a-zA-Z0-9]+$")) {
             log.error("유효하지 않는 아이디입니다");
             throw new InvalidIdException();
@@ -91,16 +89,6 @@ public class ParentService {
             throw new DuplicateIdException();
         }
     }
-//
-//    @PostMapping("/")
-//    public String loginParent(@ModelAttribute Parent parent){
-//        Parent loginResult = ParentService.login(parent);
-//        if(loginResult != null){
-//            //longin 성공
-//            return "main";
-//        } else{
-//            //login 실패
-//        }
-//    }
-    // 지영아 로그인 코드 여기 밑에다가 짜줭!
+
+        // 지영아 로그인 코드 여기 밑에다가 짜줭!
 }

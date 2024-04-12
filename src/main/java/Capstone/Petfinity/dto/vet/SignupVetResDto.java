@@ -1,4 +1,4 @@
-package Capstone.Petfinity.dto.parent;
+package Capstone.Petfinity.dto.vet;
 
 import lombok.Builder;
 import lombok.Getter;
@@ -9,12 +9,11 @@ import lombok.ToString;
 @NoArgsConstructor
 @ToString
 @Builder
-public class IdCheckResponseDto {
-
+public class SignupVetResDto {
     private String statusCode;
     private String message;
 
-    public IdCheckResponseDto(String statusCode, String message) {
+    public SignupVetResDto(String statusCode, String message) {
         this.statusCode = statusCode;
         this.message = message;
     }

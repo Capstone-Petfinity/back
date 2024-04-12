@@ -1,7 +1,7 @@
 package Capstone.Petfinity.service;
 
 import Capstone.Petfinity.domain.Vet;
-import Capstone.Petfinity.dto.vet.SignupVetRequestDto;
+import Capstone.Petfinity.dto.vet.SignupVetReqDto;
 import Capstone.Petfinity.exception.signup.*;
 import Capstone.Petfinity.repository.VetRepository;
 import lombok.RequiredArgsConstructor;
@@ -22,7 +22,7 @@ public class VetService {
 
     @Transactional
     // 회원 가입
-    public void signup(SignupVetRequestDto vet) {
+    public void signup(SignupVetReqDto vet) {
         validateParent(vet); // 형식 확인
         duplicateParent(vet); // 중복 확인
         nullParent(vet); // null 확인
@@ -30,7 +30,7 @@ public class VetService {
         log.info("회원가입 성공");
     }
 
-    private void nullParent(SignupVetRequestDto vet) {
+    private void nullParent(SignupVetReqDto vet) {
         if (vet.getName().isBlank()) {
             log.error("이름이 비어있습니다");
             throw new NullNameException();
@@ -41,7 +41,7 @@ public class VetService {
         }
     }
 
-    private void validateParent(SignupVetRequestDto vet) {
+    private void validateParent(SignupVetReqDto vet) {
         if (vet.getId().length() != 5 || !vet.getId().matches("^[0-9]+$")) {
             log.error("유효하지 않는 아이디입니다");
             throw new InvalidIdException();
@@ -56,11 +56,20 @@ public class VetService {
         }
     }
 
-    private void duplicateParent(SignupVetRequestDto vet) {
+    private void duplicateParent(SignupVetReqDto vet) {
         List<Vet> findPVetsId = vetRepository.findById(vet.getId());
         if (!findPVetsId.isEmpty()) {
             log.error("이미 존재하는 회원입니다");
             throw new DuplicateIdException();
+        }
+    }
+
+    public void changeLoginStatus(Vet vet) {
+
+        if (!vet.getLogin_status()) {
+            vet.setLogin_status(Boolean.TRUE);
+        } else {
+            vet.setLogin_status(Boolean.FALSE);
         }
     }
 }

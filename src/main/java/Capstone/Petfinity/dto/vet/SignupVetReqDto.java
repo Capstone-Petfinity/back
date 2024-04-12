@@ -7,7 +7,7 @@ import lombok.ToString;
 @Getter
 @NoArgsConstructor
 @ToString
-public class SignupVetRequestDto {
+public class SignupVetReqDto {
 
     private String auth;
     private String id;

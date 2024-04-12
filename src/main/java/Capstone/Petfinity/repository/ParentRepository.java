@@ -1,6 +1,6 @@
 package Capstone.Petfinity.repository;
 
-import Capstone.Petfinity.dto.parent.SignupParentRequestDto;
+import Capstone.Petfinity.dto.parent.SignupParentReqDto;
 import Capstone.Petfinity.domain.Parent;
 import Capstone.Petfinity.service.PwEncoderService;
 import jakarta.persistence.EntityManager;
@@ -16,7 +16,7 @@ public class ParentRepository {
 
     private final EntityManager em;
 
-    public void save(SignupParentRequestDto parentDTO) {
+    public void save(SignupParentReqDto parentDTO) {
         Parent parent = new Parent();
         PwEncoderService pwEncoderService = new PwEncoderService();
 
@@ -35,7 +35,11 @@ public class ParentRepository {
         em.persist(parent);
     }
 
-    public Parent findOne(UUID uuid) {
+    public Parent findOneById(String id) {
+        return em.find(Parent.class, id);
+    }
+
+    public Parent findOneByUuid(String uuid) {
         return em.find(Parent.class, uuid);
     }
 
@@ -49,7 +53,14 @@ public class ParentRepository {
                 .setParameter("phoneNumber", phoneNumber)
                 .getResultList();
     }
-    public void success_login_status(Parent parent) {
-        parent.setLogin_status(true);
+    public void changeLoginStatus(Parent parent) {
+
+        if (!parent.getLogin_status()) {
+            parent.setLogin_status(Boolean.TRUE);
+        } else {
+            parent.setLogin_status(Boolean.FALSE);
+        }
+
+        em.persist(parent);
     }
 }

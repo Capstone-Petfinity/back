@@ -91,16 +91,5 @@ public class ParentService {
             throw new DuplicateIdException();
         }
     }
-//
-//    @PostMapping("/")
-//    public String loginParent(@ModelAttribute Parent parent){
-//        Parent loginResult = ParentService.login(parent);
-//        if(loginResult != null){
-//            //longin 성공
-//            return "main";
-//        } else{
-//            //login 실패
-//        }
-//    }
     // 지영아 로그인 코드 여기 밑에다가 짜줭!
 }

@@ -57,10 +57,21 @@ public class ParentApiController {
             return result;
         }
     }
-//
+    //@PostMapping("/")
+//    public String loginParent(@ModelAttribute Parent parent){
+//        Parent loginResult = ParentService.login(parent);
+//        if(loginResult != null){
+//            //longin 성공
+//            return "main";
+//        } else{
+//            //login 실패
+//        }
+//    }
+
 //    public Parent loginParent(Parent parent){
 //
 //    }
+
 
     // 지영아 여기다가 로그인 코드 작성해조!
 }

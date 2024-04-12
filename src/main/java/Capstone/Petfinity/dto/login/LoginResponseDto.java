@@ -10,14 +10,15 @@ import lombok.ToString;
 @ToString
 @Builder
 public class LoginResponseDto {
+    private String uuid;
+    private String who;
     private String statusCode;
     private String message;
 
-    public LoginResponseDto(String statusCode, String message) {
+    public LoginResponseDto(String uuid, String who, String statusCode, String message) {
+        this.uuid = uuid;
+        this.who = who;
         this.statusCode = statusCode;
         this.message = message;
     }
-
-    private String uuid;
-    private String parentorvet;
 }

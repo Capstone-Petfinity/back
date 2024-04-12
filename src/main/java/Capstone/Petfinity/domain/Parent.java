@@ -35,4 +35,5 @@ public class Parent {
 
     @OneToMany(mappedBy = "parent")
     private List<Reservation> reservations = new ArrayList<>();
+
 }

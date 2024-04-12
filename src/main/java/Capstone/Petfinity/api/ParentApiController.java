@@ -28,7 +28,7 @@ public class ParentApiController {
             result = new SignupParentResponseDto("400", "권한이 없습니다.");
             return result;
         }
-
+// result = new LoginResponseDto(statusCode:"200", uuid: parent.getUuid()
         try {
             log.info("Start Signup");
             parentService.signup(request);

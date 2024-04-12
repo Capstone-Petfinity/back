@@ -1,5 +1,6 @@
 package Capstone.Petfinity.api;
 
+import Capstone.Petfinity.domain.Parent;
 import Capstone.Petfinity.dto.parent.SignupParentRequestDto;
 import Capstone.Petfinity.dto.parent.SignupParentResponseDto;
 import Capstone.Petfinity.exception.signup.*;
@@ -7,10 +8,7 @@ import Capstone.Petfinity.service.ParentService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestHeader;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
@@ -61,6 +59,10 @@ public class ParentApiController {
             result = new SignupParentResponseDto("403", "도시 공백");
             return result;
         }
+    }
+
+    public Parent loginParent(Parent parent){
+
     }
 
     // 지영아 여기다가 로그인 코드 작성해조!

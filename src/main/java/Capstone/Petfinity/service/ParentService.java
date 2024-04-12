@@ -9,6 +9,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;
 
@@ -77,5 +79,15 @@ public class ParentService {
         }
     }
 
+    @PostMapping("/")
+    public String loginParent(@ModelAttribute Parent parent){
+        Parent loginResult = ParentService.login(parent);
+        if(loginResult != null){
+            //longin 성공
+            return "main";
+        } else{
+            //login 실패
+        }
+    }
     // 지영아 로그인 코드 여기 밑에다가 짜줭!
 }

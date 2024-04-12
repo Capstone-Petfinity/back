@@ -34,9 +34,6 @@ public class ParentApiController {
             parentService.signup(request);
             result = new SignupParentResponseDto("200", "Signup Success");
             return result;
-        } catch (InvalidIdException e) {
-            result = new SignupParentResponseDto("401", "유효하지 않는 아이디");
-            return result;
         } catch (InvalidPhoneNumberException e) {
             result = new SignupParentResponseDto("401", "유효하지 않는 전화번호");
             return result;
@@ -60,10 +57,10 @@ public class ParentApiController {
             return result;
         }
     }
-
-    public Parent loginParent(Parent parent){
-
-    }
+//
+//    public Parent loginParent(Parent parent){
+//
+//    }
 
     // 지영아 여기다가 로그인 코드 작성해조!
 }

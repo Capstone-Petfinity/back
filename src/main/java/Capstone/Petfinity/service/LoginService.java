@@ -24,17 +24,21 @@ public class LoginService {
     private final ParentRepository parentRepository;
     private final VetRepository vetRepository;
 
-    public void login(LoginRequestDto login) {
+    public String login(LoginRequestDto login) {
+        String uuid;
         nullLogin(login); // null 확인
         boolean result = isNumeric(login);
         if (result) { // 수의사
             parentExistCheck(login); // db에 존재하는지 확인
             parentCorrectPw(login);// 비밀번호가 일치하는지 확인
+            uuid = findParentUuid(login);
         } else { // 보호자
             vetExistCheck(login); // db 존재하는지 확인
             vetCorrectPw(login); // 비밀번호가 일치하는지 확인
+            uuid = findVetUuid(login);
         }
         log.info("로그인 성공");
+        return uuid;
     }
 
     private void nullLogin(LoginRequestDto login) {
@@ -78,6 +82,16 @@ public class LoginService {
         if (!login.getPw().equals(findVetId.getPw())) {
             throw new NotCorrectPwException();
         }
+    }
+
+    private String findParentUuid(LoginRequestDto login){
+        Parent findParentId = parentRepository.findOneById(login.getId());
+        return findParentId.getUuid();
+    }
+
+    private String findVetUuid(LoginRequestDto login){
+        Vet findVetId = vetRepository.findOneById(login.getId());
+        return findVetId.getUuid();
     }
 
     private boolean isNumeric(LoginRequestDto login) {

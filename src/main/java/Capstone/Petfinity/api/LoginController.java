@@ -3,6 +3,7 @@ package Capstone.Petfinity.api;
 import Capstone.Petfinity.dto.login.LoginRequestDto;
 import Capstone.Petfinity.dto.login.LoginResponseDto;
 import Capstone.Petfinity.dto.parent.SignupParentResponseDto;
+import Capstone.Petfinity.service.LoginService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 @Slf4j
 public class LoginController {
 
+    private final LoginService loginService;
     LoginResponseDto result;
     @PostMapping("/user/login")
     public LoginResponseDto Login(@RequestHeader("auth") String auth,
@@ -26,6 +28,8 @@ public class LoginController {
 
         try {
             log.info("Start login");
+            String uuid = loginService.login(request);
+
         }
     }
 }

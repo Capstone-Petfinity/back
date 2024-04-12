@@ -1,7 +1,6 @@
 package Capstone.Petfinity.repository;
 
-import Capstone.Petfinity.dto.logout.LogoutRequestDto;
-import Capstone.Petfinity.dto.parent.SignupParentRequestDto;
+import Capstone.Petfinity.dto.parent.SignupParentReqDto;
 import Capstone.Petfinity.domain.Parent;
 import Capstone.Petfinity.service.PwEncoderService;
 import jakarta.persistence.EntityManager;
@@ -17,7 +16,7 @@ public class ParentRepository {
 
     private final EntityManager em;
 
-    public void save(SignupParentRequestDto parentDTO) {
+    public void save(SignupParentReqDto parentDTO) {
         Parent parent = new Parent();
         PwEncoderService pwEncoderService = new PwEncoderService();
 

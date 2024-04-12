@@ -1,16 +1,20 @@
 package Capstone.Petfinity.dto.parent;
 
-import lombok.*;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @Getter
 @NoArgsConstructor
 @ToString
 @Builder
-public class SignupParentResponseDto {
+public class IdCheckResDto {
+
     private String statusCode;
     private String message;
 
-    public SignupParentResponseDto(String statusCode, String message) {
+    public IdCheckResDto(String statusCode, String message) {
         this.statusCode = statusCode;
         this.message = message;
     }

@@ -1,4 +1,4 @@
-package Capstone.Petfinity.dto.logout;
+package Capstone.Petfinity.dto.login;
 
 import lombok.Builder;
 import lombok.Getter;
@@ -9,12 +9,15 @@ import lombok.ToString;
 @NoArgsConstructor
 @ToString
 @Builder
-public class LogoutResponseDto {
-
+public class LoginResDto {
+    private String uuid;
+    private String who;
     private String statusCode;
     private String message;
 
-    public LogoutResponseDto(String statusCode, String message) {
+    public LoginResDto(String uuid, String who, String statusCode, String message) {
+        this.uuid = uuid;
+        this.who = who;
         this.statusCode = statusCode;
         this.message = message;
     }

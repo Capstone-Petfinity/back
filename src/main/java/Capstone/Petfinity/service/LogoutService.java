@@ -2,13 +2,12 @@ package Capstone.Petfinity.service;
 
 import Capstone.Petfinity.domain.Parent;
 import Capstone.Petfinity.domain.Vet;
-import Capstone.Petfinity.dto.logout.LogoutRequestDto;
-import Capstone.Petfinity.exception.logout.InvalidStatusException;
+import Capstone.Petfinity.dto.logout.LogoutReqDto;
+import Capstone.Petfinity.exception.logout.FailLogoutException;
 import Capstone.Petfinity.repository.ParentRepository;
 import Capstone.Petfinity.repository.VetRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -22,9 +21,10 @@ public class LogoutService {
     private final VetRepository vetRepository;
 
     @Transactional
-    public void logout(LogoutRequestDto request) {
+    public void logout(LogoutReqDto request) {
 
         String uuid = request.getUuid();
+
 
         if (request.getWho()) { // True: 보호자, False: 수의사
 
@@ -44,17 +44,14 @@ public class LogoutService {
     }
 
     public void validateParentStatus(Parent parent) {
-        if (!parent.getLogin_status()) {
-            log.info("이미 로그아웃 상태입니다");
-            throw new InvalidStatusException();
-        }
+        if (parent.getLogin_status())
+            return;
+        throw new FailLogoutException();
     }
 
     public void validateVetStatus(Vet vet) {
-        if (!vet.getLogin_status()) {
-            log.info("이미 로그아웃 상태입니다");
-            throw new InvalidStatusException();
-        }
+        if (vet.getLogin_status())
+            return;
+        throw new FailLogoutException();
     }
-
 }

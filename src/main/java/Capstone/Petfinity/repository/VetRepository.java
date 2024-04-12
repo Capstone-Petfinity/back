@@ -1,8 +1,7 @@
 package Capstone.Petfinity.repository;
 
-import Capstone.Petfinity.domain.Parent;
 import Capstone.Petfinity.domain.Vet;
-import Capstone.Petfinity.dto.vet.SignupVetRequestDto;
+import Capstone.Petfinity.dto.vet.SignupVetReqDto;
 import jakarta.persistence.EntityManager;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
@@ -16,7 +15,7 @@ public class VetRepository {
 
     private final EntityManager em;
 
-    public void save(SignupVetRequestDto vetDTO) {
+    public void save(SignupVetReqDto vetDTO) {
         Vet vet = new Vet();
 
         vet.setUuid(UUID.randomUUID().toString());

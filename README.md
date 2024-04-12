@@ -32,6 +32,15 @@
 - String pw;
 - String name;
 
+## Login
+#### /login: POST
+**Header**
+- String auth;
+
+**Body**
+- String id;
+- String pw; 
+
 ## possible error
 
 auth(400): 권한 없음

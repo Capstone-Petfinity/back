@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.UUID;
+import
 
 @Repository
 @RequiredArgsConstructor
@@ -35,8 +36,8 @@ public class ParentRepository {
         em.persist(parent);
     }
 
-    public Parent findOne(UUID uuid) {
-        return em.find(Parent.class, uuid);
+    public Parent findOne(String id) {
+        return em.find(Parent.class, id);
     }
 
     public List<Parent> findById(String id) {

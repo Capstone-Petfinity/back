@@ -23,24 +23,38 @@ public class LogoutService {
     @Transactional
     public void logout(LogoutReqDto request) {
 
-        String uuid = request.getUuid();
+        String uuid;
+        Boolean isParent;
 
+        try {
+            uuid = request.getUuid();
+            isParent = request.getIsParent();
 
-        if (request.getWho()) { // True: 보호자, False: 수의사
+            if (isParent) { // True: 보호자, False: 수의사
 
-            Parent parent = parentRepository.findOneByUuid(uuid);
-            validateParentStatus(parent); // 로그인 상태인지 확인
+                Parent parent = parentRepository.findOneByUuid(uuid);
+                if (parent == null)
+                    throw new FailLogoutException();
 
-            parentRepository.changeLoginStatus(parent);
-            log.info("로그아웃 성공");
-        } else {
-            Vet vet = vetRepository.findOneByUuid(uuid);
-            validateVetStatus(vet); // 로그인 상태인지 확인
+                validateParentStatus(parent); // 로그인 상태인지 확인
 
-            vetRepository.changeLoginStatus(vet);
-            log.info("로그아웃 성공");
+                parentRepository.changeLoginStatus(parent);
+                log.info("로그아웃 성공");
+            } else if (!isParent) {
+                Vet vet = vetRepository.findOneByUuid(uuid);
+                if (vet == null)
+                    throw new FailLogoutException();
+
+                validateVetStatus(vet); // 로그인 상태인지 확인
+
+                vetRepository.changeLoginStatus(vet);
+                log.info("로그아웃 성공");
+            } else {
+                throw new FailLogoutException();
+            }
+        } finally {
+            throw new FailLogoutException();
         }
-
     }
 
     public void validateParentStatus(Parent parent) {

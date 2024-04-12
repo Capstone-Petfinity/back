@@ -10,5 +10,5 @@ import lombok.ToString;
 public class LogoutReqDto {
     private String auth;
     private String uuid;
-    private Boolean who;
+    private Boolean isParent;
 }

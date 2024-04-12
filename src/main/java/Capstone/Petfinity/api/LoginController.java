@@ -30,3 +30,4 @@ public class LoginController {
     }
 }
 // service return을 uuid로
+// service에서 db 훑는 함수를 하나더 만들고 controller에서 부르기

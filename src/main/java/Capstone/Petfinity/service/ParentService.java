@@ -26,7 +26,6 @@ public class ParentService {
     private final ParentRepository parentRepository;
 
     @Transactional
-    // 회원 가입
     public void signup(SignupParentReqDto parent) {
         validateParent(parent); // 형식 확인
         duplicateParent(parent); // 중복 확인

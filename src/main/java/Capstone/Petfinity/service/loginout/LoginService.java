@@ -62,47 +62,49 @@ public class LoginService {
     }
 
     private void parentExistCheck(LoginReqDto request) {
+
         if (parentRepository.findById(request.getId()).isEmpty()) {   // [ ]list로 받아서 해결됐어 그냥 하나 찾는거랑
             log.error("[보호자] 해당 아이디가 존재하지 않습니다."); // list랑 무슨 차이일까?
 
-        if (parentRepository.findOneById(request.getId()) == null) {
-            log.error("[보호자] 해당 아이디가 존재하지 않습니다.");
-            throw new NotExistException();
+            if (parentRepository.findOneById(request.getId()) == null) {
+                log.error("[보호자] 해당 아이디가 존재하지 않습니다.");
+                throw new NotExistException();
+            }
         }
     }
 
-    private void vetExistCheck(LoginReqDto request) {
+    private void vetExistCheck (LoginReqDto request){
 
-        if (vetRepository.findOneById(request.getId()) == null) {
         if (vetRepository.findById(request.getId()).isEmpty()) {
             log.error("[수의사] 해당 아이디가 존재하지 않습니다.");
             throw new NotExistException();
         }
     }
 
-    private void parentCorrectPw(LoginReqDto request) {
+    private void parentCorrectPw (LoginReqDto request) {
 
         Parent findParentId = parentRepository.findOneById(request.getId());
         if (!request.getPw().equals(findParentId.getPw())) {
-        Parent findParentId = parentRepository.findOneById(request.getId());   // [ ]findParentId가 null이라고 뜸 왜지 왜..
-        if (!request.getPw().equals(findParentId.getPw())) { //존재하는 아이디인데도.. 왜..
-            throw new IncorrectPwException();
+            findParentId = parentRepository.findOneById(request.getId());   // [ ]findParentId가 null이라고 뜸 왜지 왜..
+            if (!request.getPw().equals(findParentId.getPw())) { //존재하는 아이디인데도.. 왜..
+                throw new IncorrectPwException();
+            }
         }
     }
-
-    private void vetCorrectPw(LoginReqDto request) {
+    private void vetCorrectPw (LoginReqDto request) {
 
         Vet findVetId = vetRepository.findOneById(request.getId());
         if (!request.getPw().equals(findVetId.getPw())) {
             throw new IncorrectPwException();
         }
     }
+    private boolean isNumeric (LoginReqDto request){
 
-    private boolean isNumeric(LoginReqDto request) {
         return request.getId().matches("[+-]?\\d*(\\.\\d+)?");
     }
 
-    public Boolean isParent(String uuid){
+    public Boolean isParent(String uuid) {
+
         Parent findParent = parentRepository.findOneByUuid(uuid);
         return findParent != null;
     }

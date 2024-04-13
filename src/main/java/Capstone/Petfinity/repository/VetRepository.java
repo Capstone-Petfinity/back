@@ -1,7 +1,8 @@
 package Capstone.Petfinity.repository;
 
+import Capstone.Petfinity.domain.Parent;
 import Capstone.Petfinity.domain.Vet;
-import Capstone.Petfinity.dto.vet.SignupVetReqDto;
+import Capstone.Petfinity.dto.signup.vet.SignupVetReqDto;
 import jakarta.persistence.EntityManager;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
@@ -28,14 +29,19 @@ public class VetRepository {
     }
 
     public Vet findOneByUuid(String uuid) {
+
         return em.find(Vet.class, uuid);
     }
 
     public Vet findOneById(String id) {
-        return em.find(Vet.class, id);
+
+        return em.createQuery("select v from Vet v where v.id = :id", Vet.class)
+                .setParameter("id", id)
+                .getSingleResult();
     }
 
     public List<Vet> findById(String id) {
+
         return em.createQuery("select v from Vet v where v.id = :id", Vet.class)
                 .setParameter("id", id)
                 .getResultList();

@@ -1,8 +1,13 @@
 package Capstone.Petfinity.service;
 
 import Capstone.Petfinity.domain.Vet;
-import Capstone.Petfinity.dto.vet.SignupVetReqDto;
-import Capstone.Petfinity.exception.signup.*;
+import Capstone.Petfinity.dto.signup.vet.SignupVetReqDto;
+import Capstone.Petfinity.exception.NullNameException;
+import Capstone.Petfinity.exception.NullPwException;
+import Capstone.Petfinity.exception.DuplicateIdException;
+import Capstone.Petfinity.exception.InvalidIdException;
+import Capstone.Petfinity.exception.InvalidNameException;
+import Capstone.Petfinity.exception.InvalidPwException;
 import Capstone.Petfinity.repository.VetRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -23,14 +28,16 @@ public class VetService {
     @Transactional
     // 회원 가입
     public void signup(SignupVetReqDto vet) {
+
         validateParent(vet); // 형식 확인
         duplicateParent(vet); // 중복 확인
         nullParent(vet); // null 확인
         vetRepository.save(vet);
-        log.info("회원가입 성공");
+        log.debug("회원가입 성공");
     }
 
     private void nullParent(SignupVetReqDto vet) {
+
         if (vet.getName().isBlank()) {
             log.error("이름이 비어있습니다");
             throw new NullNameException();
@@ -42,6 +49,7 @@ public class VetService {
     }
 
     private void validateParent(SignupVetReqDto vet) {
+
         if (vet.getId().length() != 5 || !vet.getId().matches("^[0-9]+$")) {
             log.error("유효하지 않는 아이디입니다");
             throw new InvalidIdException();
@@ -57,6 +65,7 @@ public class VetService {
     }
 
     private void duplicateParent(SignupVetReqDto vet) {
+
         List<Vet> findPVetsId = vetRepository.findById(vet.getId());
         if (!findPVetsId.isEmpty()) {
             log.error("이미 존재하는 회원입니다");

@@ -1,9 +1,13 @@
 package Capstone.Petfinity.service;
 
-import Capstone.Petfinity.dto.parent.IdCheckReqDto;
-import Capstone.Petfinity.dto.parent.SignupParentReqDto;
+import Capstone.Petfinity.dto.signup.parent.IdCheckReqDto;
+import Capstone.Petfinity.dto.signup.parent.SignupParentReqDto;
 import Capstone.Petfinity.domain.Parent;
-import Capstone.Petfinity.exception.signup.*;
+import Capstone.Petfinity.exception.*;
+import Capstone.Petfinity.exception.InvalidIdException;
+import Capstone.Petfinity.exception.InvalidNameException;
+import Capstone.Petfinity.exception.InvalidPhoneNumberException;
+import Capstone.Petfinity.exception.InvalidPwException;
 import Capstone.Petfinity.repository.ParentRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -22,21 +26,23 @@ public class ParentService {
     private final ParentRepository parentRepository;
 
     @Transactional
-    // 회원 가입
     public void signup(SignupParentReqDto parent) {
+
         validateParent(parent); // 형식 확인
         duplicateParent(parent); // 중복 확인
         nullParent(parent); // null 확인
         parentRepository.save(parent);
-        log.info("회원가입 성공");
+        log.debug("회원가입 성공");
     }
     @Transactional
     public void idCheck(IdCheckReqDto parent) {
+
         idCheckParent(parent);
-        log.info("아이디 중복 확인");
+        log.debug("아이디 중복 확인");
     }
 
     private void nullParent(SignupParentReqDto parent) {
+
         if (parent.getName().isEmpty()) {
             log.error("이름이 비어있습니다");
             throw new NullNameException();
@@ -52,6 +58,11 @@ public class ParentService {
     }
 
     private void validateParent(SignupParentReqDto parent) {
+
+        if (parent.getId().length() < 8 || !parent.getId().matches("^[a-zA-Z0-9]+$")) {
+            log.error("유효하지 않는 아이디입니다");
+            throw new InvalidIdException();
+        }
         if (parent.getPhone_number().length() != 11 || !parent.getPhone_number().matches("^[0-9]+$")) {
             log.error("유효하지 않는 전화번호입니다.");
             throw new InvalidPhoneNumberException();
@@ -64,9 +75,18 @@ public class ParentService {
             log.error("유효하지 않는 이름입니다.");
             throw new InvalidNameException();
         }
+        if (parent.getId().length() < 8 || !parent.getId().matches("^[a-zA-Z0-9]+$")) {
+            log.error("유효하지 않는 아이디입니다");
+            throw new InvalidIdException();
+        }
     }
 
     private void duplicateParent(SignupParentReqDto parent) {
+
+        if (!parentRepository.findById(parent.getId()).isEmpty()) {
+            log.error("이미 존재하는 아이디입니다");
+            throw new DuplicateIdException();
+        }
         List<Parent> findParentsId = parentRepository.findById(parent.getId());
         if (!findParentsId.isEmpty()) {
             log.error("이미 존재하는 회원입니다");
@@ -80,6 +100,7 @@ public class ParentService {
     }
 
     private void idCheckParent(IdCheckReqDto parent) {
+
         if (parent.getId().length() < 8 || !parent.getId().matches("^[a-zA-Z0-9]+$")) {
             log.error("유효하지 않는 아이디입니다");
             throw new InvalidIdException();
@@ -89,6 +110,4 @@ public class ParentService {
             throw new DuplicateIdException();
         }
     }
-
-        // 지영아 로그인 코드 여기 밑에다가 짜줭!
 }

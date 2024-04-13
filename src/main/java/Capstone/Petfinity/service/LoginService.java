@@ -89,13 +89,13 @@ public class LoginService {
         return isNumeric;
     }
 
-    public String parentOrVet(String uuid){
+    public Boolean isParent(String uuid){
         Parent findParent = parentRepository.findOneByUuid(uuid);
         if(findParent != null){
-            return "Parent";
+            return true;
         }
         else{
-            return "Vet";
+            return false;
         }
     }
 }

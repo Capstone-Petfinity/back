@@ -23,7 +23,8 @@ public class LoginController {
     private final LoginService loginService;
     LoginResDto result;
     private String uuid;
-    private String who;
+    private Boolean isParent;
+
     @PostMapping("/user/login")
     public LoginResDto Login(@RequestHeader("auth") String auth,
                              @RequestBody LoginReqDto request) {
@@ -35,8 +36,8 @@ public class LoginController {
         try {
             log.debug("Start login");
             uuid = loginService.login(request);
-            who = loginService.parentOrVet(uuid);
-            result = new LoginResDto(uuid, who, "200", "Login Success");
+            isParent = loginService.isParent(uuid);
+            result = new LoginResDto(uuid, isParent, "200", "Login Success");
             return result;
         } catch (NullIdException e){
             result = new LoginResDto(null, null, "401", "입력되지 않은 아이디");

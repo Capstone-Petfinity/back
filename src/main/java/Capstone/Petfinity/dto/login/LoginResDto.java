@@ -11,13 +11,13 @@ import lombok.ToString;
 @Builder
 public class LoginResDto {
     private String uuid;
-    private String who;
+    private Boolean isParent;
     private String statusCode;
     private String message;
 
-    public LoginResDto(String uuid, String who, String statusCode, String message) {
+    public LoginResDto(String uuid, Boolean isParent, String statusCode, String message) {
         this.uuid = uuid;
-        this.who = who;
+        this.isParent = isParent;
         this.statusCode = statusCode;
         this.message = message;
     }

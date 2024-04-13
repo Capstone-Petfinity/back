@@ -32,7 +32,7 @@ public class VetApiController {
         }
 
         try {
-            log.info("Start Signup");
+            log.debug("Start Signup");
             vetService.signup(request);
             result = new SignupVetResDto("200", "Sign Success");
             return result;

@@ -39,7 +39,7 @@ public class LogoutService {
                 validateParentStatus(parent); // 로그인 상태인지 확인
 
                 parentRepository.changeLoginStatus(parent);
-                log.info("로그아웃 성공");
+                log.debug("로그아웃 성공");
             } else if (!isParent) {
                 Vet vet = vetRepository.findOneByUuid(uuid);
                 if (vet == null)
@@ -48,7 +48,7 @@ public class LogoutService {
                 validateVetStatus(vet); // 로그인 상태인지 확인
 
                 vetRepository.changeLoginStatus(vet);
-                log.info("로그아웃 성공");
+                log.debug("로그아웃 성공");
             } else {
                 throw new FailLogoutException();
             }

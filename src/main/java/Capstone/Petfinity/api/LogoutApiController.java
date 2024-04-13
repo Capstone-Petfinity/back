@@ -33,7 +33,7 @@ public class LogoutApiController {
         }
 
         try {
-            log.info("Start Logout");
+            log.debug("Start Logout");
             logoutService.logout(request);
 
             log.info("로그아웃 성공");

@@ -27,7 +27,7 @@ public class VetService {
         duplicateParent(vet); // 중복 확인
         nullParent(vet); // null 확인
         vetRepository.save(vet);
-        log.info("회원가입 성공");
+        log.debug("회원가입 성공");
     }
 
     private void nullParent(SignupVetReqDto vet) {

@@ -19,13 +19,13 @@ public class AddressApiController {
     @GetMapping("/address/city")
 
     public AddressResDto returnCityList(@RequestHeader("auth") String auth) {
-        log.info("auth 확인");
+        log.debug("auth 확인");
         if (!auth.equals("bVAtkPtiVGpWuO3dWEnvr51cEb6r7oF8")) {
             log.error("권한이 없습니다");
             addressResDto = new AddressResDto("401", "권한이 없습니다", null);
             return addressResDto;
         }
-        log.info("Success Return City List");
+        log.debug("Success Return City List");
         addressResDto = new AddressResDto("200", "Success Return City List", addressRepository.findAllCity());
         return addressResDto;
     }

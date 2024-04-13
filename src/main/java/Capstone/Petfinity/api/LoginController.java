@@ -33,7 +33,7 @@ public class LoginController {
         }
 
         try {
-            log.info("Start login");
+            log.debug("Start login");
             uuid = loginService.login(request);
             who = loginService.parentOrVet(uuid);
             result = new LoginResDto(uuid, who, "200", "Login Success");

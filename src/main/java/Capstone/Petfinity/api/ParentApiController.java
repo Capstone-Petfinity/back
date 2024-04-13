@@ -29,7 +29,7 @@ public class ParentApiController {
         }
 // result = new LoginResponseDto(statusCode:"200", uuid: parent.getUuid()
         try {
-            log.info("Start Signup");
+            log.debug("Start Signup");
             parentService.signup(request);
             result = new SignupParentResDto("200", "Signup Success");
             return result;

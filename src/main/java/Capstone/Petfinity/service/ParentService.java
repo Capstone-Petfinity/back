@@ -28,12 +28,12 @@ public class ParentService {
         duplicateParent(parent); // 중복 확인
         nullParent(parent); // null 확인
         parentRepository.save(parent);
-        log.info("회원가입 성공");
+        log.debug("회원가입 성공");
     }
     @Transactional
     public void idCheck(IdCheckReqDto parent) {
         idCheckParent(parent);
-        log.info("아이디 중복 확인");
+        log.debug("아이디 중복 확인");
     }
 
     private void nullParent(SignupParentReqDto parent) {
@@ -89,6 +89,4 @@ public class ParentService {
             throw new DuplicateIdException();
         }
     }
-
-        // 지영아 로그인 코드 여기 밑에다가 짜줭!
 }

@@ -37,7 +37,7 @@ public class LoginService {
             parentCorrectPw(login);// 비밀번호가 일치하는지 확인
             uuid = parentRepository.findOneById(login.getId()).getUuid();
         }
-        log.info("로그인 성공");
+        log.debug("로그인 성공");
         return uuid;
     }
 

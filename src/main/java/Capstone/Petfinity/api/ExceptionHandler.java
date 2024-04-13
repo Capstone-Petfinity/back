@@ -1,16 +1,7 @@
 package Capstone.Petfinity.api;
 
-import Capstone.Petfinity.dto.NormalResDto;
-import Capstone.Petfinity.dto.logout.LogoutResDto;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.TypeMismatchException;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.http.converter.HttpMessageNotReadableException;
-import org.springframework.web.bind.MissingServletRequestParameterException;
-import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
-import org.springframework.web.multipart.MultipartException;
 
 @Slf4j
 @RestControllerAdvice

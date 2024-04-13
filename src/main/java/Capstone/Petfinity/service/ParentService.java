@@ -1,9 +1,13 @@
 package Capstone.Petfinity.service;
 
-import Capstone.Petfinity.dto.parent.IdCheckReqDto;
-import Capstone.Petfinity.dto.parent.SignupParentReqDto;
+import Capstone.Petfinity.dto.signup.parent.IdCheckReqDto;
+import Capstone.Petfinity.dto.signup.parent.SignupParentReqDto;
 import Capstone.Petfinity.domain.Parent;
-import Capstone.Petfinity.exception.signup.*;
+import Capstone.Petfinity.exception.*;
+import Capstone.Petfinity.exception.InvalidIdException;
+import Capstone.Petfinity.exception.InvalidNameException;
+import Capstone.Petfinity.exception.InvalidPhoneNumberException;
+import Capstone.Petfinity.exception.InvalidPwException;
 import Capstone.Petfinity.repository.ParentRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

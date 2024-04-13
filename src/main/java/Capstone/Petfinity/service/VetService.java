@@ -1,8 +1,13 @@
 package Capstone.Petfinity.service;
 
 import Capstone.Petfinity.domain.Vet;
-import Capstone.Petfinity.dto.vet.SignupVetReqDto;
-import Capstone.Petfinity.exception.signup.*;
+import Capstone.Petfinity.dto.signup.vet.SignupVetReqDto;
+import Capstone.Petfinity.exception.NullNameException;
+import Capstone.Petfinity.exception.NullPwException;
+import Capstone.Petfinity.exception.DuplicateIdException;
+import Capstone.Petfinity.exception.InvalidIdException;
+import Capstone.Petfinity.exception.InvalidNameException;
+import Capstone.Petfinity.exception.InvalidPwException;
 import Capstone.Petfinity.repository.VetRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

@@ -37,10 +37,15 @@ public class ParentRepository {
     }
 
     public Parent findOneById(String id) {
-        return em.find(Parent.class, id);
+
+        //return em.find(Parent.class, id); // em.find는 PK로만 찾을 수 있음...ㅅㅂ;
+        return em.createQuery("select p from Parent p where p.id = :id", Parent.class)
+                .setParameter("id", id)
+                .getSingleResult();
     }
 
     public Parent findOneByUuid(String uuid) {
+
         return em.find(Parent.class, uuid);
     }
 

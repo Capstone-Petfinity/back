@@ -2,7 +2,6 @@ package Capstone.Petfinity.api.signup;
 
 import Capstone.Petfinity.dto.NormalResDto;
 import Capstone.Petfinity.dto.signup.vet.SignupVetReqDto;
-import Capstone.Petfinity.dto.signup.vet.SignupVetResDto;
 import Capstone.Petfinity.exception.NullNameException;
 import Capstone.Petfinity.exception.NullPwException;
 import Capstone.Petfinity.exception.DuplicateIdException;

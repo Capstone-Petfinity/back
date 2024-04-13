@@ -31,13 +31,15 @@ public class LoginService {
             vetExistCheck(request); // db 존재하는지 확인
             vetCorrectPw(request); // 비밀번호가 일치하는지 확인
             uuid = vetRepository.findOneById(request.getId()).getUuid();
+            log.debug("로그인 성공");
+            return uuid;
         } else { // 보호자
             parentExistCheck(request); // db에 존재하는지 확인
             parentCorrectPw(request);// 비밀번호가 일치하는지 확인
             uuid = parentRepository.findOneById(request.getId()).getUuid();
+            log.debug("로그인 성공");
+            return uuid;
         }
-        log.debug("로그인 성공");
-        return uuid;
     }
 
     private void nullLogin(LoginReqDto request) {
@@ -52,19 +54,15 @@ public class LoginService {
     }
 
     private void parentExistCheck(LoginReqDto request) {
-        Parent findParentId = null;
-        findParentId = parentRepository.findOneById(request.getId());
-        if (findParentId == null) {
-            log.error("해당 아이디가 존재하지 않습니다.");
+        if (parentRepository.findOneById(request.getId()) == null) {
+            log.error("[보호자] 해당 아이디가 존재하지 않습니다.");
             throw new NotExistException();
         }
     }
 
     private void vetExistCheck(LoginReqDto request) {
-        Vet findVetId = null;
-        findVetId = vetRepository.findOneById(request.getId());
-        if (findVetId == null) {
-            log.error("해당 아이디가 존재하지 않습니다.");
+        if (vetRepository.findOneById(request.getId()) == null) {
+            log.error("[수의사] 해당 아이디가 존재하지 않습니다.");
             throw new NotExistException();
         }
     }

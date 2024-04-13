@@ -56,21 +56,4 @@ public class ParentApiController {
             return result;
         }
     }
-    //@PostMapping("/")
-//    public String loginParent(@ModelAttribute Parent parent){
-//        Parent loginResult = ParentService.login(parent);
-//        if(loginResult != null){
-//            //longin 성공
-//            return "main";
-//        } else{
-//            //login 실패
-//        }
-//    }
-
-//    public Parent loginParent(Parent parent){
-//
-//    }
-// 로그인 후 : user uuid, 수의사인지 보호자인지 보내기
-
-    // 지영아 여기다가 로그인 코드 작성해조!
 }

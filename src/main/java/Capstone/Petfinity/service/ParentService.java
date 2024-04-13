@@ -27,6 +27,7 @@ public class ParentService {
 
     @Transactional
     public void signup(SignupParentReqDto parent) {
+
         validateParent(parent); // 형식 확인
         duplicateParent(parent); // 중복 확인
         nullParent(parent); // null 확인
@@ -35,11 +36,13 @@ public class ParentService {
     }
     @Transactional
     public void idCheck(IdCheckReqDto parent) {
+
         idCheckParent(parent);
         log.debug("아이디 중복 확인");
     }
 
     private void nullParent(SignupParentReqDto parent) {
+
         if (parent.getName().isEmpty()) {
             log.error("이름이 비어있습니다");
             throw new NullNameException();
@@ -55,6 +58,7 @@ public class ParentService {
     }
 
     private void validateParent(SignupParentReqDto parent) {
+
         if (parent.getId().length() < 8 || !parent.getId().matches("^[a-zA-Z0-9]+$")) {
             log.error("유효하지 않는 아이디입니다");
             throw new InvalidIdException();
@@ -78,6 +82,7 @@ public class ParentService {
     }
 
     private void duplicateParent(SignupParentReqDto parent) {
+
         if (!parentRepository.findById(parent.getId()).isEmpty()) {
             log.error("이미 존재하는 아이디입니다");
             throw new DuplicateIdException();
@@ -95,6 +100,7 @@ public class ParentService {
     }
 
     private void idCheckParent(IdCheckReqDto parent) {
+
         if (parent.getId().length() < 8 || !parent.getId().matches("^[a-zA-Z0-9]+$")) {
             log.error("유효하지 않는 아이디입니다");
             throw new InvalidIdException();

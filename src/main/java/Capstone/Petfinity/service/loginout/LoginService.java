@@ -31,20 +31,24 @@ public class LoginService {
         String uuid;
 
         if (result) { // 수의사
+
             vetExistCheck(request); // db 존재하는지 확인
             vetCorrectPw(request); // 비밀번호가 일치하는지 확인
             uuid = vetRepository.findOneById(request.getId()).getUuid();
             Vet vet = vetRepository.findOneByUuid(uuid);
             vetRepository.changeLoginStatus(vet);
-            log.debug("로그인 성공");
+
+            log.debug("Vet Login Success");
             return uuid;
         } else { // 보호자
+
             parentExistCheck(request); // db에 존재하는지 확인
             parentCorrectPw(request);// 비밀번호가 일치하는지 확인
             uuid = parentRepository.findOneById(request.getId()).getUuid();
             Parent parent = parentRepository.findOneByUuid(uuid);
             parentRepository.changeLoginStatus(parent);
-            log.debug("로그인 성공");
+
+            log.debug("Parent Login Success");
             return uuid;
         }
     }
@@ -52,10 +56,12 @@ public class LoginService {
     private void nullLogin(LoginReqDto request) {
 
         if (request.getId().isEmpty()) {
+
             log.error("아이디를 입력하지 않았습니다.");
             throw new NullIdException();
         }
         if (request.getPw().isEmpty()) {
+
             log.error("비밀번호를 입력하지 않았습니다.");
             throw new NullPwException();
         }
@@ -76,6 +82,7 @@ public class LoginService {
     private void vetExistCheck (LoginReqDto request){
 
         if (vetRepository.findById(request.getId()).isEmpty()) {
+
             log.error("[수의사] 해당 아이디가 존재하지 않습니다.");
             throw new NotExistException();
         }
@@ -84,9 +91,12 @@ public class LoginService {
     private void parentCorrectPw (LoginReqDto request) {
 
         Parent findParentId = parentRepository.findOneById(request.getId());
+
         if (!request.getPw().equals(findParentId.getPw())) {
+
             findParentId = parentRepository.findOneById(request.getId());   // [ ]findParentId가 null이라고 뜸 왜지 왜..
-            if (!request.getPw().equals(findParentId.getPw())) { //존재하는 아이디인데도.. 왜..
+            if (!request.getPw().equals(findParentId.getPw())) {
+                //존재하는 아이디인데도.. 왜..
                 throw new IncorrectPwException();
             }
         }
@@ -94,7 +104,9 @@ public class LoginService {
     private void vetCorrectPw (LoginReqDto request) {
 
         Vet findVetId = vetRepository.findOneById(request.getId());
+
         if (!request.getPw().equals(findVetId.getPw())) {
+
             throw new IncorrectPwException();
         }
     }
@@ -106,6 +118,7 @@ public class LoginService {
     public Boolean isParent(String uuid) {
 
         Parent findParent = parentRepository.findOneByUuid(uuid);
+
         return findParent != null;
     }
 }

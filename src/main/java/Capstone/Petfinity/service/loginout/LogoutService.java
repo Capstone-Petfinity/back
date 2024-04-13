@@ -41,6 +41,7 @@ public class LogoutService {
                 parentRepository.changeLoginStatus(parent);
                 log.debug("로그아웃 성공");
             } else if (!isParent) {
+
                 Vet vet = vetRepository.findOneByUuid(uuid);
                 if (vet == null)
                     throw new FailLogoutException();
@@ -50,22 +51,26 @@ public class LogoutService {
                 vetRepository.changeLoginStatus(vet);
                 log.debug("로그아웃 성공");
             } else if (isParent == null) {
+
                 log.error("로그아웃 실패");
                 throw new FailLogoutException();
             }
         } finally {
+
             log.error("로그아웃 실패");
             throw new FailLogoutException();
         }
     }
 
     public void validateParentStatus(Parent parent) {
+
         if (parent.getLogin_status())
             return;
         throw new FailLogoutException();
     }
 
     public void validateVetStatus(Vet vet) {
+
         if (vet.getLogin_status())
             return;
         throw new FailLogoutException();

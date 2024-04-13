@@ -52,6 +52,10 @@ public class ParentService {
     }
 
     private void validateParent(SignupParentReqDto parent) {
+        if (parent.getId().length() < 8 || !parent.getId().matches("^[a-zA-Z0-9]+$")) {
+            log.error("유효하지 않는 아이디입니다");
+            throw new InvalidIdException();
+        }
         if (parent.getPhone_number().length() != 11 || !parent.getPhone_number().matches("^[0-9]+$")) {
             log.error("유효하지 않는 전화번호입니다.");
             throw new InvalidPhoneNumberException();
@@ -64,9 +68,17 @@ public class ParentService {
             log.error("유효하지 않는 이름입니다.");
             throw new InvalidNameException();
         }
+        if (parent.getId().length() < 8 || !parent.getId().matches("^[a-zA-Z0-9]+$")) {
+            log.error("유효하지 않는 아이디입니다");
+            throw new InvalidIdException();
+        }
     }
 
     private void duplicateParent(SignupParentReqDto parent) {
+        if (!parentRepository.findById(parent.getId()).isEmpty()) {
+            log.error("이미 존재하는 아이디입니다");
+            throw new DuplicateIdException();
+        }
         List<Parent> findParentsId = parentRepository.findById(parent.getId());
         if (!findParentsId.isEmpty()) {
             log.error("이미 존재하는 회원입니다");

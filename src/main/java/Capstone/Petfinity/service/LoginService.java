@@ -23,80 +23,73 @@ public class LoginService {
     private final ParentRepository parentRepository;
     private final VetRepository vetRepository;
 
-    private String uuid;
-
-    public String login(LoginReqDto login) {
-        nullLogin(login); // null 확인
-        boolean result = isNumeric(login);
+    public String login(LoginReqDto request) {
+        nullLogin(request); // null 확인
+        boolean result = isNumeric(request);
+        String uuid;
         if (result) { // 수의사
-            vetExistCheck(login); // db 존재하는지 확인
-            vetCorrectPw(login); // 비밀번호가 일치하는지 확인
-            uuid = vetRepository.findOneById(login.getId()).getUuid();
+            vetExistCheck(request); // db 존재하는지 확인
+            vetCorrectPw(request); // 비밀번호가 일치하는지 확인
+            uuid = vetRepository.findOneById(request.getId()).getUuid();
         } else { // 보호자
-            parentExistCheck(login); // db에 존재하는지 확인
-            parentCorrectPw(login);// 비밀번호가 일치하는지 확인
-            uuid = parentRepository.findOneById(login.getId()).getUuid();
+            parentExistCheck(request); // db에 존재하는지 확인
+            parentCorrectPw(request);// 비밀번호가 일치하는지 확인
+            uuid = parentRepository.findOneById(request.getId()).getUuid();
         }
         log.debug("로그인 성공");
         return uuid;
     }
 
-    private void nullLogin(LoginReqDto login) {
-        if (login.getId().isEmpty()) {
+    private void nullLogin(LoginReqDto request) {
+        if (request.getId().isEmpty()) {
             log.error("아이디를 입력하지 않았습니다.");
             throw new NullIdException();
         }
-        if (login.getPw().isEmpty()) {
+        if (request.getPw().isEmpty()) {
             log.error("비밀번호를 입력하지 않았습니다.");
             throw new NullPwException();
         }
     }
 
-    private void parentExistCheck(LoginReqDto login) {
+    private void parentExistCheck(LoginReqDto request) {
         Parent findParentId = null;
-        findParentId = parentRepository.findOneById(login.getId());
+        findParentId = parentRepository.findOneById(request.getId());
         if (findParentId == null) {
             log.error("해당 아이디가 존재하지 않습니다.");
             throw new NotExistException();
         }
     }
 
-    private void vetExistCheck(LoginReqDto login) {
+    private void vetExistCheck(LoginReqDto request) {
         Vet findVetId = null;
-        findVetId = vetRepository.findOneById(login.getId());
+        findVetId = vetRepository.findOneById(request.getId());
         if (findVetId == null) {
             log.error("해당 아이디가 존재하지 않습니다.");
             throw new NotExistException();
         }
     }
 
-    private void parentCorrectPw(LoginReqDto login) {
-        Parent findParentId = parentRepository.findOneById(login.getId());
-        if (!login.getPw().equals(findParentId.getPw())) {
+    private void parentCorrectPw(LoginReqDto request) {
+        Parent findParentId = parentRepository.findOneById(request.getId());
+        if (!request.getPw().equals(findParentId.getPw())) {
             throw new IncorrectPwException();
         }
     }
 
-    private void vetCorrectPw(LoginReqDto login) {
-        Vet findVetId = vetRepository.findOneById(login.getId());
-        if (!login.getPw().equals(findVetId.getPw())) {
+    private void vetCorrectPw(LoginReqDto request) {
+        Vet findVetId = vetRepository.findOneById(request.getId());
+        if (!request.getPw().equals(findVetId.getPw())) {
             throw new IncorrectPwException();
         }
     }
 
-    private boolean isNumeric(LoginReqDto login) {
-        boolean isNumeric = login.getId().matches("[+-]?\\d*(\\.\\d+)?");
-        return isNumeric;
+    private boolean isNumeric(LoginReqDto request) {
+        return request.getId().matches("[+-]?\\d*(\\.\\d+)?");
     }
 
     public Boolean isParent(String uuid){
         Parent findParent = parentRepository.findOneByUuid(uuid);
-        if(findParent != null){
-            return true;
-        }
-        else{
-            return false;
-        }
+        return findParent != null;
     }
 }
 

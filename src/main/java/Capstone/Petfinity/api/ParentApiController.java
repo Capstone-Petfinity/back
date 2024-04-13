@@ -1,5 +1,6 @@
 package Capstone.Petfinity.api;
 
+import Capstone.Petfinity.dto.parent.IdCheckResDto;
 import Capstone.Petfinity.dto.parent.SignupParentReqDto;
 import Capstone.Petfinity.dto.parent.SignupParentResDto;
 import Capstone.Petfinity.exception.signup.*;
@@ -33,6 +34,9 @@ public class ParentApiController {
             parentService.signup(request);
             result = new SignupParentResDto("200", "Signup Success");
             return result;
+        } catch (InvalidIdException e) {
+            result = new SignupParentResDto("401", "유효하지 않는 아이디");
+            return result;
         } catch (InvalidPhoneNumberException e) {
             result = new SignupParentResDto("401", "유효하지 않는 전화번호");
             return result;
@@ -42,8 +46,11 @@ public class ParentApiController {
         } catch (InvalidNameException e) {
             result = new SignupParentResDto("401", "유효하지 않는 이름");
             return result;
-        }catch (DuplicatePhoneNumberException e) {
+        } catch (DuplicatePhoneNumberException e) {
             result = new SignupParentResDto("402", "중복된 전화번호");
+            return result;
+        } catch (DuplicateIdException e) {
+            result = new SignupParentResDto("403", "중복된 아이디");
             return result;
         } catch (NullNameException e) {
             result = new SignupParentResDto("403", "이름 공백");

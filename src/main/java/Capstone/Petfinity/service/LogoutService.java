@@ -49,7 +49,7 @@ public class LogoutService {
 
                 vetRepository.changeLoginStatus(vet);
                 log.debug("로그아웃 성공");
-            } else {
+            } else if (isParent == null) {
                 throw new FailLogoutException();
             }
         } finally {

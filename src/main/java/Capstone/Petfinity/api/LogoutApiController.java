@@ -20,9 +20,9 @@ import org.springframework.web.multipart.MultipartException;
 public class LogoutApiController {
 
     @Autowired
-    LogoutService logoutService;
+    private final LogoutService logoutService;
 
-    LogoutResDto result;
+    private LogoutResDto result;
 
     @GetMapping("/user/logout")
     public LogoutResDto logout(@RequestHeader("auth") String auth,

@@ -1,9 +1,7 @@
 package Capstone.Petfinity.api;
 
-import Capstone.Petfinity.dto.login.LoginRequestDto;
-import Capstone.Petfinity.dto.login.LoginResponseDto;
-import Capstone.Petfinity.dto.parent.SignupParentResponseDto;
-import Capstone.Petfinity.service.LoginService;
+import Capstone.Petfinity.dto.login.LoginReqDto;
+import Capstone.Petfinity.dto.login.LoginResDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,21 +14,20 @@ import org.springframework.web.bind.annotation.RestController;
 @Slf4j
 public class LoginController {
 
-    private final LoginService loginService;
-    LoginResponseDto result;
+    LoginResDto result;
     @PostMapping("/user/login")
-    public LoginResponseDto Login(@RequestHeader("auth") String auth,
-                                  @RequestBody LoginRequestDto request) {
+    public LoginResDto Login(@RequestHeader("auth") String auth,
+                             @RequestBody LoginReqDto request) {
         if (!auth.equals("bVAtkPtiVGpWuO3dWEnvr51cEb6r7oF8")) {
-            result = new LoginResponseDto("400", "권한이 없습니다.");
-            return result;
+            //result = new LoginResponseDto("400", "권한이 없습니다.");
+            //return result;
         }
 
-        try {
-            log.info("Start login");
-            String uuid = loginService.login(request);
-
-        }
+//        try {
+//            log.info("Start login");
+//            return null;
+//        }
+        return null;
     }
 }
 // service return을 uuid로

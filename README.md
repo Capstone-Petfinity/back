@@ -1,11 +1,12 @@
-# ParentApiController
+**Header**
+- String auth;
+
+# Parent/VetApiController
 
 ## /user
 
 ## signupParent
 #### /signup/parent: POST
-**Header**
-- String auth;
 
 **Body**
 - String id; 8자 이상, 알파벳/숫자만, 공백/NULL x
@@ -14,34 +15,21 @@
 - String phone_number; 숫자만, 공백/NULL x
 - String city;
 
-## duplicate Id
+## duplicateId
 #### /signup/parent/id: POST
-**Header**
-- String auth;
 
 **Body**
 - String id; 8자 이상, 알파벳/숫자만, 공백/NULL x
 
 ## signupVet
 #### /signup/vet: POST
-**Header**
-- String auth;
 
 **Body**
 - String id; 5자, 숫자만, 공백/NULL x
 - String pw; 알파벳/숫자만, 공백/NULL x
 - String name; 공백/NULL x
 
-## Login
-#### /login: POST
-**Header**
-- String auth;
-
-**Body**
-- String id;
-- String pw; 
-
-## possible error
+### possible error
 
 auth(400): 권한 없음
 
@@ -59,6 +47,29 @@ null(403)
 - NullNameException(): 이름 공백
 - NullPwException():  비밀번호 공백
 - NullCityException(): 도시 공백
+
+## Login
+#### /login: POST
+
+**Body**
+- String id;
+- String pw;
+
+### possible error
+
+## Logout
+#### /logout: Get
+
+**Body**
+- String uuid;
+- Boolean isParent;
+
+### possible error
+
+auth(400): 권한 없음
+
+fail(404)
+- FailLogoutException(): 로그아웃 실패(uuid 에러, isParent 에러 통합)
 
 # AddressApiController
 

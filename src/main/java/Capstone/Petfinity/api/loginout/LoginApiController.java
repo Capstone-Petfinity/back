@@ -31,7 +31,7 @@ public class LoginApiController {
         if (!auth.equals("bVAtkPtiVGpWuO3dWEnvr51cEb6r7oF8")) {
 
             log.warn("권한이 없습니다");
-            result = new LoginResDto(null, null, "400", "권한 없음");
+            result = new LoginResDto("400", "권한 없음", null, null);
             return result;
         }
 
@@ -41,23 +41,23 @@ public class LoginApiController {
             Boolean isParent = loginService.isParent(uuid);
 
             log.debug("로그인 성공");
-            result = new LoginResDto(uuid, isParent, "200", "로그인 성공");
+            result = new LoginResDto("200", "로그인 성공", uuid, isParent);
             return result;
         } catch (NullIdException e){
 
-            result = new LoginResDto(null, null, "401", "입력되지 않은 아이디");
+            result = new LoginResDto("401", "입력되지 않은 아이디", null, null);
             return result;
         } catch (NullPwException e){
 
-            result = new LoginResDto(null, null, "401", "입력되지 않은 비밀번호");
+            result = new LoginResDto("401", "입력되지 않은 비밀번호", null, null);
             return result;
         } catch (NotExistException e){
 
-            result = new LoginResDto(null, null, "404", "존재하지 않는 아이디");
+            result = new LoginResDto("404", "존재하지 않는 아이디", null, null);
             return result;
         } catch (IncorrectPwException e){
 
-            result = new LoginResDto(null, null, "405", "일치하지 않는 비밀번호");
+            result = new LoginResDto("405", "일치하지 않는 비밀번호", null, null);
             return result;
         }
     }

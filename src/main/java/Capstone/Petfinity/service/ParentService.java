@@ -114,7 +114,7 @@ public class ParentService {
             log.warn("이미 존재하는 아이디입니다");
             throw new DuplicateIdException();
         }
-        Optional<Parent> findParentsId = parentRepository.findById(parent.getId());
+        List<Parent> findParentsId = parentRepository.findById(parent.getId());
         if (!findParentsId.isEmpty()) {
             log.warn("이미 존재하는 회원입니다");
             throw new DuplicateIdException();

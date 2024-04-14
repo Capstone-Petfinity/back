@@ -15,6 +15,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 @Transactional(readOnly = true)
 @RequiredArgsConstructor
@@ -70,13 +72,17 @@ public class LoginService {
 
     private void parentExistCheck(LoginReqDto request) {
 
-        try {
-
-            parentRepository.findOneById(request.getId());
-        } catch (NoResultException e) {
-
+        List<Parent> findParent = parentRepository.findById(request.getId());
+        if(findParent.isEmpty()){
             throw new NotExistException();
         }
+//        try {
+//
+//          parentRepository.findOneById(request.getId());
+//        } catch (NoResultException e) {
+//
+//            throw new NotExistException();
+//        }
 
 //        if (parentRepository.findOneById(request.getId()) == null) {
 //            log.warn("[보호자] 해당 아이디가 존재하지 않습니다.");
@@ -90,11 +96,15 @@ public class LoginService {
 
     private void vetExistCheck (LoginReqDto request){
 
-        if (vetRepository.findById(request.getId()).isEmpty()) {
-
-            log.warn("[수의사] 해당 아이디가 존재하지 않습니다.");
+        List<Vet> findVet = vetRepository.findById(request.getId());
+        if(findVet.isEmpty()){
             throw new NotExistException();
         }
+//        if (vetRepository.findById(request.getId()).isEmpty()) {
+//
+//            log.warn("[수의사] 해당 아이디가 존재하지 않습니다.");
+//            throw new NotExistException();
+//        }
     }
 
     private void parentCorrectPw (LoginReqDto request) {
@@ -103,7 +113,8 @@ public class LoginService {
 
         if (!request.getPw().equals(findParent.getPw())) {
 
-            findParent = parentRepository.findOneById(request.getId());   // [ ]findParentId가 null이라고 뜸 왜지 왜..
+            throw new IncorrectPwException();
+//            findParent = parentRepository.findOneById(request.getId());   // [ ]findParentId가 null이라고 뜸 왜지 왜..
 //            if (!request.getPw().equals(findParent.getPw())) {
 //                //존재하는 아이디인데도.. 왜..
 //                throw new IncorrectPwException();
@@ -124,11 +135,11 @@ public class LoginService {
         return request.getId().matches("[+-]?\\d*(\\.\\d+)?"); // 이거 무슨 의미인지 주석 부탁함둥
     }
 
-    public Boolean isParent(String uuid) {
+    public Boolean isParent(LoginReqDto request) {
 
-        Parent findParent = parentRepository.findOneByUuid(uuid);
+        List<Parent> findParent = parentRepository.findById(request.getId());
 
-        return findParent != null;
+        return !findParent.isEmpty();
     }
 }
 

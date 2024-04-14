@@ -58,7 +58,6 @@ public class ParentRepository {
         return em.createQuery("select p from Parent p where p.id = :id", Parent.class)
                 .setParameter("id", id)
                 .getResultList();
-        //return findParent.stream().findAny();
     }
     public List<Parent> findByPhoneNumber(String phoneNumber) {
 

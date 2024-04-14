@@ -38,7 +38,7 @@ public class LoginApiController {
         try {
             log.debug("로그인 시작");
             String uuid = loginService.login(request);
-            Boolean isParent = loginService.isParent(uuid);
+            Boolean isParent = loginService.isParent(request);
 
             log.debug("로그인 성공");
             result = new LoginResDto("200", "로그인 성공", uuid, isParent);

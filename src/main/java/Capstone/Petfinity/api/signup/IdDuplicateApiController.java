@@ -24,19 +24,19 @@ public class IdDuplicateApiController {
     public NormalResDto duplicateId(@RequestHeader("auth") String auth,
                                      @RequestBody IdCheckReqDto request) {
 
-        log.debug("Auth Check");
+        log.debug("권한 확인");
         if (!auth.equals("bVAtkPtiVGpWuO3dWEnvr51cEb6r7oF8")) {
 
-            log.error("No Authorization");
+            log.warn("권한이 없습니다");
             idCheckResult = new NormalResDto("400", "권한 없음");
             return idCheckResult;
         }
 
-        log.debug("Start Id Duplicate Check");
+        log.debug("아이디 중복 확인 시작");
         try {
             parentService.idCheck(request);
 
-            log.debug("Id Duplicate Check Success");
+            log.debug("아이디 중복 확인 성공");
             idCheckResult = new NormalResDto("200", "아이디 확인 성공");
             return idCheckResult;
         } catch (InvalidIdException e) {

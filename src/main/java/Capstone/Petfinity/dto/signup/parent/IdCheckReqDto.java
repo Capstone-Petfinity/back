@@ -9,6 +9,5 @@ import lombok.ToString;
 @ToString
 public class IdCheckReqDto {
     
-    String auth;
     String id;
 }

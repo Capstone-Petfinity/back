@@ -1,4 +1,4 @@
-package Capstone.Petfinity.dto.loginout;
+package Capstone.Petfinity.dto.info;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -7,8 +7,7 @@ import lombok.ToString;
 @Getter
 @NoArgsConstructor
 @ToString
-public class LoginReqDto {
+public class InfoParentReqDto {
 
-    private String id;
-    private String pw;
+    private String uuid;
 }

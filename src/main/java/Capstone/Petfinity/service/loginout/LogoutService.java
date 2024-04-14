@@ -32,7 +32,7 @@ public class LogoutService {
 
             if (isParent) { // True: 보호자, False: 수의사
 
-                Parent parent = parentRepository.findOneByUuid(uuid);
+                 Parent parent = parentRepository.findOneByUuid(uuid);
                 if (parent == null)
                     throw new FailLogoutException();
 
@@ -52,12 +52,12 @@ public class LogoutService {
                 log.debug("로그아웃 성공");
             } else if (isParent == null) {
 
-                log.error("로그아웃 실패");
+                log.warn("로그아웃 실패");
                 throw new FailLogoutException();
             }
         } finally {
 
-            log.error("로그아웃 실패");
+            log.warn("로그아웃 실패");
             throw new FailLogoutException();
         }
     }

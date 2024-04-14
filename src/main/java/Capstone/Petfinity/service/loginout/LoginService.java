@@ -15,6 +15,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 @Transactional(readOnly = true)
 @RequiredArgsConstructor
@@ -39,7 +41,7 @@ public class LoginService {
             Vet vet = vetRepository.findOneByUuid(uuid);
             vetRepository.changeLoginStatus(vet);
 
-            log.debug("Vet Login Success");
+            log.debug("수의사 로그인 성공");
             return uuid;
         } else { // 보호자
 
@@ -49,7 +51,7 @@ public class LoginService {
             Parent parent = parentRepository.findOneByUuid(uuid);
             parentRepository.changeLoginStatus(parent);
 
-            log.debug("Parent Login Success");
+            log.debug("보호자 로그인 성공");
             return uuid;
         }
     }
@@ -58,31 +60,35 @@ public class LoginService {
 
         if (request.getId().isEmpty()) {
 
-            log.error("아이디를 입력하지 않았습니다.");
+            log.warn("아이디를 입력하지 않았습니다.");
             throw new NullIdException();
         }
         if (request.getPw().isEmpty()) {
 
-            log.error("비밀번호를 입력하지 않았습니다.");
+            log.warn("비밀번호를 입력하지 않았습니다.");
             throw new NullPwException();
         }
     }
 
     private void parentExistCheck(LoginReqDto request) {
 
-        try {
-
-            parentRepository.findOneById(request.getId());
-        } catch (NoResultException e) {
-
+        List<Parent> findParent = parentRepository.findById(request.getId());
+        if(findParent.isEmpty()){
             throw new NotExistException();
         }
+//        try {
+//
+//          parentRepository.findOneById(request.getId());
+//        } catch (NoResultException e) {
+//
+//            throw new NotExistException();
+//        }
 
 //        if (parentRepository.findOneById(request.getId()) == null) {
-//            log.error("[보호자] 해당 아이디가 존재하지 않습니다.");
+//            log.warn("[보호자] 해당 아이디가 존재하지 않습니다.");
 //        }
 //        if (parentRepository.findById(request.getId()).isEmpty()) {   // [ ]list로 받아서 해결됐어 그냥 하나 찾는거랑
-//            log.error("[보호자] 해당 아이디가 존재하지 않습니다."); // list랑 무슨 차이일까?
+//            log.warn("[보호자] 해당 아이디가 존재하지 않습니다."); // list랑 무슨 차이일까?
 //            throw new NotExistException();
 //
 //        }
@@ -90,11 +96,15 @@ public class LoginService {
 
     private void vetExistCheck (LoginReqDto request){
 
-        if (vetRepository.findById(request.getId()).isEmpty()) {
-
-            log.error("[수의사] 해당 아이디가 존재하지 않습니다.");
+        List<Vet> findVet = vetRepository.findById(request.getId());
+        if(findVet.isEmpty()){
             throw new NotExistException();
         }
+//        if (vetRepository.findById(request.getId()).isEmpty()) {
+//
+//            log.warn("[수의사] 해당 아이디가 존재하지 않습니다.");
+//            throw new NotExistException();
+//        }
     }
 
     private void parentCorrectPw (LoginReqDto request) {
@@ -103,7 +113,8 @@ public class LoginService {
 
         if (!request.getPw().equals(findParent.getPw())) {
 
-            findParent = parentRepository.findOneById(request.getId());   // [ ]findParentId가 null이라고 뜸 왜지 왜..
+            throw new IncorrectPwException();
+//            findParent = parentRepository.findOneById(request.getId());   // [ ]findParentId가 null이라고 뜸 왜지 왜..
 //            if (!request.getPw().equals(findParent.getPw())) {
 //                //존재하는 아이디인데도.. 왜..
 //                throw new IncorrectPwException();
@@ -124,11 +135,11 @@ public class LoginService {
         return request.getId().matches("[+-]?\\d*(\\.\\d+)?"); // 이거 무슨 의미인지 주석 부탁함둥
     }
 
-    public Boolean isParent(String uuid) {
+    public Boolean isParent(LoginReqDto request) {
 
-        Parent findParent = parentRepository.findOneByUuid(uuid);
+        List<Parent> findParent = parentRepository.findById(request.getId());
 
-        return findParent != null;
+        return !findParent.isEmpty();
     }
 }
 

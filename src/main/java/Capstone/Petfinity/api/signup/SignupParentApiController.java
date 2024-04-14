@@ -27,19 +27,19 @@ public class SignupParentApiController {
     public NormalResDto signupParent(@RequestHeader("auth") String auth,
                                            @RequestBody SignupParentReqDto request) {
 
-        log.debug("Auth Check");
+        log.debug("권한 확인");
         if (!auth.equals("bVAtkPtiVGpWuO3dWEnvr51cEb6r7oF8")) {
 
-            log.error("No Authorization");
+            log.warn("권한이 없습니다");
             result = new NormalResDto("400", "권한 없음");
             return result;
         }
 
-        log.debug("Start Parent Signup");
+        log.debug("보호자 회원가입 시작");
         try {
             parentService.signup(request);
 
-            log.debug("Parent Signup Success");
+            log.debug("보호자 회원가입 성공");
             result = new NormalResDto("200", "보호자 회원가입 성공");
             return result;
         } catch (InvalidIdException e) {

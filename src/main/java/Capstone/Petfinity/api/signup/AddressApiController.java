@@ -21,15 +21,15 @@ public class AddressApiController {
 
         AddressResDto result;
 
-        log.debug("Auth Check");
+        log.debug("권한 확인");
         if (!auth.equals("bVAtkPtiVGpWuO3dWEnvr51cEb6r7oF8")) {
 
-            log.error("No Authorization");
+            log.warn("권한이 없습니다");
             result = new AddressResDto("400", "권한 없음", null);
             return result;
         }
 
-        log.debug("Return City List Success");
+        log.debug("도시 리스트 리턴 성공");
         result = new AddressResDto("200", "도시 리턴 성공", addressRepository.findAllCity());
         return result;
     }

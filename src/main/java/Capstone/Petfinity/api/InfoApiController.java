@@ -29,15 +29,15 @@ public class InfoApiController {
     @PostMapping("/user/info/parent")
     public InfoParentResDto infoParent(@RequestHeader("auth") String auth,
                                        @RequestBody InfoParentReqDto request) {
-        log.debug("Auth Check");
+        log.debug("권한 확인");
         if (!auth.equals("bVAtkPtiVGpWuO3dWEnvr51cEb6r7oF8")) {
 
-            log.error("No Authorization");
+            log.warn("권한이 없습니다");
             result = new InfoParentResDto("400", "권한 없음", null, null, null, null, null, null, null);
             return result;
         }
 
-        log.debug("Start Parent Info Search");
+        log.debug("보호자 정보 조회 확인");
         try {
             Parent parent = parentService.infoParent(request);
 

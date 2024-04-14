@@ -1,5 +1,6 @@
 package Capstone.Petfinity.service;
 
+import Capstone.Petfinity.dto.info.InfoParentReqDto;
 import Capstone.Petfinity.dto.signup.parent.IdCheckReqDto;
 import Capstone.Petfinity.dto.signup.parent.SignupParentReqDto;
 import Capstone.Petfinity.domain.Parent;
@@ -13,9 +14,10 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.util.StringUtils;
 
 import java.util.List;
+
+import static org.springframework.util.StringUtils.containsWhitespace;
 
 @Service
 @Transactional(readOnly = true)
@@ -34,11 +36,35 @@ public class ParentService {
         parentRepository.save(parent);
         log.debug("회원가입 성공");
     }
-    @Transactional
+
     public void idCheck(IdCheckReqDto parent) {
 
         idCheckParent(parent);
-        log.debug("아이디 중복 확인");
+        log.debug("아이디 중복 확인 성공");
+    }
+
+    public Parent infoParent(InfoParentReqDto parent) {
+
+        Parent findParent;
+
+        if (parent.getUuid().isEmpty()) {
+            log.error("uuid가 비어있습니다");
+            throw new NullUuidException();
+        }
+        if (containsWhitespace(parent.getUuid()) || parent.getUuid().length() != 36) {
+            log.error("유효하지 않는 uuid입니다");
+            throw new InvalidUuidException();
+        }
+        if (parentRepository.findOneByUuid(parent.getUuid()) == null) {
+            log.error("보호자가 존재하지 않습니다");
+            throw new NotExistException();
+        }
+
+        findParent = parentRepository.findOneByUuid(parent.getUuid());
+        loginStatusParent(findParent);
+        log.debug("로그인 상태 확인 성공");
+
+        return findParent;
     }
 
     private void nullParent(SignupParentReqDto parent) {
@@ -71,7 +97,7 @@ public class ParentService {
             log.error("유효하지 않는 비밀번호입니다.");
             throw new InvalidPwException();
         }
-        if (StringUtils.containsWhitespace(parent.getName())) {
+        if (containsWhitespace(parent.getName())) {
             log.error("유효하지 않는 이름입니다.");
             throw new InvalidNameException();
         }
@@ -108,6 +134,14 @@ public class ParentService {
         if (!parentRepository.findById(parent.getId()).isEmpty()) {
             log.error("이미 존재하는 아이디입니다");
             throw new DuplicateIdException();
+        }
+    }
+
+    private void loginStatusParent(Parent parent) {
+
+        if (!parent.getLogin_status()) {
+            log.error("로그인 상태가 아닙니다");
+            throw new NotLoginStatusException();
         }
     }
 }

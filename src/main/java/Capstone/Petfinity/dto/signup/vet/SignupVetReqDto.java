@@ -9,7 +9,6 @@ import lombok.ToString;
 @ToString
 public class SignupVetReqDto {
 
-    private String auth;
     private String id;
     private String pw;
     private String name;

@@ -9,7 +9,6 @@ import lombok.ToString;
 @ToString
 public class LogoutReqDto {
 
-    private String auth;
     private String uuid;
     private Boolean isParent;
 }

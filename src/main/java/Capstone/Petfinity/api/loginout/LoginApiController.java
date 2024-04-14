@@ -53,11 +53,11 @@ public class LoginApiController {
             return result;
         } catch (NotExistException e){
 
-            result = new LoginResDto(null, null, "402", "존재하지 않는 아이디");
+            result = new LoginResDto(null, null, "404", "존재하지 않는 아이디");
             return result;
         } catch (IncorrectPwException e){
 
-            result = new LoginResDto(null, null, "403", "일치하지 않는 비밀번호");
+            result = new LoginResDto(null, null, "405", "일치하지 않는 비밀번호");
             return result;
         }
     }

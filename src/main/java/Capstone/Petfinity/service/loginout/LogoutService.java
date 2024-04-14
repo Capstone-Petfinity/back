@@ -32,7 +32,7 @@ public class LogoutService {
 
             if (isParent) { // True: 보호자, False: 수의사
 
-                Parent parent = parentRepository.findOneByUuid(uuid);
+                 Parent parent = parentRepository.findOneByUuid(uuid);
                 if (parent == null)
                     throw new FailLogoutException();
 

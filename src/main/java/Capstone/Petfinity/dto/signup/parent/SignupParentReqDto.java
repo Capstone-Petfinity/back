@@ -7,7 +7,6 @@ import lombok.*;
 @ToString
 public class SignupParentReqDto {
 
-    private String auth;
     private String id;
     private String pw;
     private String name;

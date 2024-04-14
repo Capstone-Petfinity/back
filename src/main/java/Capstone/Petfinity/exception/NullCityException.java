@@ -1,6 +1,6 @@
 package Capstone.Petfinity.exception;
 
-public class NullCityException extends IllegalStateException {
+public class NullCityException extends NullPointerException {
 
     public NullCityException() {
         super();

@@ -39,7 +39,7 @@ public class LoginService {
             Vet vet = vetRepository.findOneByUuid(uuid);
             vetRepository.changeLoginStatus(vet);
 
-            log.debug("Vet Login Success");
+            log.debug("수의사 로그인 성공");
             return uuid;
         } else { // 보호자
 
@@ -49,7 +49,7 @@ public class LoginService {
             Parent parent = parentRepository.findOneByUuid(uuid);
             parentRepository.changeLoginStatus(parent);
 
-            log.debug("Parent Login Success");
+            log.debug("보호자 로그인 성공");
             return uuid;
         }
     }
@@ -58,12 +58,12 @@ public class LoginService {
 
         if (request.getId().isEmpty()) {
 
-            log.error("아이디를 입력하지 않았습니다.");
+            log.warn("아이디를 입력하지 않았습니다.");
             throw new NullIdException();
         }
         if (request.getPw().isEmpty()) {
 
-            log.error("비밀번호를 입력하지 않았습니다.");
+            log.warn("비밀번호를 입력하지 않았습니다.");
             throw new NullPwException();
         }
     }
@@ -79,10 +79,10 @@ public class LoginService {
         }
 
 //        if (parentRepository.findOneById(request.getId()) == null) {
-//            log.error("[보호자] 해당 아이디가 존재하지 않습니다.");
+//            log.warn("[보호자] 해당 아이디가 존재하지 않습니다.");
 //        }
 //        if (parentRepository.findById(request.getId()).isEmpty()) {   // [ ]list로 받아서 해결됐어 그냥 하나 찾는거랑
-//            log.error("[보호자] 해당 아이디가 존재하지 않습니다."); // list랑 무슨 차이일까?
+//            log.warn("[보호자] 해당 아이디가 존재하지 않습니다."); // list랑 무슨 차이일까?
 //            throw new NotExistException();
 //
 //        }
@@ -92,7 +92,7 @@ public class LoginService {
 
         if (vetRepository.findById(request.getId()).isEmpty()) {
 
-            log.error("[수의사] 해당 아이디가 존재하지 않습니다.");
+            log.warn("[수의사] 해당 아이디가 존재하지 않습니다.");
             throw new NotExistException();
         }
     }

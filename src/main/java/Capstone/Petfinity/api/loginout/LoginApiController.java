@@ -27,20 +27,20 @@ public class LoginApiController {
 
         LoginResDto result;
 
-        log.debug("Auth Check");
+        log.debug("권한 확인");
         if (!auth.equals("bVAtkPtiVGpWuO3dWEnvr51cEb6r7oF8")) {
 
-            log.error("No Authorization");
+            log.warn("권한이 없습니다");
             result = new LoginResDto(null, null, "400", "권한 없음");
             return result;
         }
 
         try {
-            log.debug("Start Login");
+            log.debug("로그인 시작");
             String uuid = loginService.login(request);
             Boolean isParent = loginService.isParent(uuid);
 
-            log.debug("Login Success");
+            log.debug("로그인 성공");
             result = new LoginResDto(uuid, isParent, "200", "로그인 성공");
             return result;
         } catch (NullIdException e){

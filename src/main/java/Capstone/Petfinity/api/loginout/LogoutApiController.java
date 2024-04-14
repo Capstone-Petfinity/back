@@ -23,19 +23,19 @@ public class LogoutApiController {
 
         NormalResDto result;
 
-        log.debug("Auth Check");
+        log.debug("권한 확인");
         if (!auth.equals("bVAtkPtiVGpWuO3dWEnvr51cEb6r7oF8")) {
 
-            log.error("No Authorization");
+            log.warn("권한이 없습니다");
             result = new NormalResDto("400", "권한 없음");
             return result;
         }
 
         try {
-            log.debug("Start Logout");
+            log.debug("로그아웃 시작");
             logoutService.logout(request);
 
-            log.debug("Logout Success");
+            log.debug("로그아웃 성공");
             result = new NormalResDto("200", "로그아웃 성공");
             return result;
         } catch (FailLogoutException e) {

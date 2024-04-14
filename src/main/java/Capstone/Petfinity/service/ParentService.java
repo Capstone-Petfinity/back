@@ -48,15 +48,15 @@ public class ParentService {
         Parent findParent;
 
         if (parent.getUuid().isEmpty()) {
-            log.error("uuid가 비어있습니다");
+            log.warn("uuid가 비어있습니다");
             throw new NullUuidException();
         }
         if (containsWhitespace(parent.getUuid()) || parent.getUuid().length() != 36) {
-            log.error("유효하지 않는 uuid입니다");
+            log.warn("유효하지 않는 uuid입니다");
             throw new InvalidUuidException();
         }
         if (parentRepository.findOneByUuid(parent.getUuid()) == null) {
-            log.error("보호자가 존재하지 않습니다");
+            log.warn("보호자가 존재하지 않습니다");
             throw new NotExistException();
         }
 
@@ -70,15 +70,15 @@ public class ParentService {
     private void nullParent(SignupParentReqDto parent) {
 
         if (parent.getName().isEmpty()) {
-            log.error("이름이 비어있습니다");
+            log.warn("이름이 비어있습니다");
             throw new NullNameException();
         }
         if (parent.getPw().isEmpty()) {
-            log.error("비밀번호가 비어있습니다");
+            log.warn("비밀번호가 비어있습니다");
             throw new NullPwException();
         }
         if (parent.getCity().isEmpty()) {
-            log.error("도시가 비어있습니다");
+            log.warn("도시가 비어있습니다");
             throw new NullCityException();
         }
     }
@@ -86,23 +86,23 @@ public class ParentService {
     private void validateParent(SignupParentReqDto parent) {
 
         if (parent.getId().length() < 8 || !parent.getId().matches("^[a-zA-Z0-9]+$")) {
-            log.error("유효하지 않는 아이디입니다");
+            log.warn("유효하지 않는 아이디입니다");
             throw new InvalidIdException();
         }
         if (parent.getPhone_number().length() != 11 || !parent.getPhone_number().matches("^[0-9]+$")) {
-            log.error("유효하지 않는 전화번호입니다.");
+            log.warn("유효하지 않는 전화번호입니다.");
             throw new InvalidPhoneNumberException();
         }
         if (!parent.getPw().matches("^[a-zA-Z0-9]+$")) {
-            log.error("유효하지 않는 비밀번호입니다.");
+            log.warn("유효하지 않는 비밀번호입니다.");
             throw new InvalidPwException();
         }
         if (containsWhitespace(parent.getName())) {
-            log.error("유효하지 않는 이름입니다.");
+            log.warn("유효하지 않는 이름입니다.");
             throw new InvalidNameException();
         }
         if (parent.getId().length() < 8 || !parent.getId().matches("^[a-zA-Z0-9]+$")) {
-            log.error("유효하지 않는 아이디입니다");
+            log.warn("유효하지 않는 아이디입니다");
             throw new InvalidIdException();
         }
     }
@@ -110,17 +110,17 @@ public class ParentService {
     private void duplicateParent(SignupParentReqDto parent) {
 
         if (!parentRepository.findById(parent.getId()).isEmpty()) {
-            log.error("이미 존재하는 아이디입니다");
+            log.warn("이미 존재하는 아이디입니다");
             throw new DuplicateIdException();
         }
         List<Parent> findParentsId = parentRepository.findById(parent.getId());
         if (!findParentsId.isEmpty()) {
-            log.error("이미 존재하는 회원입니다");
+            log.warn("이미 존재하는 회원입니다");
             throw new DuplicateIdException();
         }
         List<Parent> findParentsPhoneNumber = parentRepository.findByPhoneNumber(parent.getPhone_number());
         if (!findParentsPhoneNumber.isEmpty()) {
-            log.error("이미 존재하는 번호입니다");
+            log.warn("이미 존재하는 번호입니다");
             throw new DuplicatePhoneNumberException();
         }
     }
@@ -128,11 +128,11 @@ public class ParentService {
     private void idCheckParent(IdCheckReqDto parent) {
 
         if (parent.getId().length() < 8 || !parent.getId().matches("^[a-zA-Z0-9]+$")) {
-            log.error("유효하지 않는 아이디입니다");
+            log.warn("유효하지 않는 아이디입니다");
             throw new InvalidIdException();
         }
         if (!parentRepository.findById(parent.getId()).isEmpty()) {
-            log.error("이미 존재하는 아이디입니다");
+            log.warn("이미 존재하는 아이디입니다");
             throw new DuplicateIdException();
         }
     }
@@ -140,7 +140,7 @@ public class ParentService {
     private void loginStatusParent(Parent parent) {
 
         if (!parent.getLogin_status()) {
-            log.error("로그인 상태가 아닙니다");
+            log.warn("로그인 상태가 아닙니다");
             throw new NotLoginStatusException();
         }
     }

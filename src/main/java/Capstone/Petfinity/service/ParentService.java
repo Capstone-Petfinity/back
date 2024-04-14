@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 import static org.springframework.util.StringUtils.containsWhitespace;
 
@@ -113,7 +114,7 @@ public class ParentService {
             log.error("이미 존재하는 아이디입니다");
             throw new DuplicateIdException();
         }
-        List<Parent> findParentsId = parentRepository.findById(parent.getId());
+        Optional<Parent> findParentsId = parentRepository.findById(parent.getId());
         if (!findParentsId.isEmpty()) {
             log.error("이미 존재하는 회원입니다");
             throw new DuplicateIdException();

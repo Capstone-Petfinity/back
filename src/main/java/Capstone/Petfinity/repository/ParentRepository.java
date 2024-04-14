@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Repository
@@ -42,7 +43,7 @@ public class ParentRepository {
     public Parent findOneById(String id) {
 
         //return em.find(Parent.class, id); // em.find는 PK로만 찾을 수 있음...ㅅㅂ;
-        return em.createQuery("select p from Parent p where p.id = :id", Parent.class)
+        return  em.createQuery("select p from Parent p where p.id = :id", Parent.class)
                 .setParameter("id", id)
                 .getSingleResult();
     }
@@ -57,6 +58,7 @@ public class ParentRepository {
         return em.createQuery("select p from Parent p where p.id = :id", Parent.class)
                 .setParameter("id", id)
                 .getResultList();
+        //return findParent.stream().findAny();
     }
     public List<Parent> findByPhoneNumber(String phoneNumber) {
 

@@ -55,7 +55,7 @@ public class ParentService {
             throw new NullUuidException();
         }
         if (containsWhitespace(parent.getUuid()) || parent.getUuid().length() != 36) {
-            log.warn("유효하지 않는 uuid입니다");
+            log.warn("유효하지 않은 uuid입니다");
             throw new InvalidUuidException();
         }
         if (parentRepository.findOneByUuid(parent.getUuid()) == null) {
@@ -79,7 +79,7 @@ public class ParentService {
             throw new NullUuidException();
         }
         if (containsWhitespace(parent.getUuid()) || parent.getUuid().length() != 36) {
-            log.warn("유효하지 않는 uuid입니다");
+            log.warn("유효하지 않은 uuid입니다");
             throw new InvalidUuidException();
         }
         if (parentRepository.findOneByUuid(parent.getUuid()) == null) {
@@ -113,23 +113,23 @@ public class ParentService {
     private void validateParent(SignupParentReqDto parent) {
 
         if (parent.getId().length() < 8 || !parent.getId().matches("^[a-zA-Z0-9]+$")) {
-            log.warn("유효하지 않는 아이디입니다");
+            log.warn("유효하지 않은 아이디입니다");
             throw new InvalidIdException();
         }
         if (parent.getPhone_number().length() != 11 || !parent.getPhone_number().matches("^[0-9]+$")) {
-            log.warn("유효하지 않는 전화번호입니다.");
+            log.warn("유효하지 않은 전화번호입니다.");
             throw new InvalidPhoneNumberException();
         }
         if (!parent.getPw().matches("^[a-zA-Z0-9]+$")) {
-            log.warn("유효하지 않는 비밀번호입니다.");
+            log.warn("유효하지 않은 비밀번호입니다.");
             throw new InvalidPwException();
         }
         if (containsWhitespace(parent.getName())) {
-            log.warn("유효하지 않는 이름입니다.");
+            log.warn("유효하지 않은 이름입니다.");
             throw new InvalidNameException();
         }
         if (parent.getId().length() < 8 || !parent.getId().matches("^[a-zA-Z0-9]+$")) {
-            log.warn("유효하지 않는 아이디입니다");
+            log.warn("유효하지 않은 아이디입니다");
             throw new InvalidIdException();
         }
     }
@@ -155,7 +155,7 @@ public class ParentService {
     private void idCheckParent(IdCheckReqDto parent) {
 
         if (parent.getId().length() < 8 || !parent.getId().matches("^[a-zA-Z0-9]+$")) {
-            log.warn("유효하지 않는 아이디입니다");
+            log.warn("유효하지 않은 아이디입니다");
             throw new InvalidIdException();
         }
         if (!parentRepository.findById(parent.getId()).isEmpty()) {

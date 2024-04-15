@@ -52,10 +52,25 @@ null(403)
 #### /login: POST
 
 **Body**
-- String id;
-- String pw;
+- String id; 공백/NULL x
+- String pw; 공백/NULL x
 
 ### possible error
+
+auth(400): 권한없음
+
+null(401)
+- NullIdException(): 아이디 공백
+- NullPwException(): 비밀번호 공백
+
+exist(404)
+- NotExistException(): 존재하지 않는 아이디
+
+incorrect(405)
+- IncorrectPwException(): 일치하지 않는 비밀번호
+
+loginStatus(406)
+- LoginStatusException(): 이미 로그인이 된 상태
 
 ## Logout
 #### /logout: Get

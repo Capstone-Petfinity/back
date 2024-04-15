@@ -56,4 +56,9 @@ public class VetRepository {
 
         em.persist(vet);
     }
+
+    public boolean checkLoginStatus(Vet vet){
+
+        return vet.getLogin_status();
+    }
 }

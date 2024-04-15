@@ -2,10 +2,7 @@ package Capstone.Petfinity.api.loginout;
 
 import Capstone.Petfinity.dto.loginout.LoginReqDto;
 import Capstone.Petfinity.dto.loginout.LoginResDto;
-import Capstone.Petfinity.exception.IncorrectPwException;
-import Capstone.Petfinity.exception.NotExistException;
-import Capstone.Petfinity.exception.NullIdException;
-import Capstone.Petfinity.exception.NullPwException;
+import Capstone.Petfinity.exception.*;
 import Capstone.Petfinity.service.loginout.LoginService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -58,6 +55,10 @@ public class LoginApiController {
         } catch (IncorrectPwException e){
 
             result = new LoginResDto("405", "일치하지 않는 비밀번호", null, null);
+            return result;
+        } catch (LoginStatusException e){
+
+            result = new LoginResDto("406", "이미 로그인된 계정", null, null);
             return result;
         }
     }

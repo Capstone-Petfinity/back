@@ -3,10 +3,7 @@ package Capstone.Petfinity.service.loginout;
 import Capstone.Petfinity.domain.Parent;
 import Capstone.Petfinity.domain.Vet;
 import Capstone.Petfinity.dto.loginout.LoginReqDto;
-import Capstone.Petfinity.exception.IncorrectPwException;
-import Capstone.Petfinity.exception.NotExistException;
-import Capstone.Petfinity.exception.NullIdException;
-import Capstone.Petfinity.exception.NullPwException;
+import Capstone.Petfinity.exception.*;
 import Capstone.Petfinity.repository.ParentRepository;
 import Capstone.Petfinity.repository.VetRepository;
 import jakarta.persistence.NoResultException;
@@ -37,6 +34,7 @@ public class LoginService {
 
             vetExistCheck(request); // db 존재하는지 확인
             vetCorrectPw(request); // 비밀번호가 일치하는지 확인
+            checkParentLoginStatus(request); // 로그인 상태 확인
             uuid = vetRepository.findOneById(request.getId()).getUuid();
             Vet vet = vetRepository.findOneByUuid(uuid);
             vetRepository.changeLoginStatus(vet);
@@ -47,6 +45,7 @@ public class LoginService {
 
             parentExistCheck(request); // db에 존재하는지 확인
             parentCorrectPw(request);// 비밀번호가 일치하는지 확인
+            checkVetLoginStatus(request); // 로그인 상태 확인
             uuid = parentRepository.findOneById(request.getId()).getUuid();
             Parent parent = parentRepository.findOneByUuid(uuid);
             parentRepository.changeLoginStatus(parent);
@@ -74,6 +73,7 @@ public class LoginService {
 
         List<Parent> findParent = parentRepository.findById(request.getId());
         if(findParent.isEmpty()){
+
             throw new NotExistException();
         }
 //        try {
@@ -98,6 +98,7 @@ public class LoginService {
 
         List<Vet> findVet = vetRepository.findById(request.getId());
         if(findVet.isEmpty()){
+
             throw new NotExistException();
         }
 //        if (vetRepository.findById(request.getId()).isEmpty()) {
@@ -130,6 +131,25 @@ public class LoginService {
             throw new IncorrectPwException();
         }
     }
+
+    private void checkParentLoginStatus(LoginReqDto request){
+
+        Parent findParent = parentRepository.findOneById(request.getId());
+        boolean loginStatus = parentRepository.checkLoginStatus(findParent);
+        if(!loginStatus){
+
+            throw new LoginStatusException();
+        }
+    }
+
+    private void checkVetLoginStatus(LoginReqDto request){
+        Vet findVet = vetRepository.findOneById(request.getId());
+        boolean loginStatus = vetRepository.checkLoginStatus(findVet);
+        if(!loginStatus){
+            throw new LoginStatusException();
+        }
+    }
+
     private boolean isNumeric (LoginReqDto request){
 
         return request.getId().matches("[+-]?\\d*(\\.\\d+)?"); // 이거 무슨 의미인지 주석 부탁함둥

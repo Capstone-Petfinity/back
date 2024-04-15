@@ -7,7 +7,6 @@ import Capstone.Petfinity.service.PwEncoderService;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.Query;
 import lombok.RequiredArgsConstructor;
-import lombok.ToString;
 import org.springframework.stereotype.Repository;
 
 import java.util.Collection;
@@ -29,11 +28,10 @@ public class ParentRepository {
         parent.setUuid(UUID.randomUUID().toString());
         parent.setId(parentDTO.getId());
         parent.setName(parentDTO.getName());
-        parent.setPw(parentDTO.getPw());
 
-//        String pw = parentDTO.getPw();
-//        parent.setPw(pwEncoderService.encode(pw));
-//        System.out.println("pwEncoderService.isPwMatch(pw, parentDTO.getPw()) = " + pwEncoderService.isPwMatch(pw, parentDTO.getPw()));
+        String pw = parentDTO.getPw();
+        parent.setPw(pwEncoderService.encode(pw));
+        System.out.println("pwEncoderService.isPwMatch(pw, parentDTO.getPw()) = " + pwEncoderService.isPwMatch(pw, parentDTO.getPw()));
 
         parent.setPhone_number(parentDTO.getPhone_number());
         parent.setCity(parentDTO.getCity());
@@ -78,12 +76,16 @@ public class ParentRepository {
         em.persist(parent);
     }
 
-     //반려동물 조회
-    public List<String> findPetByUuid(String uuid) {
+    public boolean checkLoginStatus(Parent parent){
 
+        return parent.getLogin_status();
+    }
+
+//    반려동물 조회
+//    public List<String> findPetByUuid(String uuid) {
+//
 //        return em.createQuery("select p.name from Pet p where p.parent.uuid = :uuid", Pet.class)
 //                .setParameter("uuid", uuid)
 //                .getResultList();
-        return null;
-    }
+//    }
 }

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="Capstone.Petfinity.PetfinityApplicationTests" tests="1" skipped="0" failures="0" errors="0" timestamp="2024-04-15T08:14:44" hostname="MacBookAir.local" time="0.282">
+<testsuite name="Capstone.Petfinity.PetfinityApplicationTests" tests="1" skipped="0" failures="0" errors="0" timestamp="2024-04-15T08:14:30" hostname="LAPTOP-5HE5BVPR" time="0.565">
   <properties/>
-  <testcase name="contextLoads()" classname="Capstone.Petfinity.PetfinityApplicationTests" time="0.282"/>
-  <system-out><![CDATA[17:14:42.800 [Test worker] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [Capstone.Petfinity.PetfinityApplicationTests]: PetfinityApplicationTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
-17:14:42.839 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration Capstone.Petfinity.PetfinityApplication for test class Capstone.Petfinity.PetfinityApplicationTests
+  <testcase name="contextLoads()" classname="Capstone.Petfinity.PetfinityApplicationTests" time="0.565"/>
+  <system-out><![CDATA[17:14:26.340 [Test worker] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [Capstone.Petfinity.PetfinityApplicationTests]: PetfinityApplicationTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+17:14:26.442 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration Capstone.Petfinity.PetfinityApplication for test class Capstone.Petfinity.PetfinityApplicationTests
 
   .   ____          _            __ _ _
  /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
@@ -13,37 +13,33 @@
  =========|_|==============|___/=/_/_/_/
  :: Spring Boot ::                (v3.2.4)
 
-2024-04-15T17:14:42.983+09:00  INFO 79078 --- [Petfinity] [    Test worker] C.Petfinity.PetfinityApplicationTests    : Starting PetfinityApplicationTests using Java 21.0.2 with PID 79078 (started by yezi.ce in /Users/yezi.ce/Desktop/Petfinity)
-2024-04-15T17:14:42.983+09:00  INFO 79078 --- [Petfinity] [    Test worker] C.Petfinity.PetfinityApplicationTests    : No active profile set, falling back to 1 default profile: "default"
-2024-04-15T17:14:43.204+09:00  INFO 79078 --- [Petfinity] [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2024-04-15T17:14:43.212+09:00  INFO 79078 --- [Petfinity] [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 6 ms. Found 0 JPA repository interfaces.
-2024-04-15T17:14:43.410+09:00  INFO 79078 --- [Petfinity] [    Test worker] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
-2024-04-15T17:14:43.431+09:00  INFO 79078 --- [Petfinity] [    Test worker] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.4.4.Final
-2024-04-15T17:14:43.441+09:00  INFO 79078 --- [Petfinity] [    Test worker] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
-2024-04-15T17:14:43.514+09:00  INFO 79078 --- [Petfinity] [    Test worker] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
-2024-04-15T17:14:43.523+09:00  INFO 79078 --- [Petfinity] [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
-2024-04-15T17:14:43.685+09:00  INFO 79078 --- [Petfinity] [    Test worker] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@be616f0
-2024-04-15T17:14:43.686+09:00  INFO 79078 --- [Petfinity] [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
-2024-04-15T17:14:44.131+09:00  INFO 79078 --- [Petfinity] [    Test worker] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-2024-04-15T17:14:44.171+09:00  INFO 79078 --- [Petfinity] [    Test worker] p6spy                                    : #1713168884171 | took 1ms | statement | connection 1| url jdbc:mysql://localhost:3306/petfinity
+2024-04-15T17:14:26.898+09:00  INFO 16768 --- [Petfinity] [    Test worker] C.Petfinity.PetfinityApplicationTests    : Starting PetfinityApplicationTests using Java 17.0.10 with PID 16768 (started by user in C:\dev\캡스톤)
+2024-04-15T17:14:26.900+09:00  INFO 16768 --- [Petfinity] [    Test worker] C.Petfinity.PetfinityApplicationTests    : No active profile set, falling back to 1 default profile: "default"
+2024-04-15T17:14:27.600+09:00  INFO 16768 --- [Petfinity] [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-04-15T17:14:27.625+09:00  INFO 16768 --- [Petfinity] [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 16 ms. Found 0 JPA repository interfaces.
+2024-04-15T17:14:28.126+09:00  INFO 16768 --- [Petfinity] [    Test worker] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-04-15T17:14:28.189+09:00  INFO 16768 --- [Petfinity] [    Test worker] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.4.4.Final
+2024-04-15T17:14:28.230+09:00  INFO 16768 --- [Petfinity] [    Test worker] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2024-04-15T17:14:28.479+09:00  INFO 16768 --- [Petfinity] [    Test worker] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-04-15T17:14:28.512+09:00  INFO 16768 --- [Petfinity] [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2024-04-15T17:14:28.779+09:00  INFO 16768 --- [Petfinity] [    Test worker] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@1dcca426
+2024-04-15T17:14:28.781+09:00  INFO 16768 --- [Petfinity] [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2024-04-15T17:14:29.856+09:00  INFO 16768 --- [Petfinity] [    Test worker] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-04-15T17:14:29.923+09:00  INFO 16768 --- [Petfinity] [    Test worker] p6spy                                    : #1713168869923 | took 3ms | statement | connection 1| url jdbc:mysql://localhost:3306/petfinity
 select * from `petfinity`.`parent` where 1=0
 select * from `petfinity`.`parent` where 1=0;
-2024-04-15T17:14:44.181+09:00  INFO 79078 --- [Petfinity] [    Test worker] p6spy                                    : #1713168884181 | took 0ms | statement | connection 1| url jdbc:mysql://localhost:3306/petfinity
+2024-04-15T17:14:29.933+09:00  INFO 16768 --- [Petfinity] [    Test worker] p6spy                                    : #1713168869933 | took 0ms | statement | connection 1| url jdbc:mysql://localhost:3306/petfinity
 select * from `petfinity`.`hospital` where 1=0
 select * from `petfinity`.`hospital` where 1=0;
-2024-04-15T17:14:44.183+09:00  INFO 79078 --- [Petfinity] [    Test worker] p6spy                                    : #1713168884183 | took 0ms | statement | connection 1| url jdbc:mysql://localhost:3306/petfinity
+2024-04-15T17:14:29.935+09:00  INFO 16768 --- [Petfinity] [    Test worker] p6spy                                    : #1713168869935 | took 0ms | statement | connection 1| url jdbc:mysql://localhost:3306/petfinity
 select * from `petfinity`.`parent` where 1=0
 select * from `petfinity`.`parent` where 1=0;
-2024-04-15T17:14:44.184+09:00  INFO 79078 --- [Petfinity] [    Test worker] p6spy                                    : #1713168884184 | took 0ms | statement | connection 1| url jdbc:mysql://localhost:3306/petfinity
+2024-04-15T17:14:29.937+09:00  INFO 16768 --- [Petfinity] [    Test worker] p6spy                                    : #1713168869937 | took 0ms | statement | connection 1| url jdbc:mysql://localhost:3306/petfinity
 select * from `petfinity`.`pet` where 1=0
 select * from `petfinity`.`pet` where 1=0;
-2024-04-15T17:14:44.185+09:00  INFO 79078 --- [Petfinity] [    Test worker] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
-2024-04-15T17:14:44.287+09:00  WARN 79078 --- [Petfinity] [    Test worker] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2024-04-15T17:14:44.431+09:00  INFO 79078 --- [Petfinity] [    Test worker] C.Petfinity.PetfinityApplicationTests    : Started PetfinityApplicationTests in 1.547 seconds (process running for 1.96)
+2024-04-15T17:14:29.939+09:00  INFO 16768 --- [Petfinity] [    Test worker] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-04-15T17:14:30.201+09:00  WARN 16768 --- [Petfinity] [    Test worker] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-04-15T17:14:30.578+09:00  INFO 16768 --- [Petfinity] [    Test worker] C.Petfinity.PetfinityApplicationTests    : Started PetfinityApplicationTests in 3.969 seconds (process running for 5.148)
 ]]></system-out>
-  <system-err><![CDATA[WARNING: A Java agent has been loaded dynamically (/Users/yezi.ce/.gradle/caches/modules-2/files-2.1/net.bytebuddy/byte-buddy-agent/1.14.12/be4984cb6fd1ef1d11f218a648889dfda44b8a15/byte-buddy-agent-1.14.12.jar)
-WARNING: If a serviceability tool is in use, please run with -XX:+EnableDynamicAgentLoading to hide this warning
-WARNING: If a serviceability tool is not in use, please run with -Djdk.instrument.traceUsage for more information
-WARNING: Dynamic loading of agents will be disallowed by default in a future release
-]]></system-err>
+  <system-err><![CDATA[]]></system-err>
 </testsuite>

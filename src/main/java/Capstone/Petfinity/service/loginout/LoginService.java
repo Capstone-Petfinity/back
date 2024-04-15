@@ -34,7 +34,7 @@ public class LoginService {
 
             vetExistCheck(request); // db 존재하는지 확인
             vetCorrectPw(request); // 비밀번호가 일치하는지 확인
-            checkParentLoginStatus(request); // 로그인 상태 확인
+            checkVetLoginStatus(request); // 로그인 상태 확인
             uuid = vetRepository.findOneById(request.getId()).getUuid();
             Vet vet = vetRepository.findOneByUuid(uuid);
             vetRepository.changeLoginStatus(vet);
@@ -45,7 +45,7 @@ public class LoginService {
 
             parentExistCheck(request); // db에 존재하는지 확인
             parentCorrectPw(request);// 비밀번호가 일치하는지 확인
-            checkVetLoginStatus(request); // 로그인 상태 확인
+            checkParentLoginStatus(request); // 로그인 상태 확인
             uuid = parentRepository.findOneById(request.getId()).getUuid();
             Parent parent = parentRepository.findOneByUuid(uuid);
             parentRepository.changeLoginStatus(parent);

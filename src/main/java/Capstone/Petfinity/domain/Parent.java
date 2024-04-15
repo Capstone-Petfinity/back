@@ -1,5 +1,6 @@
 package Capstone.Petfinity.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
@@ -27,6 +28,8 @@ public class Parent {
     private String phone_number;
     @NotNull
     private String city;
+
+    @JsonIgnore
     @NotNull
     private Boolean login_status;
 

@@ -1,5 +1,6 @@
 package Capstone.Petfinity.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
@@ -25,11 +26,13 @@ public class Pet {
     @NotNull
     private String kind;
 
+    @JsonIgnore
     @NotNull
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "parent_id")
     private Parent parent;
 
+    @JsonIgnore
     @NotNull
     @OneToMany(mappedBy = "pet")
     private List<Reservation> reservations = new ArrayList<>();

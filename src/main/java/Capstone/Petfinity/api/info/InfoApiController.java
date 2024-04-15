@@ -1,6 +1,7 @@
 package Capstone.Petfinity.api.info;
 
 import Capstone.Petfinity.domain.Parent;
+import Capstone.Petfinity.domain.Pet;
 import Capstone.Petfinity.dto.info.*;
 import Capstone.Petfinity.exception.InvalidUuidException;
 import Capstone.Petfinity.exception.NotExistException;
@@ -15,6 +16,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -68,7 +71,7 @@ public class InfoApiController {
 
     @PostMapping("/user/info/parent/pets")
     public InfoPetsResDto infoPets(@RequestHeader("auth") String auth,
-                                   @RequestBody InfoPetsReqDto request) {
+                                   @RequestBody InfoParentReqDto request) {
 
         log.debug("권한 확인");
         if (!auth.equals("bVAtkPtiVGpWuO3dWEnvr51cEb6r7oF8")) {
@@ -78,11 +81,29 @@ public class InfoApiController {
             return resultPet;
         }
 
-        log.debug("보호자 정보 조회");
-//        try {
-//
-//        }
-        return null;
+        log.debug("반려동물 정보 조회");
+        try {
+            List<Pet> pets = parentService.infoPet(request);
+
+            resultPet = new InfoPetsResDto("200", "회원 정보 조회 성공", pets);
+            return resultPet;
+        } catch (NotLoginStatusException e) {
+
+            resultPet = new InfoPetsResDto("406", "로그아웃 상태", null);
+            return resultPet;
+        } catch (NullUuidException e) {
+
+            resultPet = new InfoPetsResDto("403", "입력되지 않은 uuid", null);
+            return resultPet;
+        } catch (InvalidUuidException e) {
+
+            resultPet = new InfoPetsResDto("401", "유효하지 않는 uuid", null);
+            return resultPet;
+        } catch (NotExistException e) {
+
+            resultPet = new InfoPetsResDto("404", "존재하지 않는 회원", null);
+            return resultPet;
+        }
     }
 
 

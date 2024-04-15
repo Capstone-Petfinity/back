@@ -1,6 +1,8 @@
 package Capstone.Petfinity.service;
 
+import Capstone.Petfinity.domain.Pet;
 import Capstone.Petfinity.dto.info.InfoParentReqDto;
+import Capstone.Petfinity.dto.info.InfoParentResDto;
 import Capstone.Petfinity.dto.signup.parent.IdCheckReqDto;
 import Capstone.Petfinity.dto.signup.parent.SignupParentReqDto;
 import Capstone.Petfinity.domain.Parent;
@@ -66,6 +68,30 @@ public class ParentService {
         log.debug("로그인 상태 확인 성공");
 
         return findParent;
+    }
+
+    public List<Pet> infoPet(InfoParentReqDto parent) {
+
+        Parent findParent;
+
+        if (parent.getUuid().isEmpty()) {
+            log.warn("uuid가 비어있습니다");
+            throw new NullUuidException();
+        }
+        if (containsWhitespace(parent.getUuid()) || parent.getUuid().length() != 36) {
+            log.warn("유효하지 않는 uuid입니다");
+            throw new InvalidUuidException();
+        }
+        if (parentRepository.findOneByUuid(parent.getUuid()) == null) {
+            log.warn("보호자가 존재하지 않습니다");
+            throw new NotExistException();
+        }
+
+        findParent = parentRepository.findOneByUuid(parent.getUuid());
+        loginStatusParent(findParent);
+        log.debug("로그인 상태 확인 성공");
+
+        return parentRepository.findPetByUuid(findParent.getUuid());
     }
 
     private void nullParent(SignupParentReqDto parent) {

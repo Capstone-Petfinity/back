@@ -5,13 +5,10 @@ import Capstone.Petfinity.dto.signup.parent.SignupParentReqDto;
 import Capstone.Petfinity.domain.Parent;
 import Capstone.Petfinity.service.PwEncoderService;
 import jakarta.persistence.EntityManager;
-import jakarta.persistence.Query;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
-import java.util.Collection;
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 
 @Repository
@@ -82,10 +79,12 @@ public class ParentRepository {
     }
 
 //    반려동물 조회
-//    public List<String> findPetByUuid(String uuid) {
-//
-//        return em.createQuery("select p.name from Pet p where p.parent.uuid = :uuid", Pet.class)
-//                .setParameter("uuid", uuid)
-//                .getResultList();
-//    }
+    public List<Pet> findPetByUuid(String uuid) {
+
+        Parent parent = findOneByUuid(uuid);
+
+        return em.createQuery("select p from Pet p where p.parent = :uuid", Pet.class)
+                .setParameter("uuid", parent)
+                .getResultList();
+    }
 }

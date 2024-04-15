@@ -60,7 +60,7 @@ public class SignupParentApiController {
             return result;
         } catch (DuplicateIdException e) {
 
-            result = new NormalResDto("403", "중복된 아이디");
+            result = new NormalResDto("402", "중복된 아이디");
             return result;
         } catch (DuplicatePhoneNumberException e) {
 

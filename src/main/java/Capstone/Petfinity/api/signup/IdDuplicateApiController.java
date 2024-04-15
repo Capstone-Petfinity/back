@@ -48,7 +48,7 @@ public class IdDuplicateApiController {
             return idCheckResult;
         } catch (DuplicateIdException e) {
 
-            idCheckResult = new NormalResDto("403", "중복된 아이디");
+            idCheckResult = new NormalResDto("402", "중복된 아이디");
             return idCheckResult;
         }
     }
@@ -78,7 +78,7 @@ public class IdDuplicateApiController {
             return idCheckResult;
         } catch (DuplicateIdException e) {
 
-            idCheckResult = new NormalResDto("403", "중복된 아이디");
+            idCheckResult = new NormalResDto("402", "중복된 아이디");
             return idCheckResult;
         }
     }

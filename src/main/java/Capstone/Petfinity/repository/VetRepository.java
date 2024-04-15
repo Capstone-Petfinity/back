@@ -1,6 +1,5 @@
 package Capstone.Petfinity.repository;
 
-import Capstone.Petfinity.domain.Parent;
 import Capstone.Petfinity.domain.Vet;
 import Capstone.Petfinity.dto.signup.vet.SignupVetReqDto;
 import jakarta.persistence.EntityManager;

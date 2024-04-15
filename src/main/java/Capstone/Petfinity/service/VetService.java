@@ -1,6 +1,7 @@
 package Capstone.Petfinity.service;
 
 import Capstone.Petfinity.domain.Vet;
+import Capstone.Petfinity.dto.signup.parent.IdCheckReqDto;
 import Capstone.Petfinity.dto.signup.vet.SignupVetReqDto;
 import Capstone.Petfinity.exception.NullNameException;
 import Capstone.Petfinity.exception.NullPwException;
@@ -29,14 +30,20 @@ public class VetService {
     // 회원 가입
     public void signup(SignupVetReqDto vet) {
 
-        validateParent(vet); // 형식 확인
-        duplicateParent(vet); // 중복 확인
-        nullParent(vet); // null 확인
+        validateVet(vet); // 형식 확인
+        duplicateVet(vet); // 중복 확인
+        nullVet(vet); // null 확인
         vetRepository.save(vet);
         log.debug("회원가입 성공");
     }
 
-    private void nullParent(SignupVetReqDto vet) {
+    public void idCheck(IdCheckReqDto vet) {
+
+        idCheckVet(vet);
+        log.debug("아이디 중복 확인 성공");
+    }
+
+    private void nullVet(SignupVetReqDto vet) {
 
         if (vet.getName().isBlank()) {
             log.warn("이름이 비어있습니다");
@@ -48,7 +55,7 @@ public class VetService {
         }
     }
 
-    private void validateParent(SignupVetReqDto vet) {
+    private void validateVet(SignupVetReqDto vet) {
 
         if (vet.getId().length() != 5 || !vet.getId().matches("^[0-9]+$")) {
             log.warn("유효하지 않는 아이디입니다");
@@ -64,7 +71,7 @@ public class VetService {
         }
     }
 
-    private void duplicateParent(SignupVetReqDto vet) {
+    private void duplicateVet(SignupVetReqDto vet) {
 
         List<Vet> findPVetsId = vetRepository.findById(vet.getId());
         if (!findPVetsId.isEmpty()) {
@@ -73,12 +80,15 @@ public class VetService {
         }
     }
 
-    public void changeLoginStatus(Vet vet) {
+    private void idCheckVet(IdCheckReqDto vet) {
 
-        if (!vet.getLogin_status()) {
-            vet.setLogin_status(Boolean.TRUE);
-        } else {
-            vet.setLogin_status(Boolean.FALSE);
+        if (vet.getId().length() < 8 || !vet.getId().matches("^[a-zA-Z0-9]+$")) {
+            log.warn("유효하지 않는 아이디입니다");
+            throw new InvalidIdException();
+        }
+        if (!vetRepository.findById(vet.getId()).isEmpty()) {
+            log.warn("이미 존재하는 아이디입니다");
+            throw new DuplicateIdException();
         }
     }
 }

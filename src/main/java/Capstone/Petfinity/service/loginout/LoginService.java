@@ -136,7 +136,7 @@ public class LoginService {
 
         Parent findParent = parentRepository.findOneById(request.getId());
         boolean loginStatus = parentRepository.checkLoginStatus(findParent);
-        if(!loginStatus){
+        if(loginStatus){
 
             throw new LoginStatusException();
         }
@@ -145,7 +145,7 @@ public class LoginService {
     private void checkVetLoginStatus(LoginReqDto request){
         Vet findVet = vetRepository.findOneById(request.getId());
         boolean loginStatus = vetRepository.checkLoginStatus(findVet);
-        if(!loginStatus){
+        if(loginStatus){
             throw new LoginStatusException();
         }
     }

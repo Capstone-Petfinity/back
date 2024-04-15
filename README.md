@@ -149,6 +149,28 @@ loginStatus(406)
 - NotLoginStatusException: 로그아웃 상태
 
 
+## infoPet
+#### /user/info/pet: POST
+
+**Body**
+- String uuid;
+
+### possible error
+auth(400): 권한 없음
+
+null(403)
+- NullUuidException: 입력되지 않은 uuid
+
+validate(401)
+- InvalidUuidException: 유효하지 않은 uuid
+
+exist(404)
+- NotExistException: 존재하지 않는 회원
+
+loginStatus(406)
+- NotLoginStatusException: 로그아웃 상태
+
+
 ## infoVet
 #### /user/info/vet: POST
 

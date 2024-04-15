@@ -76,6 +76,11 @@ public class ParentRepository {
         em.persist(parent);
     }
 
+    public boolean checkLoginStatus(Parent parent){
+
+        return parent.getLogin_status();
+    }
+
 //    반려동물 조회
 //    public List<String> findPetByUuid(String uuid) {
 //

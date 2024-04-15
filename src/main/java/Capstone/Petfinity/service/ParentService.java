@@ -91,7 +91,7 @@ public class ParentService {
         loginStatusParent(findParent);
         log.debug("로그인 상태 확인 성공");
 
-        return parentRepository.findPetByUuid(findParent.getUuid());
+        return findParent.getPets();
     }
 
     private void nullParent(SignupParentReqDto parent) {

@@ -78,13 +78,13 @@ public class ParentRepository {
         return parent.getLogin_status();
     }
 
-//    반려동물 조회
-    public List<Pet> findPetByUuid(String uuid) {
-
-        Parent parent = findOneByUuid(uuid);
-
-        return em.createQuery("select p from Pet p where p.parent = :uuid", Pet.class)
-                .setParameter("uuid", parent)
-                .getResultList();
-    }
+//    반려동물 조회 -> getter 로 해결.......
+//    public List<Pet> findPetByUuid(String uuid) {
+//
+//        Parent parent = findOneByUuid(uuid);
+//
+//        return em.createQuery("select p from Pet p where p.parent = :uuid", Pet.class)
+//                .setParameter("uuid", parent)
+//                .getResultList();
+//    }
 }

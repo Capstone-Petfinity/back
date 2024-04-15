@@ -41,7 +41,7 @@ public class InfoApiController {
         if (!auth.equals("bVAtkPtiVGpWuO3dWEnvr51cEb6r7oF8")) {
 
             log.warn("권한이 없습니다");
-            resultParent = new InfoParentResDto("400", "권한 없음", null, null, null, null, null);
+            resultParent = new InfoParentResDto("400", "권한 없음", null, null, null, null, null, null);
             return resultParent;
         }
 
@@ -49,23 +49,23 @@ public class InfoApiController {
         try {
             Parent parent = parentService.infoParent(request);
 
-            resultParent = new InfoParentResDto("200", "회원 정보 조회 성공", parent.getUuid(), parent.getId(), parent.getName(), parent.getPhone_number(), parent.getCity());
+            resultParent = new InfoParentResDto("200", "회원 정보 조회 성공", parent.getUuid(), parent.getId(), parent.getName(), parent.getPhone_number(), parent.getCity(), parent.getReservations());
             return resultParent;
         } catch (NotLoginStatusException e) {
 
-            resultParent = new InfoParentResDto("406", "로그아웃 상태", null, null, null, null, null);
+            resultParent = new InfoParentResDto("406", "로그아웃 상태", null, null, null, null, null, null);
             return resultParent;
         } catch (NullUuidException e) {
 
-            resultParent = new InfoParentResDto("403", "입력되지 않은 uuid", null, null, null, null, null);
+            resultParent = new InfoParentResDto("403", "입력되지 않은 uuid", null, null, null, null, null, null);
             return resultParent;
         } catch (InvalidUuidException e) {
 
-            resultParent = new InfoParentResDto("401", "유효하지 않는 uuid", null, null, null, null, null);
+            resultParent = new InfoParentResDto("401", "유효하지 않는 uuid", null, null, null, null, null, null);
             return resultParent;
         } catch (NotExistException e) {
 
-            resultParent = new InfoParentResDto("404", "존재하지 않는 회원", null, null, null, null, null);
+            resultParent = new InfoParentResDto("404", "존재하지 않는 회원", null, null, null, null, null, null);
             return resultParent;
         }
     }

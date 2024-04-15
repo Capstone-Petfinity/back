@@ -3,6 +3,7 @@ package Capstone.Petfinity.service;
 import Capstone.Petfinity.domain.Parent;
 import Capstone.Petfinity.domain.Vet;
 import Capstone.Petfinity.dto.info.InfoParentReqDto;
+import Capstone.Petfinity.dto.info.InfoVetReqDto;
 import Capstone.Petfinity.dto.signup.parent.IdCheckReqDto;
 import Capstone.Petfinity.dto.signup.vet.SignupVetReqDto;
 import Capstone.Petfinity.exception.*;
@@ -42,7 +43,7 @@ public class VetService {
         log.debug("아이디 중복 확인 성공");
     }
 
-    public Vet infoVet(InfoParentReqDto vet) {
+    public Vet infoVet(InfoVetReqDto vet) {
 
         Vet findVet;
 

@@ -2,6 +2,7 @@ package Capstone.Petfinity.api.info;
 
 import Capstone.Petfinity.domain.Parent;
 import Capstone.Petfinity.domain.Pet;
+import Capstone.Petfinity.domain.Vet;
 import Capstone.Petfinity.dto.info.*;
 import Capstone.Petfinity.exception.InvalidUuidException;
 import Capstone.Petfinity.exception.NotExistException;
@@ -69,7 +70,7 @@ public class InfoApiController {
         }
     }
 
-    @PostMapping("/user/info/parent/pets")
+    @PostMapping("/user/info/pet")
     public InfoPetsResDto infoPets(@RequestHeader("auth") String auth,
                                    @RequestBody InfoParentReqDto request) {
 
@@ -106,7 +107,6 @@ public class InfoApiController {
         }
     }
 
-
     @PostMapping("/user/info/vet")
     public InfoVetResDto infoVet(@RequestHeader("auth") String auth,
                                  @RequestBody InfoVetReqDto request) {
@@ -119,9 +119,27 @@ public class InfoApiController {
         }
 
         log.debug("수의사 정보 조회");
-//        try {
-//
-//        } catch ()
-        return null;
+        try {
+             Vet vet = vetService.infoVet(request);
+
+            resultVet = new InfoVetResDto("200", "회원 정보 조회 성공", vet.getUuid(), vet.getId(), vet.getName());
+            return resultVet;
+        } catch (NotLoginStatusException e) {
+
+            resultVet = new InfoVetResDto("406", "로그아웃 상태", null, null, null);
+            return resultVet;
+        } catch (NullUuidException e) {
+
+            resultVet = new InfoVetResDto("403", "입력되지 않은 uuid", null, null, null);
+            return resultVet;
+        } catch (InvalidUuidException e) {
+
+            resultVet = new InfoVetResDto("401", "유효하지 않는 uuid", null, null, null);
+            return resultVet;
+        } catch (NotExistException e) {
+
+            resultVet = new InfoVetResDto("404", "존재하지 않는 회원", null, null, null);
+            return resultVet;
+        }
     }
 }

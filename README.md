@@ -16,7 +16,7 @@
 ### possible error
 auth(400): 권한 없음
 
-validate(401)
+invalid(401)
 - InvalidIdException(): 유효하지 않은 아이디
 - InvalidPhoneNumberException(): 유효하지 않은 전화번호
 - InvalidPwException(): 유효하지 않은 비밀번호
@@ -72,7 +72,7 @@ null(403)
 ### possible error
 auth(400): 권한 없음
 
-validate(401)
+invalid(401)
 - InvalidIdException: 유효하지 않은 아이디
 
 duplicate(402)
@@ -88,7 +88,7 @@ duplicate(402)
 ### possible error
 auth(400): 권한 없음
 
-validate(401)
+invalid(401)
 - InvalidIdException: 유효하지 않은 아이디
 
 duplicate(402)
@@ -140,7 +140,7 @@ auth(400): 권한 없음
 null(403)
 - NullUuidException: 입력되지 않은 uuid
 
-validate(401)
+invalid(401)
 - InvalidUuidException: 유효하지 않은 uuid
 
 exist(404)
@@ -162,7 +162,7 @@ auth(400): 권한 없음
 null(403)
 - NullUuidException: 입력되지 않은 uuid
 
-validate(401)
+invalid(401)
 - InvalidUuidException: 유효하지 않은 uuid
 
 exist(404)
@@ -184,7 +184,7 @@ auth(400): 권한 없음
 null(403)
 - NullUuidException: 입력되지 않은 uuid
 
-validate(401)
+invalid(401)
 - InvalidUuidException: 유효하지 않은 uuid
 
 exist(404)

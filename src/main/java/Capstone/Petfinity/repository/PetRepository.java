@@ -13,9 +13,9 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class PetRepository {
 
-    private final ParentRepository parentRepository;
-
     private final EntityManager em;
+
+    private final ParentRepository parentRepository;
 
     public void save(RegisterPetReqDto petDto){
 

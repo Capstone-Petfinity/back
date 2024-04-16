@@ -28,7 +28,7 @@ public class PetService {
         checkParentUuid(pet);// parentUuid null, validate 확인
         checkParentLoginStatus(pet);// parent loginStatus 확인
         petRepository.save(pet);
-        log.debug("반려동물 등록 성공");
+        log.info("반려동물 등록 성공");
     }
 
     private void nullPet(RegisterPetReqDto pet) {

@@ -35,13 +35,13 @@ public class ParentService {
         duplicateParent(parent); // 중복 확인
         nullParent(parent); // null 확인
         parentRepository.save(parent);
-        log.debug("회원가입 성공");
+        log.info("회원가입 성공");
     }
 
     public void idCheck(IdCheckReqDto parent) {
 
         idCheckParent(parent);
-        log.debug("아이디 중복 확인 성공");
+        log.info("아이디 중복 확인 성공");
     }
 
     public Parent infoParent(InfoParentReqDto parent) {
@@ -63,7 +63,7 @@ public class ParentService {
 
         findParent = parentRepository.findOneByUuid(parent.getUuid());
         loginStatusParent(findParent);
-        log.debug("로그인 상태 확인 성공");
+        log.info("로그인 상태 확인 성공");
 
         return findParent;
     }
@@ -87,7 +87,7 @@ public class ParentService {
 
         findParent = parentRepository.findOneByUuid(parent.getUuid());
         loginStatusParent(findParent);
-        log.debug("로그인 상태 확인 성공");
+        log.info("로그인 상태 확인 성공");
 
         return findParent.getPets();
     }

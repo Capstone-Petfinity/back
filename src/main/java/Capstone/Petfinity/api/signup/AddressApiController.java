@@ -21,7 +21,7 @@ public class AddressApiController {
 
         AddressResDto result;
 
-        log.debug("권한 확인");
+        log.info("권한 확인");
         if (!auth.equals("bVAtkPtiVGpWuO3dWEnvr51cEb6r7oF8")) {
 
             log.warn("권한이 없습니다");
@@ -29,7 +29,7 @@ public class AddressApiController {
             return result;
         }
 
-        log.debug("도시 리스트 리턴 성공");
+        log.info("도시 리스트 리턴 성공");
         result = new AddressResDto("200", "도시 리턴 성공", addressRepository.findAllCity());
         return result;
     }

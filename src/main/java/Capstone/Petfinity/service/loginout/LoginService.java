@@ -39,7 +39,7 @@ public class LoginService {
             Vet vet = vetRepository.findOneByUuid(uuid);
             vetRepository.changeLoginStatus(vet);
 
-            log.debug("수의사 로그인 성공");
+            log.info("수의사 로그인 성공");
             return uuid;
         } else { // 보호자
 
@@ -50,7 +50,7 @@ public class LoginService {
             Parent parent = parentRepository.findOneByUuid(uuid);
             parentRepository.changeLoginStatus(parent);
 
-            log.debug("보호자 로그인 성공");
+            log.info("보호자 로그인 성공");
             return uuid;
         }
     }

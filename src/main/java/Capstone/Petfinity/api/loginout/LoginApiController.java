@@ -6,6 +6,7 @@ import Capstone.Petfinity.exception.*;
 import Capstone.Petfinity.service.loginout.LoginService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 @Slf4j
 public class LoginApiController {
 
+    @Autowired
     private final LoginService loginService;
 
     LoginResDto result;
@@ -24,7 +26,7 @@ public class LoginApiController {
     public LoginResDto Login(@RequestHeader("auth") String auth,
                              @RequestBody LoginReqDto request) {
 
-        log.debug("권한 확인");
+        log.info("권한 확인");
         if (!auth.equals("bVAtkPtiVGpWuO3dWEnvr51cEb6r7oF8")) {
 
             log.warn("권한이 없습니다");
@@ -33,11 +35,11 @@ public class LoginApiController {
         }
 
         try {
-            log.debug("로그인 시작");
+            log.info("로그인 시작");
             String uuid = loginService.login(request);
             Boolean isParent = loginService.isParent(request);
 
-            log.debug("로그인 성공");
+            log.info("로그인 성공");
             result = new LoginResDto("200", "로그인 성공", uuid, isParent);
             return result;
         } catch (NullIdException e){

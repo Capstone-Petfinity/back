@@ -32,13 +32,13 @@ public class VetService {
         duplicateVet(vet); // 중복 확인
         nullVet(vet); // null 확인
         vetRepository.save(vet);
-        log.debug("회원가입 성공");
+        log.info("회원가입 성공");
     }
 
     public void idCheck(IdCheckReqDto vet) {
 
         idCheckVet(vet);
-        log.debug("아이디 중복 확인 성공");
+        log.info("아이디 중복 확인 성공");
     }
 
     public Vet infoVet(InfoVetReqDto vet) {
@@ -60,7 +60,7 @@ public class VetService {
 
         findVet = vetRepository.findOneByUuid(vet.getUuid());
         loginStatusVet(findVet);
-        log.debug("로그인 상태 확인 성공");
+        log.info("로그인 상태 확인 성공");
 
         return findVet;
     }

@@ -26,36 +26,30 @@ public class LogoutService {
         String uuid;
         Boolean isParent;
 
-        try {
-            uuid = request.getUuid();
-            isParent = request.getIsParent();
+        uuid = request.getUuid();
+        isParent = request.getIsParent();
 
-            if (isParent) { // True: 보호자, False: 수의사
+        if (isParent) { // True: 보호자, False: 수의사
 
-                 Parent parent = parentRepository.findOneByUuid(uuid);
-                if (parent == null)
-                    throw new FailLogoutException();
-
-                validateParentStatus(parent); // 로그인 상태인지 확인
-
-                parentRepository.changeLoginStatus(parent);
-                log.debug("로그아웃 성공");
-            } else if (!isParent) {
-
-                Vet vet = vetRepository.findOneByUuid(uuid);
-                if (vet == null)
-                    throw new FailLogoutException();
-
-                validateVetStatus(vet); // 로그인 상태인지 확인
-
-                vetRepository.changeLoginStatus(vet);
-                log.debug("로그아웃 성공");
-            } else if (isParent == null) {
-
-                log.warn("로그아웃 실패");
+            Parent parent = parentRepository.findOneByUuid(uuid);
+            if (parent == null)
                 throw new FailLogoutException();
-            }
-        } finally {
+
+            validateParentStatus(parent); // 로그인 상태인지 확인
+
+            parentRepository.changeLoginStatus(parent);
+            log.info("로그아웃 성공");
+        } else if (!isParent) {
+
+            Vet vet = vetRepository.findOneByUuid(uuid);
+            if (vet == null)
+                throw new FailLogoutException();
+
+            validateVetStatus(vet); // 로그인 상태인지 확인
+
+            vetRepository.changeLoginStatus(vet);
+            log.info("로그아웃 성공");
+        } else if (isParent == null) {
 
             log.warn("로그아웃 실패");
             throw new FailLogoutException();

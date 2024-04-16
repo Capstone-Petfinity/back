@@ -41,7 +41,7 @@ public class InfoApiController {
     @PostMapping("/user/info/parent")
     public InfoParentResDto infoParent(@RequestHeader("auth") String auth,
                                        @RequestBody InfoParentReqDto request) {
-        log.debug("권한 확인");
+        log.info("권한 확인");
         if (!auth.equals("bVAtkPtiVGpWuO3dWEnvr51cEb6r7oF8")) {
 
             log.warn("권한이 없습니다");
@@ -49,7 +49,7 @@ public class InfoApiController {
             return resultParent;
         }
 
-        log.debug("보호자 정보 조회");
+        log.info("보호자 정보 조회");
         try {
             Parent parent = parentService.infoParent(request);
 
@@ -78,7 +78,7 @@ public class InfoApiController {
     public InfoPetsResDto infoPets(@RequestHeader("auth") String auth,
                                    @RequestBody InfoParentReqDto request) {
 
-        log.debug("권한 확인");
+        log.info("권한 확인");
         if (!auth.equals("bVAtkPtiVGpWuO3dWEnvr51cEb6r7oF8")) {
 
             log.warn("권한이 없습니다");
@@ -86,7 +86,7 @@ public class InfoApiController {
             return resultPet;
         }
 
-        log.debug("반려동물 정보 조회");
+        log.info("반려동물 정보 조회");
         try {
             List<Pet> pets = parentService.infoPet(request);
 
@@ -114,7 +114,7 @@ public class InfoApiController {
     @PostMapping("/user/info/vet")
     public InfoVetResDto infoVet(@RequestHeader("auth") String auth,
                                  @RequestBody InfoVetReqDto request) {
-        log.debug("권한 확인");
+        log.info("권한 확인");
         if (!auth.equals("bVAtkPtiVGpWuO3dWEnvr51cEb6r7oF8")) {
 
             log.warn("권한이 없습니다");
@@ -122,7 +122,7 @@ public class InfoApiController {
             return resultVet;
         }
 
-        log.debug("수의사 정보 조회");
+        log.info("수의사 정보 조회");
         try {
              Vet vet = vetService.infoVet(request);
 

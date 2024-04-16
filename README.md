@@ -46,10 +46,11 @@ null(403)
 ### possible error
 auth(400): 권한 없음
 
-validate(401)
-- InvalidIdException: 유효하지 않은 아이디
-- InvalidPwException: 유효하지 않은 비밀번호
-- InvalidNameException: 유효하지 않은 이름
+invalid(401)
+- InvalidIdException(): 유효하지 않는 아이디
+- InvalidPhoneNumberException(): 유효하지 않는 전화번호
+- InvalidPwException(): 유효하지 않는 비밀번호
+- InvalidNameException(): 유효하지 않는 이름
 
 duplicate(402)
 - DuplicateIdException: 중복된 아이디

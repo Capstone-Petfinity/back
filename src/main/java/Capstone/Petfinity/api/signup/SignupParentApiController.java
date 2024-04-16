@@ -44,19 +44,19 @@ public class SignupParentApiController {
             return result;
         } catch (InvalidIdException e) {
 
-            result = new NormalResDto("401", "유효하지 않는 아이디");
+            result = new NormalResDto("401", "유효하지 않은 아이디");
             return result;
         } catch (InvalidPwException e) {
 
-            result = new NormalResDto("401", "유효하지 않는 비밀번호");
+            result = new NormalResDto("401", "유효하지 않은 비밀번호");
             return result;
         } catch (InvalidNameException e) {
 
-            result = new NormalResDto("401", "유효하지 않는 이름");
+            result = new NormalResDto("401", "유효하지 않은 이름");
             return result;
         } catch (InvalidPhoneNumberException e) {
 
-            result = new NormalResDto("401", "유효하지 않는 전화번호");
+            result = new NormalResDto("401", "유효하지 않은 전화번호");
             return result;
         } catch (DuplicateIdException e) {
 

@@ -44,7 +44,7 @@ public class IdDuplicateApiController {
             return idCheckResult;
         } catch (InvalidIdException e) {
 
-            idCheckResult = new NormalResDto("401", "유효하지 않는 아이디");
+            idCheckResult = new NormalResDto("401", "유효하지 않은 아이디");
             return idCheckResult;
         } catch (DuplicateIdException e) {
 
@@ -74,7 +74,7 @@ public class IdDuplicateApiController {
             return idCheckResult;
         } catch (InvalidIdException e) {
 
-            idCheckResult = new NormalResDto("401", "유효하지 않는 아이디");
+            idCheckResult = new NormalResDto("401", "유효하지 않은 아이디");
             return idCheckResult;
         } catch (DuplicateIdException e) {
 

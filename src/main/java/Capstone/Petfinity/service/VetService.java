@@ -52,7 +52,7 @@ public class VetService {
             throw new NullUuidException();
         }
         if (containsWhitespace(vet.getUuid()) || vet.getUuid().length() != 36) {
-            log.warn("유효하지 않는 uuid입니다");
+            log.warn("유효하지 않은 uuid입니다");
             throw new InvalidUuidException();
         }
         if (vetRepository.findOneByUuid(vet.getUuid()) == null) {
@@ -82,15 +82,15 @@ public class VetService {
     private void validateVet(SignupVetReqDto vet) {
 
         if (vet.getId().length() != 5 || !vet.getId().matches("^[0-9]+$")) {
-            log.warn("유효하지 않는 아이디입니다");
+            log.warn("유효하지 않은 아이디입니다");
             throw new InvalidIdException();
         }
         if (!vet.getPw().matches("^[a-zA-Z0-9]+$")) {
-            log.warn("유효하지 않는 비밀번호입니다.");
+            log.warn("유효하지 않은 비밀번호입니다.");
             throw new InvalidPwException();
         }
         if (StringUtils.containsWhitespace(vet.getName())) {
-            log.warn("유효하지 않는 이름입니다.");
+            log.warn("유효하지 않은 이름입니다.");
             throw new InvalidNameException();
         }
     }
@@ -107,7 +107,7 @@ public class VetService {
     private void idCheckVet(IdCheckReqDto vet) {
 
         if (vet.getId().length() != 5 || !vet.getId().matches("^[0-9]+$")) {
-            log.warn("유효하지 않는 아이디입니다");
+            log.warn("유효하지 않은 아이디입니다");
             throw new InvalidIdException();
         }
         if (!vetRepository.findById(vet.getId()).isEmpty()) {

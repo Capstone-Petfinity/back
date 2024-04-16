@@ -34,15 +34,15 @@ public class PetService {
 
     private void nullPet(RegisterPetReqDto pet) {
 
-        if(pet.getName().isEmpty()) {
+        if (pet.getName().isEmpty()) {
 
             throw new NullNameException();
         }
-        if(pet.getGender().isEmpty()) {
+        if (pet.getGender().isEmpty()) {
 
             throw new NullPetGenderException();
         }
-        if(pet.getKind().isEmpty()) {
+        if (pet.getKind().isEmpty()) {
 
             throw new NullPetKindException();
         }

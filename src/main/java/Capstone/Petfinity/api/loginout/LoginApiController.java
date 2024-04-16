@@ -18,11 +18,11 @@ public class LoginApiController {
 
     private final LoginService loginService;
 
+    LoginResDto result;
+
     @PostMapping("/user/login")
     public LoginResDto Login(@RequestHeader("auth") String auth,
                              @RequestBody LoginReqDto request) {
-
-        LoginResDto result;
 
         log.debug("권한 확인");
         if (!auth.equals("bVAtkPtiVGpWuO3dWEnvr51cEb6r7oF8")) {

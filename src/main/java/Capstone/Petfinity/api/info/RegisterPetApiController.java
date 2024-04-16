@@ -4,9 +4,7 @@ import Capstone.Petfinity.dto.NormalResDto;
 import Capstone.Petfinity.dto.info.RegisterPetReqDto;
 import Capstone.Petfinity.dto.loginout.LoginResDto;
 import Capstone.Petfinity.dto.signup.parent.SignupParentReqDto;
-import Capstone.Petfinity.exception.NullNameException;
-import Capstone.Petfinity.exception.NullPetGenderException;
-import Capstone.Petfinity.exception.NullPetKindException;
+import Capstone.Petfinity.exception.*;
 import Capstone.Petfinity.service.PetService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -56,6 +54,22 @@ public class RegisterPetApiController {
         } catch (NullPetKindException e) {
 
             result = new NormalResDto("403", "입력되지 않은 품종");
+            return result;
+        } catch (NullUuidException e) {
+
+            result = new NormalResDto("403", "입력되지 않은 uuid");
+            return result;
+        } catch (InvalidUuidException e) {
+
+            result = new NormalResDto("401", "유효하지 않은 uuid");
+            return result;
+        } catch (NotExistException e) {
+
+            result = new NormalResDto("404", "존재하지 않는 회원");
+            return result;
+        } catch (NotLoginStatusException e) {
+
+            result = new NormalResDto("406", "로그아웃된 상태");
             return result;
         }
     }

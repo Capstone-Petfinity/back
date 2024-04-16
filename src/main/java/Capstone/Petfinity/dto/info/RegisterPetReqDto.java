@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Getter
@@ -13,7 +14,7 @@ import java.time.LocalDateTime;
 public class RegisterPetReqDto {
 
     private String name;
-    private LocalDateTime birth;
+    private LocalDate birth;
     private String gender;
     private String kind;
     private String parentUuid;

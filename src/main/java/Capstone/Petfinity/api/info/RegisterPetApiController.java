@@ -47,15 +47,15 @@ public class RegisterPetApiController {
             return result;
         } catch (NullNameException e) {
 
-            result = new NormalResDto("401", "입력되지 않은 이름");
+            result = new NormalResDto("403", "입력되지 않은 이름");
             return result;
         } catch (NullPetGenderException e) {
 
-            result = new NormalResDto("401", "입력되지 않은 성별");
+            result = new NormalResDto("403", "입력되지 않은 성별");
             return result;
         } catch (NullPetKindException e) {
 
-            result = new NormalResDto("401", "입력되지 않은 품종");
+            result = new NormalResDto("403", "입력되지 않은 품종");
             return result;
         }
     }

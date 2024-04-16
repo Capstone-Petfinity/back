@@ -1,14 +1,13 @@
-package Capstone.Petfinity.dto.info;
+package Capstone.Petfinity.dto.info.parent;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
 import lombok.ToString;
 
 @Getter
 @NoArgsConstructor
 @ToString
-public class InfoVetReqDto {
+public class InfoParentReqDto {
 
     private String uuid;
 }

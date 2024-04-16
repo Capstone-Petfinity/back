@@ -125,7 +125,7 @@ loginStatus(406)
 # LogoutApiController
 
 ## Logout
-#### /user/logout: GET
+#### /user/logout: POST
 
 **Body**
 - String uuid;

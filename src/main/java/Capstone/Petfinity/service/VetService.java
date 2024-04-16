@@ -1,9 +1,7 @@
 package Capstone.Petfinity.service;
 
-import Capstone.Petfinity.domain.Parent;
 import Capstone.Petfinity.domain.Vet;
-import Capstone.Petfinity.dto.info.InfoParentReqDto;
-import Capstone.Petfinity.dto.info.InfoVetReqDto;
+import Capstone.Petfinity.dto.info.vet.InfoVetReqDto;
 import Capstone.Petfinity.dto.signup.parent.IdCheckReqDto;
 import Capstone.Petfinity.dto.signup.vet.SignupVetReqDto;
 import Capstone.Petfinity.exception.*;

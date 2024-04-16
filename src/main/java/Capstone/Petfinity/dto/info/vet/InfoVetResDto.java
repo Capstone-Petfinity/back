@@ -1,4 +1,4 @@
-package Capstone.Petfinity.dto.info;
+package Capstone.Petfinity.dto.info.vet;
 
 import jakarta.validation.constraints.NotNull;
 import lombok.Builder;

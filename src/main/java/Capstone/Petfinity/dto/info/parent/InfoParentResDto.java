@@ -1,4 +1,4 @@
-package Capstone.Petfinity.dto.info;
+package Capstone.Petfinity.dto.info.parent;
 
 import Capstone.Petfinity.domain.Pet;
 import Capstone.Petfinity.domain.Reservation;

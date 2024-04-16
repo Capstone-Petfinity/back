@@ -1,8 +1,7 @@
 package Capstone.Petfinity.service;
 
 import Capstone.Petfinity.domain.Pet;
-import Capstone.Petfinity.dto.info.InfoParentReqDto;
-import Capstone.Petfinity.dto.info.InfoParentResDto;
+import Capstone.Petfinity.dto.info.parent.InfoParentReqDto;
 import Capstone.Petfinity.dto.signup.parent.IdCheckReqDto;
 import Capstone.Petfinity.dto.signup.parent.SignupParentReqDto;
 import Capstone.Petfinity.domain.Parent;
@@ -18,7 +17,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.Optional;
 
 import static org.springframework.util.StringUtils.containsWhitespace;
 

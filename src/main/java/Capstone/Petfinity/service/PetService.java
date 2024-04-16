@@ -1,8 +1,7 @@
 package Capstone.Petfinity.service;
 
 import Capstone.Petfinity.domain.Parent;
-import Capstone.Petfinity.dto.NormalResDto;
-import Capstone.Petfinity.dto.info.RegisterPetReqDto;
+import Capstone.Petfinity.dto.info.pet.RegisterPetReqDto;
 import Capstone.Petfinity.exception.*;
 import Capstone.Petfinity.repository.ParentRepository;
 import Capstone.Petfinity.repository.PetRepository;

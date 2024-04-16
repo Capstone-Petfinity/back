@@ -1,4 +1,4 @@
-package Capstone.Petfinity.dto.info;
+package Capstone.Petfinity.dto.info.pet;
 
 import Capstone.Petfinity.domain.Parent;
 import lombok.Getter;

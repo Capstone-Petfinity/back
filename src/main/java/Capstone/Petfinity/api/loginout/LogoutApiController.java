@@ -17,7 +17,7 @@ public class LogoutApiController {
     @Autowired
     private final LogoutService logoutService;
 
-    @GetMapping("/user/logout")
+    @PostMapping("/user/logout")
     public NormalResDto logout(@RequestHeader("auth") String auth,
                                @RequestBody LogoutReqDto request) {
 

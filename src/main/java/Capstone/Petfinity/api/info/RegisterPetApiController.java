@@ -1,9 +1,7 @@
 package Capstone.Petfinity.api.info;
 
 import Capstone.Petfinity.dto.NormalResDto;
-import Capstone.Petfinity.dto.info.RegisterPetReqDto;
-import Capstone.Petfinity.dto.loginout.LoginResDto;
-import Capstone.Petfinity.dto.signup.parent.SignupParentReqDto;
+import Capstone.Petfinity.dto.info.pet.RegisterPetReqDto;
 import Capstone.Petfinity.exception.*;
 import Capstone.Petfinity.service.PetService;
 import lombok.RequiredArgsConstructor;

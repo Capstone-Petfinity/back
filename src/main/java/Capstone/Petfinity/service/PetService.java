@@ -68,7 +68,7 @@ public class PetService {
     private void checkParentLoginStatus(RegisterPetReqDto pet) {
 
         Parent findParent = parentRepository.findOneByUuid(pet.getParentUuid());
-        if(!parentRepository.checkLoginStatus(findParent)){
+        if (!parentRepository.checkLoginStatus(findParent)){
             throw new NotLoginStatusException();
         }
     }

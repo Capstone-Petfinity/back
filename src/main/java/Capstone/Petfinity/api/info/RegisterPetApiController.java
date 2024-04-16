@@ -24,7 +24,7 @@ public class RegisterPetApiController {
 
     NormalResDto result;
 
-    @PostMapping("/user/parent/registerPet")
+    @PostMapping("/user/parent/registerpet")
     public NormalResDto registerPet(@RequestHeader("auth") String auth,
                                     @RequestBody RegisterPetReqDto request) {
 

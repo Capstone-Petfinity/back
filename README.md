@@ -106,7 +106,20 @@ duplicate(402)
 - String pw;
 
 ### possible error
+auth(400): 권한 없음
 
+null(403)
+- NullIdException: 입력되지 않은 아이디
+- NullPwException: 입력되지 않은 비밀번호
+
+exist(404)
+- NotExistException: 존재하지 않는 회원
+
+incorrect(405)
+- IncorrectPwException: 일치하지 않는 비밀번호
+
+loginStatus(406)
+- LoginStatusException: 로그인 상태
 
 
 # LogoutApiController
@@ -199,3 +212,35 @@ loginStatus(406)
 
 ## returnCityList
 #### /address/city: GET
+
+
+
+# RegisterPetApiController
+
+## registerPet
+#### /user/parent/registerpet: POST
+
+**Body**
+- String name;
+- Localdate birth;
+- String gender;
+- String kind;
+- String parentUuid;
+
+### Possible error
+auth(400): 권한 없음
+
+null(403)
+- NullNameException: 입력되지 않은 이름
+- NullPetGenderException: 입력되지 않은 성별
+- NullPetKindException: 입력되지 않은 품종
+- NullUuidException: 입력되지 않은 uuid
+
+invalid(401)
+- InvalidUuidException: 유효하지 않은 uuid
+
+exist(404)
+- NotExistException: 존재하지 않는 회원
+
+loginStatus(406)
+- NotLoginStatusException: 로그아웃 상태

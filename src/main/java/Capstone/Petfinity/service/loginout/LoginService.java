@@ -71,7 +71,7 @@ public class LoginService {
     private void parentExistCheck(LoginReqDto request) {
 
         List<Parent> findParent = parentRepository.findById(request.getId());
-        if(findParent.isEmpty()){
+        if (findParent.isEmpty()){
 
             log.warn("[보호자] 해당 아이디가 존재하지 않습니다");
             throw new NotExistException();
@@ -97,7 +97,7 @@ public class LoginService {
     private void vetExistCheck (LoginReqDto request){
 
         List<Vet> findVet = vetRepository.findById(request.getId());
-        if(findVet.isEmpty()){
+        if (findVet.isEmpty()){
 
             log.warn("[수의사] 해당 아이디가 존재하지 않습니다");
             throw new NotExistException();
@@ -139,7 +139,7 @@ public class LoginService {
 
         Parent findParent = parentRepository.findOneById(request.getId());
         boolean loginStatus = parentRepository.checkLoginStatus(findParent);
-        if(loginStatus){
+        if (loginStatus){
 
             log.warn("[보호자] 이미 로그인 된 상태입니다");
             throw new LoginStatusException();
@@ -149,7 +149,7 @@ public class LoginService {
     private void checkVetLoginStatus(LoginReqDto request){
         Vet findVet = vetRepository.findOneById(request.getId());
         boolean loginStatus = vetRepository.checkLoginStatus(findVet);
-        if(loginStatus){
+        if (loginStatus){
 
             log.warn("[수의사] 이미 로그인 된 상태입니다");
             throw new LoginStatusException();

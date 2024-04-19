@@ -13,6 +13,7 @@ import Capstone.Petfinity.exception.NotExistException;
 import Capstone.Petfinity.exception.NotLoginStatusException;
 import Capstone.Petfinity.exception.NullUuidException;
 import Capstone.Petfinity.service.ParentService;
+import Capstone.Petfinity.service.PetService;
 import Capstone.Petfinity.service.VetService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -33,6 +34,8 @@ public class InfoApiController {
     private final ParentService parentService;
     @Autowired
     private final VetService vetService;
+    @Autowired
+    private final PetService petService;
 
     InfoParentResDto resultParent;
     InfoPetsResDto resultPet;
@@ -88,7 +91,7 @@ public class InfoApiController {
 
         log.info("반려동물 정보 조회");
         try {
-            List<Pet> pets = parentService.infoPet(request);
+            List<Pet> pets = petService.infoPet(request);
 
             resultPet = new InfoPetsResDto("200", "회원 정보 조회 성공", pets);
             return resultPet;

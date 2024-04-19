@@ -49,7 +49,7 @@ public class LogoutService {
 
             vetRepository.changeLoginStatus(vet);
             log.info("로그아웃 성공");
-        } else if (isParent == null) {
+        } else if (isParent == null) { // else로만 해도 되지 않을까?
 
             log.warn("로그아웃 실패");
             throw new FailLogoutException();

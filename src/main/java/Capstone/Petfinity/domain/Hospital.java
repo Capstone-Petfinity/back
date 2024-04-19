@@ -6,7 +6,6 @@ import jakarta.persistence.Id;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 
-import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 @Entity

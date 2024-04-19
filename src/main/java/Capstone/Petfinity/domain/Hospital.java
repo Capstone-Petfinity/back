@@ -7,6 +7,7 @@ import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 @Entity
 @Getter
@@ -21,13 +22,13 @@ public class Hospital {
     @NotNull
     private String hospital_callnumber;
     @NotNull
-    private LocalDateTime open_time;
+    private LocalTime open_time;
     @NotNull
-    private LocalDateTime close_time;
+    private LocalTime close_time;
     @NotNull
-    private LocalDateTime lunch_start;
+    private LocalTime lunch_start;
     @NotNull
-    private LocalDateTime lunch_finish;
+    private LocalTime lunch_finish;
     @NotNull
     private String city;
 }

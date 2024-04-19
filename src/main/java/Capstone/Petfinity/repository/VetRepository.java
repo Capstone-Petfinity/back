@@ -22,6 +22,7 @@ public class VetRepository {
         vet.setId(vetDTO.getId());
         vet.setName(vetDTO.getName());
         vet.setPw(vetDTO.getPw());
+        vet.setPhone_number(vetDTO.getPhone_number());
         vet.setLogin_status(Boolean.FALSE);
 
         em.persist(vet);

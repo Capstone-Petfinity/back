@@ -6,7 +6,6 @@ import Capstone.Petfinity.dto.loginout.LoginReqDto;
 import Capstone.Petfinity.exception.*;
 import Capstone.Petfinity.repository.ParentRepository;
 import Capstone.Petfinity.repository.VetRepository;
-import jakarta.persistence.NoResultException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;

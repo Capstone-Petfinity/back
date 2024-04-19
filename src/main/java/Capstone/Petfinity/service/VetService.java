@@ -75,6 +75,10 @@ public class VetService {
             log.warn("비밀번호가 비어있습니다");
             throw new NullPwException();
         }
+        if(vet.getPhone_number().isBlank()) {
+            log.warn("전화번호가 비어있습니다");
+            throw new NullPhoneNumberException();
+        }
     }
 
     private void validateVet(SignupVetReqDto vet) {

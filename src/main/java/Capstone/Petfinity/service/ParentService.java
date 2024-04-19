@@ -106,6 +106,10 @@ public class ParentService {
             log.warn("도시가 비어있습니다");
             throw new NullCityException();
         }
+        if(parent.getPhone_number().isBlank()) {
+            log.warn("전화번호가 비어있습니다");
+            throw new NullPhoneNumberException();
+        }
     }
 
     private void validateParent(SignupParentReqDto parent) {

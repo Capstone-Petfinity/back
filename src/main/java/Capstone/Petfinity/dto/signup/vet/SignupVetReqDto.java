@@ -12,4 +12,5 @@ public class SignupVetReqDto {
     private String id;
     private String pw;
     private String name;
+    private String phone_number;
 }

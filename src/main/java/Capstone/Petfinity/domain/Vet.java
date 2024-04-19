@@ -23,5 +23,7 @@ public class Vet {
     @NotNull
     private String name;
     @NotNull
+    private String phone_number;
+    @NotNull
     private Boolean login_status;
 }

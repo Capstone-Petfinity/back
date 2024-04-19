@@ -59,12 +59,12 @@ public class LoginService {
 
         if (request.getId().isEmpty()) {
 
-            log.warn("아이디를 입력하지 않았습니다.");
+            log.warn("아이디를 입력하지 않았습니다");
             throw new NullIdException();
         }
         if (request.getPw().isEmpty()) {
 
-            log.warn("비밀번호를 입력하지 않았습니다.");
+            log.warn("비밀번호를 입력하지 않았습니다");
             throw new NullPwException();
         }
     }
@@ -74,6 +74,7 @@ public class LoginService {
         List<Parent> findParent = parentRepository.findById(request.getId());
         if(findParent.isEmpty()){
 
+            log.warn("[보호자] 해당 아이디가 존재하지 않습니다");
             throw new NotExistException();
         }
 //        try {
@@ -99,6 +100,7 @@ public class LoginService {
         List<Vet> findVet = vetRepository.findById(request.getId());
         if(findVet.isEmpty()){
 
+            log.warn("[수의사] 해당 아이디가 존재하지 않습니다");
             throw new NotExistException();
         }
 //        if (vetRepository.findById(request.getId()).isEmpty()) {
@@ -114,6 +116,7 @@ public class LoginService {
 
         if (!request.getPw().equals(findParent.getPw())) {
 
+            log.warn("[보호자] 일치하지 않는 비밀번호입니다");
             throw new IncorrectPwException();
 //            findParent = parentRepository.findOneById(request.getId());   // [ ]findParentId가 null이라고 뜸 왜지 왜..
 //            if (!request.getPw().equals(findParent.getPw())) {
@@ -128,6 +131,7 @@ public class LoginService {
 
         if (!request.getPw().equals(findVet.getPw())) {
 
+            log.warn("[수의사] 일치하지 않는 비밀번호입니다");
             throw new IncorrectPwException();
         }
     }
@@ -138,6 +142,7 @@ public class LoginService {
         boolean loginStatus = parentRepository.checkLoginStatus(findParent);
         if(loginStatus){
 
+            log.warn("[보호자] 이미 로그인 된 상태입니다");
             throw new LoginStatusException();
         }
     }
@@ -146,6 +151,8 @@ public class LoginService {
         Vet findVet = vetRepository.findOneById(request.getId());
         boolean loginStatus = vetRepository.checkLoginStatus(findVet);
         if(loginStatus){
+
+            log.warn("[수의사] 이미 로그인 된 상태입니다");
             throw new LoginStatusException();
         }
     }

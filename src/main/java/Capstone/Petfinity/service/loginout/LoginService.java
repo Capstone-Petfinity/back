@@ -117,7 +117,7 @@ public class LoginService {
             throw new IncorrectPwException();
 //            findParent = parentRepository.findOneById(request.getId());   // [ ]findParentId가 null이라고 뜸 왜지 왜..
 //            if (!request.getPw().equals(findParent.getPw())) {
-//                //존재하는 아이디인데도.. 왜..
+//                //존재하는 아이디인데도.. 왜..  -> find는 uuid로밖에 못찾고, findOneById는 꼭 있어야함
 //                throw new IncorrectPwException();
 //            }
         }
@@ -166,6 +166,6 @@ public class LoginService {
 
 
 
-// 수의사, 보호자 구분
-// 각각의 db에 접근
-// 로그인 성공 여부 return
+// 수의사, 보호자 구분 [v]
+// 각각의 db에 접근 [v]
+// 로그인 성공 여부 return [v]

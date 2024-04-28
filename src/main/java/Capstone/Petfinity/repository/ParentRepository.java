@@ -1,8 +1,8 @@
 package Capstone.Petfinity.repository;
 
+import Capstone.Petfinity.domain.Hospital;
 import Capstone.Petfinity.dto.signup.parent.SignupParentReqDto;
 import Capstone.Petfinity.domain.Parent;
-import Capstone.Petfinity.service.PwEncoderService;
 import jakarta.persistence.EntityManager;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
@@ -62,6 +62,17 @@ public class ParentRepository {
                 .setParameter("phoneNumber", phoneNumber)
                 .getResultList();
     }
+
+    public List<Hospital> findByAddress(Parent parent) {
+
+        String findCity = parent.getCity();
+
+
+        return em.createQuery("select h from Hospital h where replace(h.city, '\\r', '') = :findCity", Hospital.class)
+                .setParameter("findCity", findCity)
+                .getResultList();
+    }
+
     public void changeLoginStatus(Parent parent) {
 
         if (!parent.getLogin_status()) {

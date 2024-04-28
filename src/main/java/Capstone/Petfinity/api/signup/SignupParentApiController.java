@@ -7,7 +7,7 @@ import Capstone.Petfinity.exception.InvalidIdException;
 import Capstone.Petfinity.exception.InvalidNameException;
 import Capstone.Petfinity.exception.InvalidPhoneNumberException;
 import Capstone.Petfinity.exception.InvalidPwException;
-import Capstone.Petfinity.service.ParentService;
+import Capstone.Petfinity.service.user.ParentService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

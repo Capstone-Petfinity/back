@@ -1,8 +1,11 @@
 package Capstone.Petfinity.api.info;
 
+import Capstone.Petfinity.domain.Hospital;
 import Capstone.Petfinity.domain.Parent;
 import Capstone.Petfinity.domain.Pet;
 import Capstone.Petfinity.domain.Vet;
+import Capstone.Petfinity.dto.info.hospital.InfoHospitalReqDto;
+import Capstone.Petfinity.dto.info.hospital.InfoHospitalResDto;
 import Capstone.Petfinity.dto.info.parent.InfoParentReqDto;
 import Capstone.Petfinity.dto.info.parent.InfoParentResDto;
 import Capstone.Petfinity.dto.info.pet.InfoPetsResDto;
@@ -12,9 +15,9 @@ import Capstone.Petfinity.exception.InvalidUuidException;
 import Capstone.Petfinity.exception.NotExistException;
 import Capstone.Petfinity.exception.NotLoginStatusException;
 import Capstone.Petfinity.exception.NullUuidException;
-import Capstone.Petfinity.service.ParentService;
-import Capstone.Petfinity.service.PetService;
-import Capstone.Petfinity.service.VetService;
+import Capstone.Petfinity.service.user.ParentService;
+import Capstone.Petfinity.service.user.PetService;
+import Capstone.Petfinity.service.user.VetService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,7 +43,10 @@ public class InfoApiController {
     InfoParentResDto resultParent;
     InfoPetsResDto resultPet;
     InfoVetResDto resultVet;
+    InfoHospitalResDto resultHospital;
 
+
+    // 보호자 정보 API
     @PostMapping("/user/info/parent")
     public InfoParentResDto infoParent(@RequestHeader("auth") String auth,
                                        @RequestBody InfoParentReqDto request) {
@@ -77,6 +83,7 @@ public class InfoApiController {
         }
     }
 
+    // 반려동물 정보 API
     @PostMapping("/user/info/pet")
     public InfoPetsResDto infoPets(@RequestHeader("auth") String auth,
                                    @RequestBody InfoParentReqDto request) {
@@ -114,6 +121,7 @@ public class InfoApiController {
         }
     }
 
+    // 수의사 정보 API
     @PostMapping("/user/info/vet")
     public InfoVetResDto infoVet(@RequestHeader("auth") String auth,
                                  @RequestBody InfoVetReqDto request) {
@@ -127,7 +135,7 @@ public class InfoApiController {
 
         log.info("수의사 정보 조회");
         try {
-             Vet vet = vetService.infoVet(request);
+            Vet vet = vetService.infoVet(request);
 
             resultVet = new InfoVetResDto("200", "회원 정보 조회 성공", vet.getUuid(), vet.getId(), vet.getName());
             return resultVet;
@@ -148,5 +156,43 @@ public class InfoApiController {
             resultVet = new InfoVetResDto("404", "존재하지 않는 회원", null, null, null);
             return resultVet;
         }
+    }
+
+    // 병원 정보 API
+    @PostMapping("/info/hospital")
+    public InfoHospitalResDto infoHospital(@RequestHeader("auth") String auth,
+                                           @RequestBody InfoHospitalReqDto request) {
+        log.info("권한 확인");
+        if (!auth.equals("bVAtkPtiVGpWuO3dWEnvr51cEb6r7oF8")) {
+
+            log.warn("권한이 없습니다");
+            resultHospital = new InfoHospitalResDto("400", "권한 없음", null);
+            return resultHospital;
+        }
+
+        log.info("병원 정보 조회");
+        try {
+            List<Hospital> hospitalList = parentService.infoHospital(request);
+
+            resultHospital = new InfoHospitalResDto("200", "병원 정보 조회 성공", hospitalList);
+            return resultHospital;
+        } catch (NullUuidException e) {
+
+            resultHospital = new InfoHospitalResDto("403", "입력되지 않은 uuid", null);
+            return resultHospital;
+        } catch (InvalidUuidException e) {
+
+            resultHospital = new InfoHospitalResDto("401", "유효하지 않은 uuid", null);
+            return resultHospital;
+        } catch (NotExistException e) {
+
+            resultHospital = new InfoHospitalResDto("404", "존재하지 않는 회원", null);
+            return resultHospital;
+        } catch (NotLoginStatusException e) {
+
+            resultHospital = new InfoHospitalResDto("406", "로그아웃 상태", null);
+            return resultHospital;
+        }
+
     }
 }

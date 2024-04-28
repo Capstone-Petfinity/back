@@ -3,7 +3,7 @@ package Capstone.Petfinity.api.info;
 import Capstone.Petfinity.dto.NormalResDto;
 import Capstone.Petfinity.dto.info.pet.RegisterPetReqDto;
 import Capstone.Petfinity.exception.*;
-import Capstone.Petfinity.service.PetService;
+import Capstone.Petfinity.service.user.PetService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

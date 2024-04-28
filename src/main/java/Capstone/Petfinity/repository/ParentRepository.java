@@ -68,7 +68,7 @@ public class ParentRepository {
         String findCity = parent.getCity();
 
 
-        return em.createQuery("select h from Hospital h where replace(h.city, '\\r', '') = :findCity", Hospital.class)
+        return em.createQuery("select h from Hospital h where replace(h.city, '\\r', '') = :findCity order by hospital_name desc limit 10", Hospital.class)
                 .setParameter("findCity", findCity)
                 .getResultList();
     }

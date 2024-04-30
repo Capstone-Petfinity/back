@@ -19,7 +19,6 @@ public class ReservationRepository {
     private final EntityManager em;
 
     private final ParentRepository parentRepository;
-    private final PetRepository petRepository;
 
     public void save(ReservationReqDto reservationDto) {
 

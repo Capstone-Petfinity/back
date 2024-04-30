@@ -2,6 +2,7 @@ package Capstone.Petfinity.service.user;
 
 import Capstone.Petfinity.domain.Hospital;
 import Capstone.Petfinity.domain.Pet;
+import Capstone.Petfinity.dto.info.hospital.HospitalListReqDto;
 import Capstone.Petfinity.dto.info.hospital.InfoHospitalReqDto;
 import Capstone.Petfinity.dto.info.parent.InfoParentReqDto;
 import Capstone.Petfinity.dto.signup.parent.IdCheckReqDto;
@@ -70,7 +71,7 @@ public class ParentService {
         return findParent;
     }
 
-    public List<Hospital> infoHospital(InfoHospitalReqDto parent) {
+    public List<Hospital> hospitalList(HospitalListReqDto parent) {
 
         Parent findParent;
         List<Hospital> hospitalList;

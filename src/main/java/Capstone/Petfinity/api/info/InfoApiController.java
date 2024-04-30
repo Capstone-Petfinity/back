@@ -15,6 +15,7 @@ import Capstone.Petfinity.exception.InvalidUuidException;
 import Capstone.Petfinity.exception.NotExistException;
 import Capstone.Petfinity.exception.NotLoginStatusException;
 import Capstone.Petfinity.exception.NullUuidException;
+import Capstone.Petfinity.service.reservation.ReservationService;
 import Capstone.Petfinity.service.user.ParentService;
 import Capstone.Petfinity.service.user.PetService;
 import Capstone.Petfinity.service.user.VetService;
@@ -39,6 +40,8 @@ public class InfoApiController {
     private final VetService vetService;
     @Autowired
     private final PetService petService;
+    @Autowired
+    private final ReservationService reservationService;
 
     InfoParentResDto resultParent;
     InfoPetsResDto resultPet;
@@ -166,33 +169,28 @@ public class InfoApiController {
         if (!auth.equals("bVAtkPtiVGpWuO3dWEnvr51cEb6r7oF8")) {
 
             log.warn("권한이 없습니다");
-            resultHospital = new InfoHospitalResDto("400", "권한 없음", null);
+            resultHospital = new InfoHospitalResDto("400", "권한 없음", null, null, null, null, null, null, null, null);
             return resultHospital;
         }
 
         log.info("병원 정보 조회");
         try {
-            List<Hospital> hospitalList = parentService.infoHospital(request);
+            Hospital hospital = reservationService.infoHospital(request);
 
-            resultHospital = new InfoHospitalResDto("200", "병원 정보 조회 성공", hospitalList);
+            resultHospital = new InfoHospitalResDto("200", "병원 정보 조회 성공", hospital.getHospital_name(), hospital.getHospital_callnumber(), hospital.getOpen_time(), hospital.getClose_time(), hospital.getLunch_start(), hospital.getLunch_finish(), hospital.getAddress(), hospital.getCity());
             return resultHospital;
         } catch (NullUuidException e) {
 
-            resultHospital = new InfoHospitalResDto("403", "입력되지 않은 uuid", null);
+            resultHospital = new InfoHospitalResDto("403", "입력되지 않은 uuid", null, null, null, null, null, null, null, null);
             return resultHospital;
         } catch (InvalidUuidException e) {
 
-            resultHospital = new InfoHospitalResDto("401", "유효하지 않은 uuid", null);
+            resultHospital = new InfoHospitalResDto("401", "유효하지 않은 uuid", null, null, null, null, null, null, null, null);
             return resultHospital;
         } catch (NotExistException e) {
 
-            resultHospital = new InfoHospitalResDto("404", "존재하지 않는 회원", null);
-            return resultHospital;
-        } catch (NotLoginStatusException e) {
-
-            resultHospital = new InfoHospitalResDto("406", "로그아웃 상태", null);
+            resultHospital = new InfoHospitalResDto("404", "존재하지 않는 병원", null, null, null, null, null, null, null, null);
             return resultHospital;
         }
-
     }
 }

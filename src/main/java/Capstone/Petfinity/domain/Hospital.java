@@ -29,5 +29,7 @@ public class Hospital {
     @NotNull
     private LocalTime lunch_finish;
     @NotNull
+    private String address;
+    @NotNull
     private String city;
 }

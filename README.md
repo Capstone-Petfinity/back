@@ -226,6 +226,24 @@ exist(404)
 - NotExistException: 존재하지 않는 병원
 
 
+## infoReservation
+#### /info/reservation: POST
+
+**Body**
+- String uuid;
+
+### possible error
+auth(400): 권한 없음
+
+null(403)
+- NullUuidException: 입력되지 않은 uuid
+
+invalid(401)
+- InvalidUuidException: 유효하지 않은 uuid
+
+exist(404)
+- NotExistException: 존재하지 않는 예약
+
 
 # AddressApiController
 

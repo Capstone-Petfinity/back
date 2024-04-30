@@ -2,7 +2,9 @@ package Capstone.Petfinity.service.reservation;
 
 import Capstone.Petfinity.domain.Hospital;
 import Capstone.Petfinity.domain.Parent;
+import Capstone.Petfinity.domain.Reservation;
 import Capstone.Petfinity.dto.info.hospital.InfoHospitalReqDto;
+import Capstone.Petfinity.dto.reservation.InfoReservationReqDto;
 import Capstone.Petfinity.dto.reservation.ReservationReqDto;
 import Capstone.Petfinity.exception.*;
 import Capstone.Petfinity.repository.ParentRepository;
@@ -11,6 +13,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 import static org.springframework.util.StringUtils.containsWhitespace;
 
@@ -27,7 +31,7 @@ public class ReservationService {
     public void reservation(ReservationReqDto request) {
 
         nullReservationDate(request); // reservation_date null 확인
-        checkParent(request); // parent uuid null, validate, db존재여부, loginstatus 확인
+        checkParent(request.getParentUuid()); // parent uuid null, validate, db존재여부, loginstatus 확인
         checkHospital(request.getHospitalUuid()); // hospital uuid null, validate, db존재여부 확인
         checkPet(request); // pet uuid null, validate, db존재여부 확인
         reservationRepository.save(request);
@@ -43,6 +47,15 @@ public class ReservationService {
         return reservationRepository.findHospital(hospitalUuid);
     }
 
+    public List<Reservation> infoReservation(InfoReservationReqDto request) {
+
+        String parentUuid = request.getUuid();
+
+        checkParent(parentUuid);
+
+        return reservationRepository.findReservation(request.getUuid());
+    }
+
     private void nullReservationDate(ReservationReqDto request) {
 
         if(request.getReservationDate().isEmpty()) {
@@ -51,21 +64,21 @@ public class ReservationService {
         }
     }
 
-    private void checkParent(ReservationReqDto request) {
+    private void checkParent(String uuid) {
 
-        if(request.getParentUuid().isEmpty()) {
+        if(uuid.isEmpty()) {
             log.warn("parentUuid가 비어있습니다");
             throw new NullUuidException();
         }
-        if (containsWhitespace(request.getParentUuid()) || request.getParentUuid().length() != 36) {
+        if (containsWhitespace(uuid) || uuid.length() != 36) {
             log.warn("유효하지 않은 uuid입니다");
             throw new InvalidUuidException();
         }
-        if (parentRepository.findOneByUuid(request.getParentUuid()) == null) {
+        if (parentRepository.findOneByUuid(uuid) == null) {
             log.warn("보호자가 존재하지 않습니다");
             throw new NotExistException();
         }
-        Parent findParent = parentRepository.findOneByUuid(request.getParentUuid());
+        Parent findParent = parentRepository.findOneByUuid(uuid);
         if (!parentRepository.checkLoginStatus(findParent)){
             log.info("로그인 상태가 아닙니다");
             throw new NotLoginStatusException();

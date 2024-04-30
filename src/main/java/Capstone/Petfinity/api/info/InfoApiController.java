@@ -1,9 +1,6 @@
 package Capstone.Petfinity.api.info;
 
-import Capstone.Petfinity.domain.Hospital;
-import Capstone.Petfinity.domain.Parent;
-import Capstone.Petfinity.domain.Pet;
-import Capstone.Petfinity.domain.Vet;
+import Capstone.Petfinity.domain.*;
 import Capstone.Petfinity.dto.info.hospital.InfoHospitalReqDto;
 import Capstone.Petfinity.dto.info.hospital.InfoHospitalResDto;
 import Capstone.Petfinity.dto.info.parent.InfoParentReqDto;
@@ -11,6 +8,8 @@ import Capstone.Petfinity.dto.info.parent.InfoParentResDto;
 import Capstone.Petfinity.dto.info.pet.InfoPetsResDto;
 import Capstone.Petfinity.dto.info.vet.InfoVetReqDto;
 import Capstone.Petfinity.dto.info.vet.InfoVetResDto;
+import Capstone.Petfinity.dto.reservation.InfoReservationReqDto;
+import Capstone.Petfinity.dto.reservation.InfoReservationResDto;
 import Capstone.Petfinity.exception.InvalidUuidException;
 import Capstone.Petfinity.exception.NotExistException;
 import Capstone.Petfinity.exception.NotLoginStatusException;
@@ -22,6 +21,7 @@ import Capstone.Petfinity.service.user.VetService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.parameters.P;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
@@ -47,6 +47,7 @@ public class InfoApiController {
     InfoPetsResDto resultPet;
     InfoVetResDto resultVet;
     InfoHospitalResDto resultHospital;
+    InfoReservationResDto resultReservation;
 
 
     // 보호자 정보 API
@@ -57,7 +58,7 @@ public class InfoApiController {
         if (!auth.equals("bVAtkPtiVGpWuO3dWEnvr51cEb6r7oF8")) {
 
             log.warn("권한이 없습니다");
-            resultParent = new InfoParentResDto("400", "권한 없음", null, null, null, null, null, null);
+            resultParent = new InfoParentResDto("400", "권한 없음", null, null, null, null, null);
             return resultParent;
         }
 
@@ -65,23 +66,23 @@ public class InfoApiController {
         try {
             Parent parent = parentService.infoParent(request);
 
-            resultParent = new InfoParentResDto("200", "회원 정보 조회 성공", parent.getUuid(), parent.getId(), parent.getName(), parent.getPhone_number(), parent.getCity(), parent.getReservations());
+            resultParent = new InfoParentResDto("200", "회원 정보 조회 성공", parent.getUuid(), parent.getId(), parent.getName(), parent.getPhone_number(), parent.getCity());
             return resultParent;
         } catch (NullUuidException e) {
 
-            resultParent = new InfoParentResDto("403", "입력되지 않은 uuid", null, null, null, null, null, null);
+            resultParent = new InfoParentResDto("403", "입력되지 않은 uuid", null, null, null, null, null);
             return resultParent;
         } catch (InvalidUuidException e) {
 
-            resultParent = new InfoParentResDto("401", "유효하지 않은 uuid", null, null, null, null, null, null);
+            resultParent = new InfoParentResDto("401", "유효하지 않은 uuid", null, null, null, null, null);
             return resultParent;
         } catch (NotExistException e) {
 
-            resultParent = new InfoParentResDto("404", "존재하지 않는 회원", null, null, null, null, null, null);
+            resultParent = new InfoParentResDto("404", "존재하지 않는 회원", null, null, null, null, null);
             return resultParent;
         } catch (NotLoginStatusException e) {
 
-            resultParent = new InfoParentResDto("406", "로그아웃 상태", null, null, null, null, null, null);
+            resultParent = new InfoParentResDto("406", "로그아웃 상태", null, null, null, null, null);
             return resultParent;
         }
     }
@@ -191,6 +192,39 @@ public class InfoApiController {
 
             resultHospital = new InfoHospitalResDto("404", "존재하지 않는 병원", null, null, null, null, null, null, null, null);
             return resultHospital;
+        }
+    }
+
+    // 예약 정보 API
+    @PostMapping("/info/reservation")
+    public InfoReservationResDto infoReservation(@RequestHeader("auth") String auth,
+                                                 @RequestBody InfoReservationReqDto request) {
+        log.info("권한 확인");
+        if (!auth.equals("bVAtkPtiVGpWuO3dWEnvr51cEb6r7oF8")) {
+
+            log.warn("권한이 없습니다");
+            resultReservation = new InfoReservationResDto("400", "권한 없음", null);
+            return resultReservation;
+        }
+
+        log.info("예약 정보 조회");
+        try {
+            List<Reservation> reservations = reservationService.infoReservation(request);
+
+            resultReservation = new InfoReservationResDto("200", "예약 조회 성공", reservations);
+            return resultReservation;
+        } catch (NullUuidException e) {
+
+            resultReservation = new InfoReservationResDto("403", "입력되지 않은 uuid", null);
+            return resultReservation;
+        } catch (InvalidUuidException e) {
+
+            resultReservation = new InfoReservationResDto("401", "유효하지 않은 uuid", null);
+            return resultReservation;
+        } catch (NotExistException e) {
+
+            resultReservation = new InfoReservationResDto("404", "존재하지 않는 예약", null);
+            return resultReservation;
         }
     }
 }

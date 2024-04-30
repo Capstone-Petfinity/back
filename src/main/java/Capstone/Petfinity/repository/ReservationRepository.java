@@ -10,6 +10,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.UUID;
 
 @Repository
@@ -50,5 +51,12 @@ public class ReservationRepository {
     public Hospital findHospital(String hospitalUuid) {
 
         return em.find(Hospital.class, hospitalUuid);
+    }
+
+    public List<Reservation> findReservation(String uuid) {
+
+        return em.createQuery("select r from Reservation r where r.parent.uuid = :uuid", Reservation.class)
+                .setParameter("uuid", uuid)
+                .getResultList();
     }
 }

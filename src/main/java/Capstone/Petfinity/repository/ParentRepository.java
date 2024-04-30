@@ -1,6 +1,7 @@
 package Capstone.Petfinity.repository;
 
 import Capstone.Petfinity.domain.Hospital;
+import Capstone.Petfinity.domain.Reservation;
 import Capstone.Petfinity.dto.signup.parent.SignupParentReqDto;
 import Capstone.Petfinity.domain.Parent;
 import jakarta.persistence.EntityManager;

@@ -23,9 +23,8 @@ public class InfoParentResDto {
     private String name;
     private String phone_number;
     private String city;
-    private List<Reservation> reservations;
 
-    public InfoParentResDto(String statusCode, String message, String uuid, String id, String name, String phone_number, String city, List<Reservation> reservations) {
+    public InfoParentResDto(String statusCode, String message, String uuid, String id, String name, String phone_number, String city) {
         this.statusCode = statusCode;
         this.message = message;
         this.uuid = uuid;
@@ -33,6 +32,5 @@ public class InfoParentResDto {
         this.name = name;
         this.phone_number = phone_number;
         this.city = city;
-        this.reservations = reservations;
     }
 }

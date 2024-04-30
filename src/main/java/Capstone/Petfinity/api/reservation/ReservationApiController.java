@@ -38,8 +38,8 @@ public class ReservationApiController {
         try {
             reservationService.reservation(request);
 
-            log.info("반려동물 등록 성공");
-            result = new NormalResDto("200", "반려동물 등록 성공");
+            log.info("예약 성공");
+            result = new NormalResDto("200", "예약 성공");
             return result;
         } catch (NullReservationDateException e) {
 

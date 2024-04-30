@@ -29,7 +29,7 @@ public class PetService {
     public void registerPet(RegisterPetReqDto pet){
 
         nullPet(pet);// null 확인
-        checkParentUuid(pet);// parentUuid null, validate 확인
+        checkParentUuid(pet);// parentUuid null, validate, db존재 확인
         checkParentLoginStatus(pet);// parent loginStatus 확인
         petRepository.save(pet);
         log.info("반려동물 등록 성공");
@@ -62,15 +62,15 @@ public class PetService {
     private void nullPet(RegisterPetReqDto pet) {
 
         if (pet.getName().isEmpty()) {
-
+            log.warn("이름이 비어있습니다");
             throw new NullNameException();
         }
         if (pet.getGender().isEmpty()) {
-
+            log.warn("반려동물의 성별이 비어있습니다");
             throw new NullPetGenderException();
         }
         if (pet.getKind().isEmpty()) {
-
+            log.warn("반려동물 종이 비어있습니다");
             throw new NullPetKindException();
         }
     }
@@ -96,6 +96,7 @@ public class PetService {
 
         Parent findParent = parentRepository.findOneByUuid(pet.getParentUuid());
         if (!parentRepository.checkLoginStatus(findParent)){
+            log.info("로그인 상태가 아닙니다");
             throw new NotLoginStatusException();
         }
     }

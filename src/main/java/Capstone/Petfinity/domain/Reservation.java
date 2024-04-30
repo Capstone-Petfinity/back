@@ -4,16 +4,18 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import org.hibernate.annotations.GenericGenerator;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.UUID;
 
 @Entity
 @Getter
+@Setter
 public class Reservation {
 
     @Id
@@ -35,5 +37,5 @@ public class Reservation {
     @JoinColumn(name = "hospital_id")
     private Hospital hospital;
 
-    private LocalDateTime reservation_date;
+    private LocalDate reservation_date;
 }

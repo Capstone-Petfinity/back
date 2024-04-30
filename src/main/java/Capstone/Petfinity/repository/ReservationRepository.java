@@ -4,6 +4,7 @@ import Capstone.Petfinity.domain.Hospital;
 import Capstone.Petfinity.domain.Parent;
 import Capstone.Petfinity.domain.Pet;
 import Capstone.Petfinity.domain.Reservation;
+import Capstone.Petfinity.dto.reservation.ReservationDto;
 import Capstone.Petfinity.dto.reservation.ReservationReqDto;
 import jakarta.persistence.EntityManager;
 import lombok.RequiredArgsConstructor;
@@ -53,9 +54,9 @@ public class ReservationRepository {
         return em.find(Hospital.class, hospitalUuid);
     }
 
-    public List<Reservation> findReservation(String uuid) {
+    public List<ReservationDto> findReservation(String uuid) {
 
-        return em.createQuery("select r from Reservation r where r.parent.uuid = :uuid", Reservation.class)
+        return em.createQuery("select new Capstone.Petfinity.dto.reservation.ReservationDto(r.uuid, r.parent.uuid, r.pet.uuid, r.hospital.uuid, r.reservation_date)" +  "from Reservation r where r.parent.uuid = :uuid", ReservationDto.class)
                 .setParameter("uuid", uuid)
                 .getResultList();
     }

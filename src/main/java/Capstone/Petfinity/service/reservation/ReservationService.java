@@ -2,9 +2,9 @@ package Capstone.Petfinity.service.reservation;
 
 import Capstone.Petfinity.domain.Hospital;
 import Capstone.Petfinity.domain.Parent;
-import Capstone.Petfinity.domain.Reservation;
 import Capstone.Petfinity.dto.info.hospital.InfoHospitalReqDto;
 import Capstone.Petfinity.dto.reservation.InfoReservationReqDto;
+import Capstone.Petfinity.dto.reservation.ReservationDto;
 import Capstone.Petfinity.dto.reservation.ReservationReqDto;
 import Capstone.Petfinity.exception.*;
 import Capstone.Petfinity.repository.ParentRepository;
@@ -47,7 +47,7 @@ public class ReservationService {
         return reservationRepository.findHospital(hospitalUuid);
     }
 
-    public List<Reservation> infoReservation(InfoReservationReqDto request) {
+    public List<ReservationDto> infoReservation(InfoReservationReqDto request) {
 
         String parentUuid = request.getUuid();
 

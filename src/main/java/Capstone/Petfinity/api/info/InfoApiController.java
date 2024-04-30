@@ -10,6 +10,7 @@ import Capstone.Petfinity.dto.info.vet.InfoVetReqDto;
 import Capstone.Petfinity.dto.info.vet.InfoVetResDto;
 import Capstone.Petfinity.dto.reservation.InfoReservationReqDto;
 import Capstone.Petfinity.dto.reservation.InfoReservationResDto;
+import Capstone.Petfinity.dto.reservation.ReservationDto;
 import Capstone.Petfinity.exception.InvalidUuidException;
 import Capstone.Petfinity.exception.NotExistException;
 import Capstone.Petfinity.exception.NotLoginStatusException;
@@ -21,7 +22,6 @@ import Capstone.Petfinity.service.user.VetService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.parameters.P;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
@@ -209,7 +209,7 @@ public class InfoApiController {
 
         log.info("예약 정보 조회");
         try {
-            List<Reservation> reservations = reservationService.infoReservation(request);
+            List<ReservationDto> reservations = reservationService.infoReservation(request);
 
             resultReservation = new InfoReservationResDto("200", "예약 조회 성공", reservations);
             return resultReservation;

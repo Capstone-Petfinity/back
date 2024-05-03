@@ -53,9 +53,10 @@ public class ReservationService {
         String parentUuid = request.getUuid();
 
         checkParent(parentUuid);
+        List<ReservationDto> result = reservationRepository.findReservation(request.getUuid());
 
         log.info("예약 정보 조회 성공");
-        return reservationRepository.findReservation(request.getUuid());
+        return result;
     }
 
     private void nullReservationDate(ReservationReqDto request) {

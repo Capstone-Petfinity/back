@@ -1,5 +1,6 @@
 package Capstone.Petfinity.dto.reservation;
 
+import Capstone.Petfinity.domain.Hospital;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -16,14 +17,14 @@ public class ReservationDto {
     private String reservationUuid;
     private String parentUuid;
     private String petUuid;
-    private String hospitalUuid;
+    private Hospital hospital;
     private LocalDate reservationDate;
 
-    public ReservationDto(String reservationUuid, String parentUuid, String petUuid, String hospitalUuid, LocalDate reservationDate) {
+    public ReservationDto(String reservationUuid, String parentUuid, String petUuid, Hospital hospital, LocalDate reservationDate) {
         this.reservationUuid = reservationUuid;
         this.parentUuid = parentUuid;
         this.petUuid = petUuid;
-        this.hospitalUuid = hospitalUuid;
+        this.hospital = hospital;
         this.reservationDate = reservationDate;
     }
 }

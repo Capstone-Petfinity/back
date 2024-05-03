@@ -50,7 +50,7 @@ public class InfoApiController {
     InfoReservationResDto resultReservation;
 
 
-    // 보호자 정보 API
+    // 보호자 정보 조회 API
     @PostMapping("/user/info/parent")
     public InfoParentResDto infoParent(@RequestHeader("auth") String auth,
                                        @RequestBody InfoParentReqDto request) {
@@ -87,7 +87,7 @@ public class InfoApiController {
         }
     }
 
-    // 반려동물 정보 API
+    // 반려동물 정보 조회 API
     @PostMapping("/user/info/pet")
     public InfoPetsResDto infoPets(@RequestHeader("auth") String auth,
                                    @RequestBody InfoParentReqDto request) {
@@ -125,7 +125,7 @@ public class InfoApiController {
         }
     }
 
-    // 수의사 정보 API
+    // 수의사 정보 조회 API
     @PostMapping("/user/info/vet")
     public InfoVetResDto infoVet(@RequestHeader("auth") String auth,
                                  @RequestBody InfoVetReqDto request) {
@@ -162,7 +162,7 @@ public class InfoApiController {
         }
     }
 
-    // 병원 정보 API
+    // 병원 정보 조회 API
     @PostMapping("/info/hospital")
     public InfoHospitalResDto infoHospital(@RequestHeader("auth") String auth,
                                            @RequestBody InfoHospitalReqDto request) {
@@ -195,7 +195,7 @@ public class InfoApiController {
         }
     }
 
-    // 예약 정보 API
+    // 예약 정보 조회 API
     @PostMapping("/info/reservation")
     public InfoReservationResDto infoReservation(@RequestHeader("auth") String auth,
                                                  @RequestBody InfoReservationReqDto request) {

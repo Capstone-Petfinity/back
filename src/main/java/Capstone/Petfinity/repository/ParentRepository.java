@@ -69,7 +69,8 @@ public class ParentRepository {
         String findCity = parent.getCity();
 
 
-        return em.createQuery("select h from Hospital h where h.city = :findCity order by rand() limit 10", Hospital.class)
+        return em.createQuery("select h from Hospital h where h.city = :findCity " +
+                        "order by rand() limit 10", Hospital.class)
                 .setParameter("findCity", findCity)
                 .getResultList();
     }

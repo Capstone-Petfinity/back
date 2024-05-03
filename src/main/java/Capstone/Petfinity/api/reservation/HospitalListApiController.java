@@ -3,7 +3,6 @@ package Capstone.Petfinity.api.reservation;
 import Capstone.Petfinity.domain.Hospital;
 import Capstone.Petfinity.dto.info.hospital.HospitalListReqDto;
 import Capstone.Petfinity.dto.info.hospital.HospitalListResDto;
-import Capstone.Petfinity.dto.info.hospital.InfoHospitalResDto;
 import Capstone.Petfinity.exception.InvalidUuidException;
 import Capstone.Petfinity.exception.NotExistException;
 import Capstone.Petfinity.exception.NotLoginStatusException;

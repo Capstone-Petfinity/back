@@ -56,7 +56,9 @@ public class ReservationRepository {
 
     public List<ReservationDto> findReservation(String uuid) {
 
-        return em.createQuery("select new Capstone.Petfinity.dto.reservation.ReservationDto(r.uuid, r.parent.uuid, r.pet.uuid, r.hospital.uuid, r.reservation_date)" +  "from Reservation r where r.parent.uuid = :uuid", ReservationDto.class)
+        return em.createQuery("select new Capstone.Petfinity.dto.reservation.ReservationDto" +
+                        "(r.uuid, r.parent.uuid, r.pet.uuid, r.hospital, r.reservation_date) " +
+                        "from Reservation r where r.parent.uuid = :uuid", ReservationDto.class)
                 .setParameter("uuid", uuid)
                 .getResultList();
     }

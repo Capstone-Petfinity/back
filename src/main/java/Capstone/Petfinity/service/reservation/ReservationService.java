@@ -44,6 +44,7 @@ public class ReservationService {
 
         checkHospital(hospitalUuid);
 
+        log.info("병원 정보 조회 성공");
         return reservationRepository.findHospital(hospitalUuid);
     }
 
@@ -53,6 +54,7 @@ public class ReservationService {
 
         checkParent(parentUuid);
 
+        log.info("예약 정보 조회 성공");
         return reservationRepository.findReservation(request.getUuid());
     }
 

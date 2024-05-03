@@ -306,3 +306,29 @@ exist(404)
 
 loginStatus(406)
 - NotLoginStatusException: 로그아웃 상태
+
+# ReservationApiController
+
+## reservation
+#### /user/reservation : POST
+
+**Body**
+- String parentUuid;
+- String petUuid;
+- String hospitalUuid;
+- String reservationDate;
+
+### possible error
+auth(400): 권한 없음
+
+null(403)
+- NullUuidException: 입력되지 않은 uuid(parent, pet, hospital)
+
+invalid(401)
+- InvalidUuidException: 유효하지 않은 uuid(parent, pet, hospital)
+
+exist(404)
+- NotExistException: 존재하지 않는 회원, 반려동물, 병원
+
+loginStatus(406)
+- NotLoginStatusException: 로그아웃 상태

@@ -133,7 +133,7 @@ public class InfoApiController {
         if (!auth.equals("bVAtkPtiVGpWuO3dWEnvr51cEb6r7oF8")) {
 
             log.warn("권한이 없습니다");
-            resultVet = new InfoVetResDto("400", "권한 없음", null, null, null);
+            resultVet = new InfoVetResDto("400", "권한 없음", null, null, null, null);
             return resultVet;
         }
 
@@ -141,23 +141,23 @@ public class InfoApiController {
         try {
             Vet vet = vetService.infoVet(request);
 
-            resultVet = new InfoVetResDto("200", "회원 정보 조회 성공", vet.getUuid(), vet.getId(), vet.getName());
+            resultVet = new InfoVetResDto("200", "회원 정보 조회 성공", vet.getUuid(), vet.getId(), vet.getName(), vet.getPhone_number());
             return resultVet;
         } catch (NotLoginStatusException e) {
 
-            resultVet = new InfoVetResDto("406", "로그아웃 상태", null, null, null);
+            resultVet = new InfoVetResDto("406", "로그아웃 상태", null, null, null, null);
             return resultVet;
         } catch (NullUuidException e) {
 
-            resultVet = new InfoVetResDto("403", "입력되지 않은 uuid", null, null, null);
+            resultVet = new InfoVetResDto("403", "입력되지 않은 uuid", null, null, null, null);
             return resultVet;
         } catch (InvalidUuidException e) {
 
-            resultVet = new InfoVetResDto("401", "유효하지 않은 uuid", null, null, null);
+            resultVet = new InfoVetResDto("401", "유효하지 않은 uuid", null, null, null, null);
             return resultVet;
         } catch (NotExistException e) {
 
-            resultVet = new InfoVetResDto("404", "존재하지 않는 회원", null, null, null);
+            resultVet = new InfoVetResDto("404", "존재하지 않는 회원", null, null, null, null);
             return resultVet;
         }
     }

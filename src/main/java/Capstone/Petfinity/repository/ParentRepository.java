@@ -1,9 +1,9 @@
 package Capstone.Petfinity.repository;
 
 import Capstone.Petfinity.domain.Hospital;
-import Capstone.Petfinity.domain.Reservation;
 import Capstone.Petfinity.dto.signup.parent.SignupParentReqDto;
 import Capstone.Petfinity.domain.Parent;
+import Capstone.Petfinity.service.BcryptService;
 import jakarta.persistence.EntityManager;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
@@ -20,16 +20,15 @@ public class ParentRepository {
     public void save(SignupParentReqDto parentDTO) {
 
         Parent parent = new Parent();
-//        PwEncoderService pwEncoderService = new PwEncoderService();
+        BcryptService bcryptService = new BcryptService();
 
         parent.setUuid(UUID.randomUUID().toString());
         parent.setId(parentDTO.getId());
         parent.setName(parentDTO.getName());
-        parent.setPw(parentDTO.getPw());
 
-//        String pw = parentDTO.getPw();
-//        parent.setPw(pwEncoderService.encode(pw));
-//        System.out.println("pwEncoderService.isPwMatch(pw, parentDTO.getPw()) = " + pwEncoderService.isPwMatch(pw, parentDTO.getPw()));
+        //parent.setPw(parentDTO.getPw());
+        String pw = parentDTO.getPw();
+        parent.setPw(bcryptService.encode(pw));
 
         parent.setPhone_number(parentDTO.getPhone_number());
         parent.setCity(parentDTO.getCity());

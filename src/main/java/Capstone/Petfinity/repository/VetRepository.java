@@ -2,6 +2,7 @@ package Capstone.Petfinity.repository;
 
 import Capstone.Petfinity.domain.Vet;
 import Capstone.Petfinity.dto.signup.vet.SignupVetReqDto;
+import Capstone.Petfinity.service.BcryptService;
 import jakarta.persistence.EntityManager;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
@@ -14,6 +15,7 @@ import java.util.UUID;
 public class VetRepository {
 
     private final EntityManager em;
+    private final BcryptService bcryptService;
 
     public void save(SignupVetReqDto vetDTO) {
         Vet vet = new Vet();
@@ -21,7 +23,11 @@ public class VetRepository {
         vet.setUuid(UUID.randomUUID().toString());
         vet.setId(vetDTO.getId());
         vet.setName(vetDTO.getName());
-        vet.setPw(vetDTO.getPw());
+
+        //vet.setPw(vetDTO.getPw());
+        String pw = vetDTO.getPw();
+        vet.setPw(bcryptService.encode(pw));
+
         vet.setPhone_number(vetDTO.getPhone_number());
         vet.setLogin_status(Boolean.FALSE);
 

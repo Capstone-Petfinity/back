@@ -6,8 +6,10 @@ import Capstone.Petfinity.dto.loginout.LoginReqDto;
 import Capstone.Petfinity.exception.*;
 import Capstone.Petfinity.repository.ParentRepository;
 import Capstone.Petfinity.repository.VetRepository;
+import Capstone.Petfinity.service.BcryptService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -21,6 +23,7 @@ public class LoginService {
 
     private final ParentRepository parentRepository;
     private final VetRepository vetRepository;
+    private final BcryptService bcryptService;
 
     @Transactional
     public String login(LoginReqDto request) {
@@ -113,7 +116,7 @@ public class LoginService {
 
         Parent findParent = parentRepository.findOneById(request.getId());
 
-        if (!request.getPw().equals(findParent.getPw())) {
+        if (!bcryptService.isPwMatch(request.getPw(), findParent.getPw())) {
 
             log.warn("[보호자] 일치하지 않는 비밀번호입니다");
             throw new IncorrectPwException();
@@ -128,7 +131,7 @@ public class LoginService {
 
         Vet findVet = vetRepository.findOneById(request.getId());
 
-        if (!request.getPw().equals(findVet.getPw())) {
+        if (!bcryptService.isPwMatch(request.getPw(), findVet.getPw())) {
 
             log.warn("[수의사] 일치하지 않는 비밀번호입니다");
             throw new IncorrectPwException();

@@ -42,6 +42,7 @@ null(403)
 - String id; 5자, 숫자만, 공백/NULL x
 - String pw; 알파벳/숫자만, 공백/NULL x
 - String name; 공백/NULL x
+- String phone_number; 숫자만, 공백/NULL x
 
 ### possible error
 auth(400): 권한 없음

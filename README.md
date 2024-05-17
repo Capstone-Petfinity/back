@@ -338,7 +338,7 @@ loginStatus(406)
 
 # DiagnosisApiController
 
-## saveDiagnosis
+## diagnosis
 #### /user/diagnosis : POST
 
 **Param**

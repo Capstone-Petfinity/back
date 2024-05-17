@@ -21,7 +21,7 @@ public class DiagnosisApiController {
     NormalResDto result;
 
     @PostMapping("/user/diagnosis")
-    public NormalResDto saveDiagnosis(@RequestHeader("auth") String auth, SaveDiagnosisReqDto request) {
+    public NormalResDto diagnosis(@RequestHeader("auth") String auth, SaveDiagnosisReqDto request) {
 
         log.info("권한 확인");
         if (!auth.equals("bVAtkPtiVGpWuO3dWEnvr51cEb6r7oF8")) {

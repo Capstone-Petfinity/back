@@ -22,9 +22,8 @@ public class ReservationApiController {
 
     NormalResDto result;
 
-    @PostMapping("/user/reservation")
-    public NormalResDto reservation (@RequestHeader("auth") String auth,
-                                          @RequestBody ReservationReqDto request) {
+    public NormalResDto reservation(@RequestHeader("auth") String auth,
+                                    @RequestBody ReservationReqDto request) {
 
         log.info("권한 확인");
         if (!auth.equals("bVAtkPtiVGpWuO3dWEnvr51cEb6r7oF8")) {

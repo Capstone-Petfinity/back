@@ -12,7 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 @RequiredArgsConstructor
 @Slf4j
 public class BcryptService {
-    // 일단 미뤄둬 ㅋ
+
     BCrypt bCrypt = new BCrypt();
     BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 

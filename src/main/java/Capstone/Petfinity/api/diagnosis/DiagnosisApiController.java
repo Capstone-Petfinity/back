@@ -21,7 +21,7 @@ public class DiagnosisApiController {
     NormalResDto result;
 
     @PostMapping("/user/diagnosis")
-    public NormalResDto saveDiagnosis(@RequestHeader("auth") String auth, @RequestBody SaveDiagnosisReqDto saveDiagnosisReqDto) {
+    public NormalResDto saveDiagnosis(@RequestHeader("auth") String auth, SaveDiagnosisReqDto request) {
 
         log.info("권한 확인");
         if (!auth.equals("bVAtkPtiVGpWuO3dWEnvr51cEb6r7oF8")) {
@@ -34,7 +34,7 @@ public class DiagnosisApiController {
         log.info("질병 정보 저장");
         try {
 
-            diagnosisService.saveDiagnosis(saveDiagnosisReqDto);
+            diagnosisService.saveDiagnosis(request);
             result = new NormalResDto("200", "질병 정보 저장 성공");
             return result;
         } catch (IllegalStateException e) {

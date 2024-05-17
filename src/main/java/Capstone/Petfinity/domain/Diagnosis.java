@@ -27,5 +27,5 @@ public class Diagnosis {
     @NotNull
     private String content;
     @NotNull
-    private byte[] image;
+    private Byte[] image;
 }

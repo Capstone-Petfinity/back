@@ -1,6 +1,8 @@
 package Capstone.Petfinity.api.info;
 
 import Capstone.Petfinity.domain.*;
+import Capstone.Petfinity.dto.NormalResDto;
+import Capstone.Petfinity.dto.info.diagnosis.SaveDiagnosisReqDto;
 import Capstone.Petfinity.dto.info.hospital.InfoHospitalReqDto;
 import Capstone.Petfinity.dto.info.hospital.InfoHospitalResDto;
 import Capstone.Petfinity.dto.info.parent.InfoParentReqDto;

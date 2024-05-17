@@ -339,7 +339,7 @@ loginStatus(406)
 # DiagnosisApiController
 
 ## saveDiagnosis
-#### /info/diagnosis : POST
+#### /user/diagnosis : POST
 
 **Param**
 - String disease_name;

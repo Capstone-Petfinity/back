@@ -29,6 +29,5 @@ public class Diagnosis {
     private Double percent;
     @NotNull
     private String content;
-    @NotNull
     private byte[] image;
 }

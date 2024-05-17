@@ -314,7 +314,7 @@ loginStatus(406)
 #### /user/reservation : POST
 
 **Body**
-- String parentUuid;
+- String userUuid;
 - String petUuid;
 - String hospitalUuid;
 - String reservationDate;
@@ -333,3 +333,19 @@ exist(404)
 
 loginStatus(406)
 - NotLoginStatusException: 로그아웃 상태
+
+
+
+# DiagnosisApiController
+
+## saveDiagnosis
+#### /info/diagnosis : POST
+
+**Param**
+- String uuid;
+- String disease_name;
+- String parentUuid;
+- LocalDate date;
+- Double percent;
+- String content;
+- byte[] image;

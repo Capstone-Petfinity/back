@@ -20,7 +20,7 @@ public class DiagnosisRepository {
 
         diagnosis.setUuid(UUID.randomUUID().toString());
         diagnosis.setDisease_name(saveDiagnosisReqDto.getDisease_name());
-        diagnosis.setParent_uuid(saveDiagnosisReqDto.getParent_uuid());
+        diagnosis.setUserUuid(saveDiagnosisReqDto.getUserUuid());
         diagnosis.setDate(saveDiagnosisReqDto.getDate());
         diagnosis.setPercent(saveDiagnosisReqDto.getPercent());
         diagnosis.setContent(saveDiagnosisReqDto.getContent());

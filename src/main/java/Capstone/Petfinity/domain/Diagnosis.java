@@ -21,7 +21,7 @@ public class Diagnosis {
     @NotNull
     private String disease_name;
     @NotNull
-    private String parent_uuid;
+    private String userUuid;
     @NotNull
     private LocalDate date;
     @NotNull

@@ -5,11 +5,13 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
+import lombok.Setter;
 
 import java.time.LocalDate;
 
 @Entity
 @Getter
+@Setter
 public class Diagnosis {
 
     @Id
@@ -27,5 +29,5 @@ public class Diagnosis {
     @NotNull
     private String content;
     @NotNull
-    private Byte[] image;
+    private byte[] image;
 }

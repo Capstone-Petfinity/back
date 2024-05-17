@@ -1,9 +1,7 @@
 package Capstone.Petfinity.service.diagnosis;
 
-import Capstone.Petfinity.dto.info.diagnosis.SaveDiagnosisReqDto;
-import Capstone.Petfinity.dto.signup.parent.SignupParentReqDto;
+import Capstone.Petfinity.dto.diagnosis.SaveDiagnosisReqDto;
 import Capstone.Petfinity.repository.DiagnosisRepository;
-import Capstone.Petfinity.repository.ParentRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -20,6 +18,7 @@ public class DiagnosisService {
     @Transactional
     public void saveDiagnosis(SaveDiagnosisReqDto diagnosis) {
 
-
+        diagnosisRepository.save(diagnosis);
+        log.info("진단결과 저장 성공");
     }
 }

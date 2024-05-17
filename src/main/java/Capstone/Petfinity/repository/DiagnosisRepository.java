@@ -19,12 +19,12 @@ public class DiagnosisRepository {
         Diagnosis diagnosis = new Diagnosis();
 
         diagnosis.setUuid(UUID.randomUUID().toString());
+        System.out.println("diagnosis = " + diagnosis);
         diagnosis.setDisease_name(saveDiagnosisReqDto.getDisease_name());
         diagnosis.setUser(saveDiagnosisReqDto.getUserUuid());
         diagnosis.setDate(saveDiagnosisReqDto.getDate());
         diagnosis.setPercent(saveDiagnosisReqDto.getPercent());
         diagnosis.setContent(saveDiagnosisReqDto.getContent());
-        diagnosis.setImage(saveDiagnosisReqDto.getImage());
 
         em.persist(diagnosis);
     }

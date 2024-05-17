@@ -21,7 +21,12 @@ public class DiagnosisApiController {
     NormalResDto result;
 
     @PostMapping("/user/diagnosis")
-    public NormalResDto diagnosis(@RequestHeader("auth") String auth, SaveDiagnosisReqDto request) {
+    public NormalResDto diagnosis(@RequestHeader("auth") String auth,
+                                  @RequestParam("disease_name") String disease_name,
+                                  @RequestParam("userUuid") String userUuid,
+                                  @RequestParam("date") LocalDate date,
+                                  @RequestParam("percent") Double percent,
+                                  @RequestParam("content") String content) {
 
         log.info("권한 확인");
         if (!auth.equals("bVAtkPtiVGpWuO3dWEnvr51cEb6r7oF8")) {
@@ -34,7 +39,9 @@ public class DiagnosisApiController {
         log.info("질병 정보 저장");
         try {
 
+            SaveDiagnosisReqDto request = new SaveDiagnosisReqDto(disease_name, userUuid, date, percent, content);
             diagnosisService.saveDiagnosis(request);
+
             result = new NormalResDto("200", "질병 정보 저장 성공");
             return result;
         } catch (IllegalStateException e) {

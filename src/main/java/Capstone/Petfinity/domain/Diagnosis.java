@@ -21,7 +21,8 @@ public class Diagnosis {
     @NotNull
     private String disease_name;
     @NotNull
-    private String userUuid;
+    @Column(name = "user_id")
+    private String user;
     @NotNull
     private LocalDate date;
     @NotNull

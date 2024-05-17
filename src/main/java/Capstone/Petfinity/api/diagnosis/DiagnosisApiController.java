@@ -23,7 +23,7 @@ public class DiagnosisApiController {
     @PostMapping("/user/diagnosis")
     public NormalResDto saveDiagnosis(@RequestHeader("auth") String auth,
                                       @RequestParam("uuid") String uuid, @RequestParam("disease_name") String disease_name,
-                                      @RequestParam("parent_uuid") String userUuid, @RequestParam("date") LocalDate date,
+                                      @RequestParam("userUuid") String userUuid, @RequestParam("date") LocalDate date,
                                       @RequestParam("percent") Double percent, @RequestParam("content") String content,
                                       @RequestParam("image") byte[] image) {
 

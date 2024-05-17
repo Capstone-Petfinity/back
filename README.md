@@ -342,9 +342,8 @@ loginStatus(406)
 #### /info/diagnosis : POST
 
 **Param**
-- String uuid;
 - String disease_name;
-- String parentUuid;
+- String userUuid;
 - LocalDate date;
 - Double percent;
 - String content;

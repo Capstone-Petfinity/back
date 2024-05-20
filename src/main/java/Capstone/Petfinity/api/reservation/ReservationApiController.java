@@ -58,7 +58,7 @@ public class ReservationApiController {
             return result;
         } catch (NotLoginStatusException e) {
 
-            result = new NormalResDto("406", "로그아웃된 상태");
+            result = new NormalResDto("406", "로그아웃 상태");
             return result;
         }
     }

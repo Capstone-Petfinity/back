@@ -1,10 +1,8 @@
 package Capstone.Petfinity.repository;
 
 import Capstone.Petfinity.domain.Diagnosis;
-import Capstone.Petfinity.domain.Hospital;
 import Capstone.Petfinity.dto.diagnosis.DiagnosisListDto;
 import Capstone.Petfinity.dto.diagnosis.SaveDiagnosisReqDto;
-import Capstone.Petfinity.dto.reservation.ReservationDto;
 import jakarta.persistence.EntityManager;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;

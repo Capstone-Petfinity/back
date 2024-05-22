@@ -1,12 +1,9 @@
 package Capstone.Petfinity.service.diagnosis;
 
 import Capstone.Petfinity.domain.Diagnosis;
-import Capstone.Petfinity.domain.Hospital;
 import Capstone.Petfinity.domain.Parent;
 import Capstone.Petfinity.domain.Vet;
 import Capstone.Petfinity.dto.diagnosis.*;
-import Capstone.Petfinity.dto.info.hospital.InfoHospitalReqDto;
-import Capstone.Petfinity.dto.loginout.LoginReqDto;
 import Capstone.Petfinity.exception.InvalidUuidException;
 import Capstone.Petfinity.exception.LoginStatusException;
 import Capstone.Petfinity.exception.NotExistException;

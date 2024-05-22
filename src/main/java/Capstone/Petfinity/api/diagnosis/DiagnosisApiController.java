@@ -1,7 +1,11 @@
 package Capstone.Petfinity.api.diagnosis;
 
 import Capstone.Petfinity.dto.NormalResDto;
+import Capstone.Petfinity.dto.diagnosis.DiagnosisListReqDto;
+import Capstone.Petfinity.dto.diagnosis.DiagnosisListResDto;
 import Capstone.Petfinity.dto.diagnosis.SaveDiagnosisReqDto;
+import Capstone.Petfinity.dto.info.parent.InfoParentReqDto;
+import Capstone.Petfinity.dto.info.pet.InfoPetsResDto;
 import Capstone.Petfinity.exception.LoginStatusException;
 import Capstone.Petfinity.exception.NotExistException;
 import Capstone.Petfinity.service.diagnosis.DiagnosisService;
@@ -22,8 +26,10 @@ public class DiagnosisApiController {
 
     NormalResDto result;
 
-    @PostMapping("/user/diagnosis")
-    public NormalResDto diagnosis(@RequestHeader("auth") String auth,
+    DiagnosisListResDto resultDiagnosisList;
+
+    @PostMapping("/user/savediagnosis")
+    public NormalResDto savediagnosis(@RequestHeader("auth") String auth,
                                   @RequestParam("disease_name") String disease_name,
                                   @RequestParam("userUuid") String userUuid,
                                   @RequestParam("date") LocalDate date,
@@ -56,4 +62,23 @@ public class DiagnosisApiController {
             return result;
         }
     }
+
+    @PostMapping("/user/diagnosislist")
+    public DiagnosisListResDto diagnosisList(@RequestHeader("auth") String auth,
+                                             @RequestBody DiagnosisListReqDto request){
+        log.info("권한 확인");
+        if (!auth.equals("bVAtkPtiVGpWuO3dWEnvr51cEb6r7oF8")) {
+
+            log.warn("권한이 없습니다");
+            resultDiagnosisList = new DiagnosisListResDto("400", "권한 없음", null);
+            return resultDiagnosisList;
+        }
+
+        log.info("질병리스트 확인");
+        try{
+
+        }
+    }
 }
+
+

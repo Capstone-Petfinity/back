@@ -2,6 +2,9 @@ package Capstone.Petfinity.service.diagnosis;
 
 import Capstone.Petfinity.domain.Parent;
 import Capstone.Petfinity.domain.Vet;
+import Capstone.Petfinity.dto.diagnosis.DiagnosisListDto;
+import Capstone.Petfinity.dto.diagnosis.DiagnosisListReqDto;
+import Capstone.Petfinity.dto.diagnosis.DiagnosisListResDto;
 import Capstone.Petfinity.dto.diagnosis.SaveDiagnosisReqDto;
 import Capstone.Petfinity.dto.loginout.LoginReqDto;
 import Capstone.Petfinity.exception.LoginStatusException;
@@ -73,5 +76,14 @@ public class DiagnosisService {
                 throw new LoginStatusException();
             }
         }
+    }
+
+    public List<DiagnosisListDto> diagnosisList(DiagnosisListReqDto request){
+        String userUuid = request.getUserUuid();
+
+        List<DiagnosisListDto> result = diagnosisRepository.findDiagnoses(request.getUserUuid());
+
+        log.info("진단리스트 확인 성공");
+        return result;
     }
 }

@@ -1,6 +1,5 @@
 package Capstone.Petfinity.dto.diagnosis;
 
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
@@ -8,7 +7,6 @@ import lombok.ToString;
 @Getter
 @NoArgsConstructor
 @ToString
-@Builder
 public class DiagnosisListReqDto {
 
     private String userUuid; // userUuid나 진단Uuid

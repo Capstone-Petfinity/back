@@ -1,14 +1,15 @@
 package Capstone.Petfinity.api.diagnosis;
 
+import Capstone.Petfinity.domain.Diagnosis;
 import Capstone.Petfinity.dto.NormalResDto;
-import Capstone.Petfinity.dto.diagnosis.DiagnosisListDto;
-import Capstone.Petfinity.dto.diagnosis.DiagnosisListReqDto;
-import Capstone.Petfinity.dto.diagnosis.DiagnosisListResDto;
-import Capstone.Petfinity.dto.diagnosis.SaveDiagnosisReqDto;
+import Capstone.Petfinity.dto.diagnosis.*;
+import Capstone.Petfinity.dto.info.hospital.InfoHospitalResDto;
 import Capstone.Petfinity.dto.info.parent.InfoParentReqDto;
 import Capstone.Petfinity.dto.info.pet.InfoPetsResDto;
+import Capstone.Petfinity.exception.InvalidUuidException;
 import Capstone.Petfinity.exception.LoginStatusException;
 import Capstone.Petfinity.exception.NotExistException;
+import Capstone.Petfinity.exception.NullUuidException;
 import Capstone.Petfinity.service.diagnosis.DiagnosisService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -29,6 +30,8 @@ public class DiagnosisApiController {
     NormalResDto result;
 
     DiagnosisListResDto resultDiagnosisList;
+
+    InfoDiagnosisResDto resultDiagnosis;
 
     @PostMapping("/user/savediagnosis")
     public NormalResDto savediagnosis(@RequestHeader("auth") String auth,
@@ -91,6 +94,38 @@ public class DiagnosisApiController {
 
             resultDiagnosisList = new DiagnosisListResDto("406", "로그아웃 상태", null);
             return resultDiagnosisList;
+        }
+    }
+    @PostMapping("/user/infodiagnosis")
+    public InfoDiagnosisResDto infoDiagnosis(@RequestHeader("auth") String auth,
+                                             @RequestBody InfoDiagnosisReqDto request){
+        log.info("권한 확인");
+        if (!auth.equals("bVAtkPtiVGpWuO3dWEnvr51cEb6r7oF8")) {
+
+            log.warn("권한이 없습니다");
+            resultDiagnosis = new InfoDiagnosisResDto("400", "권한 없음", null, null, null, null);
+            return resultDiagnosis;
+        }
+
+        log.info("진단 리스트 조회");
+        try{
+
+            Diagnosis diagnosis = diagnosisService.infoDiagnosis(request);
+
+            resultDiagnosis = new InfoDiagnosisResDto("200", "진단 조회 성공", diagnosis.getDisease_name(), diagnosis.getDate(), diagnosis.getPercent(), diagnosis.getContent());
+            return resultDiagnosis;
+        }catch (NullUuidException e) {
+
+            resultDiagnosis = new InfoDiagnosisResDto("403", "입력되지 않은 uuid", null, null, null, null);
+            return resultDiagnosis;
+        } catch (InvalidUuidException e) {
+
+            resultDiagnosis = new InfoDiagnosisResDto("401", "유효하지 않은 uuid", null, null, null, null);
+            return resultDiagnosis;
+        } catch (NotExistException e) {
+
+            resultDiagnosis = new InfoDiagnosisResDto("404", "존재하지 않는 진단", null, null, null, null);
+            return resultDiagnosis;
         }
     }
 }

@@ -1,14 +1,16 @@
 package Capstone.Petfinity.service.diagnosis;
 
+import Capstone.Petfinity.domain.Diagnosis;
+import Capstone.Petfinity.domain.Hospital;
 import Capstone.Petfinity.domain.Parent;
 import Capstone.Petfinity.domain.Vet;
-import Capstone.Petfinity.dto.diagnosis.DiagnosisListDto;
-import Capstone.Petfinity.dto.diagnosis.DiagnosisListReqDto;
-import Capstone.Petfinity.dto.diagnosis.DiagnosisListResDto;
-import Capstone.Petfinity.dto.diagnosis.SaveDiagnosisReqDto;
+import Capstone.Petfinity.dto.diagnosis.*;
+import Capstone.Petfinity.dto.info.hospital.InfoHospitalReqDto;
 import Capstone.Petfinity.dto.loginout.LoginReqDto;
+import Capstone.Petfinity.exception.InvalidUuidException;
 import Capstone.Petfinity.exception.LoginStatusException;
 import Capstone.Petfinity.exception.NotExistException;
+import Capstone.Petfinity.exception.NullUuidException;
 import Capstone.Petfinity.repository.DiagnosisRepository;
 import Capstone.Petfinity.repository.ParentRepository;
 import Capstone.Petfinity.repository.VetRepository;
@@ -18,6 +20,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+
+import static org.springframework.util.StringUtils.containsWhitespace;
 
 @Service
 @Transactional(readOnly = true)
@@ -88,5 +92,31 @@ public class DiagnosisService {
 
         log.info("진단리스트 확인 성공");
         return result;
+    }
+
+    public Diagnosis infoDiagnosis(InfoDiagnosisReqDto request) {
+
+        String diagnosisUuid = request.getUuid();
+
+        checkDiagnosis(diagnosisUuid);
+
+        log.info("질병 정보 조회 성공");
+        return diagnosisRepository.findDiagnosis(diagnosisUuid);
+    }
+
+    private void checkDiagnosis(String uuid) {
+
+        if(uuid.isEmpty()) {
+            log.warn("hospitalUuid가 비어있습니다");
+            throw new NullUuidException();
+        }
+        if (containsWhitespace(uuid) || uuid.length() != 36) {
+            log.warn("유효하지 않은 uuid입니다");
+            throw new InvalidUuidException();
+        }
+        if (diagnosisRepository.findDiagnosis(uuid) == null) {
+            log.warn("해당 병원이 존재하지 않습니다");
+            throw new NotExistException();
+        }
     }
 }

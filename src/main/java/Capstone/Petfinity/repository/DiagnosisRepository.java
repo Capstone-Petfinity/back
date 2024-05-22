@@ -1,6 +1,7 @@
 package Capstone.Petfinity.repository;
 
 import Capstone.Petfinity.domain.Diagnosis;
+import Capstone.Petfinity.domain.Hospital;
 import Capstone.Petfinity.dto.diagnosis.DiagnosisListDto;
 import Capstone.Petfinity.dto.diagnosis.SaveDiagnosisReqDto;
 import Capstone.Petfinity.dto.reservation.ReservationDto;
@@ -39,6 +40,11 @@ public class DiagnosisRepository {
                         "from Diagnosis r where r.user = :uuid", DiagnosisListDto.class)
                 .setParameter("uuid", uuid)
                 .getResultList();
+    }
+
+    public Diagnosis findDiagnosis(String diagnosisUuid) {
+
+        return em.find(Diagnosis.class, diagnosisUuid);
     }
 
 }

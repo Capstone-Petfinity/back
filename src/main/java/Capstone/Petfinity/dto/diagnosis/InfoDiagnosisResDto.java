@@ -1,0 +1,34 @@
+package Capstone.Petfinity.dto.diagnosis;
+
+import jakarta.persistence.Column;
+import jakarta.validation.constraints.NotNull;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
+
+import java.time.LocalDate;
+
+@Getter
+@NoArgsConstructor
+@ToString
+@Builder
+public class InfoDiagnosisResDto {
+
+    private String statusCode;
+    private String message;
+    private String disease_name;
+    private LocalDate date;
+    private Double percent;
+    private String content;
+
+    public InfoDiagnosisResDto (String statusCode, String message, String disease_name,
+                                LocalDate date, Double percent, String content) {
+        this.statusCode = statusCode;
+        this.message = message;
+        this.disease_name = disease_name;
+        this.date = date;
+        this.percent = percent;
+        this.content = content;
+    }
+}

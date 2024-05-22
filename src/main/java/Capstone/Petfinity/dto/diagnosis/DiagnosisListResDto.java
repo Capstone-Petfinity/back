@@ -14,6 +14,7 @@ import java.util.List;
 @ToString
 @Builder
 public class DiagnosisListResDto {
+
     private String statusCode;
     private String message;
     private List<DiagnosisListDto> diagnoses;

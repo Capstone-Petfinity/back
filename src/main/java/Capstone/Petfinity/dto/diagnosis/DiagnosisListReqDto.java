@@ -12,4 +12,8 @@ import lombok.ToString;
 public class DiagnosisListReqDto {
 
     private String userUuid; // userUuid나 진단Uuid
+
+    public DiagnosisListReqDto (String userUuid){
+        this.userUuid = userUuid;
+    }
 }

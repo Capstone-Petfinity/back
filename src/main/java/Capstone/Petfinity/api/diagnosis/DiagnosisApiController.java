@@ -1,6 +1,7 @@
 package Capstone.Petfinity.api.diagnosis;
 
 import Capstone.Petfinity.dto.NormalResDto;
+import Capstone.Petfinity.dto.diagnosis.DiagnosisListDto;
 import Capstone.Petfinity.dto.diagnosis.DiagnosisListReqDto;
 import Capstone.Petfinity.dto.diagnosis.DiagnosisListResDto;
 import Capstone.Petfinity.dto.diagnosis.SaveDiagnosisReqDto;
@@ -15,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -74,9 +76,21 @@ public class DiagnosisApiController {
             return resultDiagnosisList;
         }
 
-        log.info("질병리스트 확인");
+        log.info("진단 리스트 조회");
         try{
 
+            List<DiagnosisListDto> diagnoses = diagnosisService.diagnosisList(request);
+
+            resultDiagnosisList = new DiagnosisListResDto("200", "진단 리스트 조회 성공", diagnoses);
+            return resultDiagnosisList;
+        }catch (NotExistException e) {
+
+            resultDiagnosisList = new DiagnosisListResDto("404", "존재하지 않는 회원", null);
+            return resultDiagnosisList;
+        }catch (LoginStatusException e) {
+
+            resultDiagnosisList = new DiagnosisListResDto("406", "로그아웃 상태", null);
+            return resultDiagnosisList;
         }
     }
 }

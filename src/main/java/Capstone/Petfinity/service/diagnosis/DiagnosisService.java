@@ -81,6 +81,9 @@ public class DiagnosisService {
     public List<DiagnosisListDto> diagnosisList(DiagnosisListReqDto request){
         String userUuid = request.getUserUuid();
 
+        userExistCheck(userUuid);
+        checkLoginStatus(userUuid);
+
         List<DiagnosisListDto> result = diagnosisRepository.findDiagnoses(request.getUserUuid());
 
         log.info("진단리스트 확인 성공");

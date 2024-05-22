@@ -16,9 +16,9 @@ import java.util.List;
 public class DiagnosisListResDto {
     private String statusCode;
     private String message;
-    private List<Diagnosis> diagnoses;
+    private List<DiagnosisListDto> diagnoses;
 
-    public DiagnosisListResDto(String statusCode, String message, List<Diagnosis> diagnoses) {
+    public DiagnosisListResDto(String statusCode, String message, List<DiagnosisListDto> diagnoses) {
         this.statusCode = statusCode;
         this.message = message;
         this.diagnoses = diagnoses;

@@ -68,7 +68,7 @@ public class AiApi {
     }
 
     @PostMapping("/diagnosis/receive/test")
-    public ResponseEntity<MultiValueMap<String, Object>> formData(@RequestParam("img") MultipartFile img) throws Exception {
+    public MultiValueMap<String, Object> formData(@RequestParam("img") MultipartFile img) throws Exception {
 
 
         // RestTemplate restTemplate = new RestTemplate();
@@ -81,10 +81,10 @@ public class AiApi {
         MultiValueMap<String, Object> body = new LinkedMultiValueMap<>();
         body.add("file", img);
 
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.MULTIPART_FORM_DATA);
+//        HttpHeaders headers = new HttpHeaders();
+//        headers.setContentType(MediaType.MULTIPART_FORM_DATA);
 
-        return ResponseEntity.ok().headers(headers).body(body);
+        return body;
     }
 
 //    @PostMapping("/formdata_test")

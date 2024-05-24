@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="Capstone.Petfinity.AiApiTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2024-05-24T11:33:53" hostname="MacBookAir.local" time="0.136">
+<testsuite name="Capstone.Petfinity.AiApiTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2024-05-24T11:39:57" hostname="MacBookAir.local" time="0.131">
   <properties/>
-  <testcase name="testRequestToFlask()" classname="Capstone.Petfinity.AiApiTest" time="0.136"/>
-  <system-out><![CDATA[20:33:50.479 [Test worker] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [Capstone.Petfinity.AiApiTest]: AiApiTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
-20:33:50.544 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration Capstone.Petfinity.PetfinityApplication for test class Capstone.Petfinity.AiApiTest
+  <testcase name="testRequestToFlask()" classname="Capstone.Petfinity.AiApiTest" time="0.131"/>
+  <system-out><![CDATA[20:39:54.523 [Test worker] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [Capstone.Petfinity.AiApiTest]: AiApiTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+20:39:54.584 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration Capstone.Petfinity.PetfinityApplication for test class Capstone.Petfinity.AiApiTest
 
   .   ____          _            __ _ _
  /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
@@ -13,36 +13,36 @@
  =========|_|==============|___/=/_/_/_/
  :: Spring Boot ::                (v3.2.4)
 
-2024-05-24T20:33:50.765+09:00  INFO 61092 --- [Petfinity] [    Test worker] Capstone.Petfinity.AiApiTest             : Starting AiApiTest using Java 21.0.2 with PID 61092 (started by yezi.ce in /Users/yezi.ce/Desktop/Petfinity)
-2024-05-24T20:33:50.766+09:00  INFO 61092 --- [Petfinity] [    Test worker] Capstone.Petfinity.AiApiTest             : No active profile set, falling back to 1 default profile: "default"
-2024-05-24T20:33:51.148+09:00  INFO 61092 --- [Petfinity] [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2024-05-24T20:33:51.166+09:00  INFO 61092 --- [Petfinity] [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 13 ms. Found 0 JPA repository interfaces.
-2024-05-24T20:33:51.493+09:00  INFO 61092 --- [Petfinity] [    Test worker] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
-2024-05-24T20:33:51.523+09:00  INFO 61092 --- [Petfinity] [    Test worker] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.4.4.Final
-2024-05-24T20:33:51.540+09:00  INFO 61092 --- [Petfinity] [    Test worker] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
-2024-05-24T20:33:51.654+09:00  INFO 61092 --- [Petfinity] [    Test worker] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
-2024-05-24T20:33:51.669+09:00  INFO 61092 --- [Petfinity] [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
-2024-05-24T20:33:51.911+09:00  INFO 61092 --- [Petfinity] [    Test worker] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@49d543a9
-2024-05-24T20:33:51.912+09:00  INFO 61092 --- [Petfinity] [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
-2024-05-24T20:33:52.557+09:00  INFO 61092 --- [Petfinity] [    Test worker] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-2024-05-24T20:33:52.613+09:00  INFO 61092 --- [Petfinity] [    Test worker] p6spy                                    : #1716550432613 | took 1ms | statement | connection 1| url jdbc:mysql://localhost:3306/petfinity
+2024-05-24T20:39:54.800+09:00  INFO 61447 --- [Petfinity] [    Test worker] Capstone.Petfinity.AiApiTest             : Starting AiApiTest using Java 21.0.2 with PID 61447 (started by yezi.ce in /Users/yezi.ce/Desktop/Petfinity)
+2024-05-24T20:39:54.801+09:00  INFO 61447 --- [Petfinity] [    Test worker] Capstone.Petfinity.AiApiTest             : No active profile set, falling back to 1 default profile: "default"
+2024-05-24T20:39:55.159+09:00  INFO 61447 --- [Petfinity] [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-05-24T20:39:55.176+09:00  INFO 61447 --- [Petfinity] [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 12 ms. Found 0 JPA repository interfaces.
+2024-05-24T20:39:55.499+09:00  INFO 61447 --- [Petfinity] [    Test worker] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-05-24T20:39:55.532+09:00  INFO 61447 --- [Petfinity] [    Test worker] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.4.4.Final
+2024-05-24T20:39:55.551+09:00  INFO 61447 --- [Petfinity] [    Test worker] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2024-05-24T20:39:55.673+09:00  INFO 61447 --- [Petfinity] [    Test worker] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-05-24T20:39:55.687+09:00  INFO 61447 --- [Petfinity] [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2024-05-24T20:39:55.945+09:00  INFO 61447 --- [Petfinity] [    Test worker] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@762da62b
+2024-05-24T20:39:55.946+09:00  INFO 61447 --- [Petfinity] [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2024-05-24T20:39:56.608+09:00  INFO 61447 --- [Petfinity] [    Test worker] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-05-24T20:39:56.664+09:00  INFO 61447 --- [Petfinity] [    Test worker] p6spy                                    : #1716550796664 | took 1ms | statement | connection 1| url jdbc:mysql://localhost:3306/petfinity
 select * from `petfinity`.`parent` where 1=0
 select * from `petfinity`.`parent` where 1=0;
-2024-05-24T20:33:52.627+09:00  INFO 61092 --- [Petfinity] [    Test worker] p6spy                                    : #1716550432627 | took 0ms | statement | connection 1| url jdbc:mysql://localhost:3306/petfinity
+2024-05-24T20:39:56.679+09:00  INFO 61447 --- [Petfinity] [    Test worker] p6spy                                    : #1716550796679 | took 0ms | statement | connection 1| url jdbc:mysql://localhost:3306/petfinity
 select * from `petfinity`.`hospital` where 1=0
 select * from `petfinity`.`hospital` where 1=0;
-2024-05-24T20:33:52.629+09:00  INFO 61092 --- [Petfinity] [    Test worker] p6spy                                    : #1716550432629 | took 0ms | statement | connection 1| url jdbc:mysql://localhost:3306/petfinity
+2024-05-24T20:39:56.681+09:00  INFO 61447 --- [Petfinity] [    Test worker] p6spy                                    : #1716550796681 | took 0ms | statement | connection 1| url jdbc:mysql://localhost:3306/petfinity
 select * from `petfinity`.`parent` where 1=0
 select * from `petfinity`.`parent` where 1=0;
-2024-05-24T20:33:52.631+09:00  INFO 61092 --- [Petfinity] [    Test worker] p6spy                                    : #1716550432631 | took 0ms | statement | connection 1| url jdbc:mysql://localhost:3306/petfinity
+2024-05-24T20:39:56.683+09:00  INFO 61447 --- [Petfinity] [    Test worker] p6spy                                    : #1716550796683 | took 0ms | statement | connection 1| url jdbc:mysql://localhost:3306/petfinity
 select * from `petfinity`.`pet` where 1=0
 select * from `petfinity`.`pet` where 1=0;
-2024-05-24T20:33:52.632+09:00  INFO 61092 --- [Petfinity] [    Test worker] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
-2024-05-24T20:33:52.840+09:00  WARN 61092 --- [Petfinity] [    Test worker] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2024-05-24T20:33:53.057+09:00  INFO 61092 --- [Petfinity] [    Test worker] Capstone.Petfinity.AiApiTest             : Started AiApiTest in 2.435 seconds (process running for 3.116)
+2024-05-24T20:39:56.684+09:00  INFO 61447 --- [Petfinity] [    Test worker] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-05-24T20:39:56.859+09:00  WARN 61447 --- [Petfinity] [    Test worker] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-05-24T20:39:57.076+09:00  INFO 61447 --- [Petfinity] [    Test worker] Capstone.Petfinity.AiApiTest             : Started AiApiTest in 2.417 seconds (process running for 3.074)
 Message from Flask server: Hello, World!
-2024-05-24T20:33:53.704+09:00  INFO 61092 --- [Petfinity] [    Test worker] Capstone.Petfinity.api.AiApi             : Hello 확인
-2024-05-24T20:33:53.714+09:00  INFO 61092 --- [Petfinity] [    Test worker] p6spy                                    : #1716550433714 | took 1ms | rollback | connection 2| url jdbc:mysql://localhost:3306/petfinity
+2024-05-24T20:39:57.742+09:00  INFO 61447 --- [Petfinity] [    Test worker] Capstone.Petfinity.api.AiApi             : Hello 확인
+2024-05-24T20:39:57.755+09:00  INFO 61447 --- [Petfinity] [    Test worker] p6spy                                    : #1716550797755 | took 0ms | rollback | connection 2| url jdbc:mysql://localhost:3306/petfinity
 
 ;
 ]]></system-out>

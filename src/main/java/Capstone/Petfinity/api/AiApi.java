@@ -1,7 +1,7 @@
 package Capstone.Petfinity.api;
 
+import Capstone.Petfinity.dto.FormData;
 import Capstone.Petfinity.service.AiService;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.time.LocalDate;
+import java.awt.event.WindowFocusListener;
 import java.util.Base64;
 
 @RestController
@@ -22,11 +22,6 @@ public class AiApi {
 
     @Autowired
     private AiService aiService;
-
-    private String getBase64String(MultipartFile multipartFile) throws Exception {
-        byte[] bytes = multipartFile.getBytes();
-        return Base64.getEncoder().encodeToString(bytes);
-    }
 
     public String requestToFlask() throws Exception {
 
@@ -68,47 +63,52 @@ public class AiApi {
         return message;
     }
 
-//    @PostMapping("/diagnosis")
-//    public String formData(@RequestParam("user_uuid") String user_uuid,
-//                           @RequestParam("user_type") String user_type,
-//                           @RequestParam("disease_area") String disease_area,
-//                           @RequestParam("type") String type,
-//                           @RequestParam("disease") String disease,
-//                           @RequestParam("img") MultipartFile img) throws Exception {
-//
-//
-//        RestTemplate restTemplate = new RestTemplate();
-//
-//        String response = restTemplate.postForEntity(url);
-//        response = aiService.sendDataToAiServerTest(user_type, disease_area, type, disease, img);
-//        System.out.println("response = " + response);
-//
-//        System.out.println("Message from Flask server: " + response);
-//        log.info("FormData 테스트");
-//
-//        return response;
-//    }
+    @PostMapping("/diagnosis/receive/test")
+    public FormData formData(@RequestParam("user_uuid") String user_uuid,
+                           @RequestParam("img") MultipartFile image) throws Exception {
+
+
+        // RestTemplate restTemplate = new RestTemplate();
+
+        System.out.println("image = " + image);
+        String encodedImage = Base64.getEncoder().encodeToString(image.getBytes());
+        System.out.println("encodedImage = " + encodedImage);
+        FormData formData = new FormData(user_uuid, encodedImage);
+
+        log.info("FormData 테스트");
+
+        return formData;
+    }
 
 //    @PostMapping("/formdata_test")
-//    public String formData(@RequestParam("user_type") String user_type,
-//                           @RequestParam("disease_area") String disease_area,
-//                           @RequestParam("type") String type,
-//                           @RequestParam("detail_area") String detail_area,
-//                           @RequestParam("disease") String disease,
-//                           @RequestParam("img") MultipartFile img) throws Exception {
+//    public String formData(@RequestBody FormData formData) throws Exception {
 //
 //        String url = "http://203.250.148.132:5000/formdata_test";
 //
 //        RestTemplate restTemplate = new RestTemplate();
 //
+//        ResponseEntity<String> request = restTemplate.getForEntity(url, String.class);
+//
+//
+//
+//
 //        // ResponseEntity<String> response = restTemplate.getForEntity(url, String.class);
-//        String response = aiService.sendDataToAiServer(user_type, disease_area, type, detail_area, disease, img);
+//        res = aiService.sendDataToAiServerTest(user_type, disease_area, type, disease, image);
+//
+//        ObjectMapper objectMapper = new ObjectMapper();
+//        JsonNode jsonNode = objectMapper.readTree(response);
+//
+//
+//        // "message" 필드의 값 추출
+//        String message = jsonNode.get("image").asText();
+//        String info = jsonNode.get("info").asText();
 //
 //        System.out.println("Message from Flask server: " + response);
+//        System.out.println("message = " + message);
+//        System.out.println("info = " + info);
+//
 //        log.info("FormData 확인");
 //
 //        return response;
 //    }
-
-
 }

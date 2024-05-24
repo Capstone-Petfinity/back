@@ -79,14 +79,14 @@ public class DiagnosisApiController {
     }
 
     @PostMapping("user/receive/diagnosis")
-    public ResponseEntity<String> sendToAi(@RequestParam("userUuid") String userUuid,
-                                           @RequestParam("user_type") String user_type,
-                                           @RequestParam("disease_area") String disease_area,
-                                           @RequestParam("type") String type,
-                                           @RequestParam("position") String position,
-                                           @RequestParam("detail_type") String detail_area,
-                                           @RequestParam("disease") String disease,
-                                           @RequestParam("img") MultipartFile img) {
+    public ResponseEntity<String> sendToAi(@RequestBody String userUuid,
+                                           @RequestBody String user_type,
+                                           @RequestBody String disease_area,
+                                           @RequestBody String type,
+                                           @RequestBody String position,
+                                           @RequestBody String detail_area,
+                                           @RequestBody String disease,
+                                           @RequestBody String img) {
 
         log.info("ai서버에 데이터 전송");
         try {
@@ -100,15 +100,16 @@ public class DiagnosisApiController {
 
     @PostMapping("user/send/diagnosis")
     public AiResDto sendToFront(@RequestParam("userUuid") String userUuid,
-                                              @RequestParam("disease_name") String disease_name,
-                                              @RequestParam("percent") Double percent,
-                                              @RequestParam("content") String content) {
+                                @RequestParam("disease_name") String disease_name,
+                                @RequestParam("percent") Double percent,
+                                @RequestParam("content") String content,
+                                @RequestParam("img") byte[] img) {
 
 
         log.info("DB에 저장 후 프론트에 데이터 전송");
         try {
 
-            SaveDiagnosisReqDto request = new SaveDiagnosisReqDto(userUuid, disease_name, LocalDate.now(), percent, content);
+            SaveDiagnosisReqDto request = new SaveDiagnosisReqDto(userUuid, disease_name, LocalDate.now(), percent, content, img);
             diagnosisService.saveDiagnosis(request);
 
             // 프론트로 데이터 전송
@@ -119,40 +120,40 @@ public class DiagnosisApiController {
         }
     }
 
-    @PostMapping("/user/savediagnosis")
-    public NormalResDto saveDiagnosis(@RequestHeader("auth") String auth,
-                                      @RequestParam("userUuid") String userUuid,
-                                      @RequestParam("disease_name") String disease_name,
-                                      @RequestParam("date") LocalDate date,
-                                      @RequestParam("percent") Double percent,
-                                      @RequestParam("content") String content) {
-
-        log.info("권한 확인");
-        if (!auth.equals("bVAtkPtiVGpWuO3dWEnvr51cEb6r7oF8")) {
-
-            log.warn("권한이 없습니다");
-            result = new NormalResDto("400", "권한 없음");
-            return result;
-        }
-
-        log.info("질병 정보 저장");
-        try {
-
-            SaveDiagnosisReqDto request = new SaveDiagnosisReqDto(disease_name, userUuid, date, percent, content);
-            diagnosisService.saveDiagnosis(request);
-
-            result = new NormalResDto("200", "질병 정보 저장 성공");
-            return result;
-        } catch (NotExistException e) {
-
-            result = new NormalResDto("404", "존재하지 않는 회원");
-            return result;
-        } catch (LoginStatusException e) {
-
-            result = new NormalResDto("406", "로그아웃 상태");
-            return result;
-        }
-    }
+//    @PostMapping("/user/savediagnosis")
+//    public NormalResDto saveDiagnosis(@RequestHeader("auth") String auth,
+//                                      @RequestParam("userUuid") String userUuid,
+//                                      @RequestParam("disease_name") String disease_name,
+//                                      @RequestParam("date") LocalDate date,
+//                                      @RequestParam("percent") Double percent,
+//                                      @RequestParam("content") String content) {
+//
+//        log.info("권한 확인");
+//        if (!auth.equals("bVAtkPtiVGpWuO3dWEnvr51cEb6r7oF8")) {
+//
+//            log.warn("권한이 없습니다");
+//            result = new NormalResDto("400", "권한 없음");
+//            return result;
+//        }
+//
+//        log.info("질병 정보 저장");
+//        try {
+//
+//            SaveDiagnosisReqDto request = new SaveDiagnosisReqDto(disease_name, userUuid, date, percent, content);
+//            diagnosisService.saveDiagnosis(request);
+//
+//            result = new NormalResDto("200", "질병 정보 저장 성공");
+//            return result;
+//        } catch (NotExistException e) {
+//
+//            result = new NormalResDto("404", "존재하지 않는 회원");
+//            return result;
+//        } catch (LoginStatusException e) {
+//
+//            result = new NormalResDto("406", "로그아웃 상태");
+//            return result;
+//        }
+//    }
 
     @PostMapping("/user/diagnosislist")
     public DiagnosisListResDto diagnosisList(@RequestHeader("auth") String auth,

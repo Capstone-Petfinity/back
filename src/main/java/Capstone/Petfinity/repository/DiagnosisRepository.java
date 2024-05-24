@@ -6,7 +6,9 @@ import Capstone.Petfinity.dto.diagnosis.SaveDiagnosisReqDto;
 import jakarta.persistence.EntityManager;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.util.Base64;
 import java.util.List;
 import java.util.UUID;
 
@@ -27,6 +29,7 @@ public class DiagnosisRepository {
         diagnosis.setDate(saveDiagnosisReqDto.getDate());
         diagnosis.setPercent(saveDiagnosisReqDto.getPercent());
         diagnosis.setContent(saveDiagnosisReqDto.getContent());
+        diagnosis.setImage(saveDiagnosisReqDto.getImage());
 
         em.persist(diagnosis);
     }
@@ -45,4 +48,8 @@ public class DiagnosisRepository {
         return em.find(Diagnosis.class, diagnosisUuid);
     }
 
+    private String getBase64String(MultipartFile multipartFile) throws Exception {
+        byte[] bytes = multipartFile.getBytes();
+        return Base64.getEncoder().encodeToString(bytes);
+    }
 }

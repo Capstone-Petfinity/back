@@ -37,19 +37,12 @@ public class AiApiTest {
         assertEquals(message, "Hello, World!");
     }
 
-    @Test
-    public void testFormData() throws Exception {
+//    @Test
+//    public void testFormData() throws Exception {
 //		// Given
-//		String fileName = "test.jpg";
-//		MultipartFile file = Mockito.mock(MultipartFile.class);
-//		Mockito.when(file.getBytes()).thenReturn(new byte[0]); // 파일 데이터 설정
 //
-//		ResponseEntity<String> mockResponse = new ResponseEntity<>("{\"message\": \"success\"}", HttpStatus.OK);
-//		Mockito.when(restTemplate.postForEntity(Mockito.anyString(), Mockito.any(), Mockito.any())).thenReturn(mockResponse);
-
-        // When
-//        String message = aiApi.formData("수의사", "안구", "몰라", "안구건조증");
-
-        // Then
-    }
+//        String message = aiApi.formData();
+//
+//        // Then
+//    }
 }

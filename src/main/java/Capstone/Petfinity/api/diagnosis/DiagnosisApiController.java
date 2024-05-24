@@ -81,19 +81,19 @@ public class DiagnosisApiController {
     // 프론트에서 formdata 형식으로 데이터 받아서 ai 서버에 전송(RequestParam으로 받아야 함)
     // 이미지: MultipartFile로 받아서 그대로 ai 서버에 전송
     @PostMapping("user/receive/diagnosis")
-    public ResponseEntity<String> sendToAi(@RequestParam("userUuid") String userUuid,
-                                           @RequestParam("user_type") String user_type,
-                                           @RequestParam("disease_area") String disease_area,
-                                           @RequestParam("type") String type,
-                                           @RequestParam("position") String position,
-                                           @RequestParam("detail_type") String detail_area,
-                                           @RequestParam("disease") String disease,
-                                           @RequestParam("img") MultipartFile img) {
+    public ResponseEntity<String> sendToAi(@RequestParam("user_uuid") String user_uuid,
+                             @RequestParam("user_type") String user_type,
+                             @RequestParam("disease_area") String disease_area,
+                             @RequestParam("type") String type,
+                             @RequestParam("position") String position,
+                             @RequestParam("detail_type") String detail_area,
+                             @RequestParam("disease") String disease,
+                             @RequestParam("img") MultipartFile img) {
 
         log.info("ai서버에 데이터 전송");
         try {
             // AI 서버로 데이터 전송
-            String result = aiService.sendDataToAiServer(userUuid, user_type, disease_area, type, position, detail_area, disease, img);
+            String result = aiService.sendDataToAiServer(user_uuid, user_type, disease_area, type, position, detail_area, disease, img);
             return new ResponseEntity<>(result, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>("Failed to process file", HttpStatus.INTERNAL_SERVER_ERROR);
@@ -107,7 +107,6 @@ public class DiagnosisApiController {
                                 @RequestParam("percent") Double percent,
                                 @RequestParam("content") String content,
                                 @RequestParam("img") byte[] img) {
-
 
         log.info("DB에 저장 후 프론트에 데이터 전송");
         try {

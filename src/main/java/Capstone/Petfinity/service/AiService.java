@@ -46,7 +46,8 @@ public class AiService {
         return response.getBody();
     }
 
-    public String sendDataToAiServer(String userUuid, String user_type, String disease_area, String type, String position, String detail_area, String disease, MultipartFile img) throws Exception {
+    public String sendDataToAiServer(String userUuid, String user_type, String disease_area, String type, String position, String detail_area, String disease, MultipartFile img)
+            throws Exception {
 
         RestTemplate restTemplate = new RestTemplate();
 

@@ -79,7 +79,7 @@ public class AiApi {
 
         log.info("FormData 테스트");
         MultiValueMap<String, Object> body = new LinkedMultiValueMap<>();
-        body.add("file", img);
+        body.add("img", img);
 
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.MULTIPART_FORM_DATA);

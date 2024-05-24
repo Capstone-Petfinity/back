@@ -7,11 +7,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.util.LinkedMultiValueMap;
-import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.multipart.MultipartFile;
@@ -68,23 +64,19 @@ public class AiApi {
     }
 
     @PostMapping("/diagnosis/receive/test")
-    public ResponseEntity<MultiValueMap<String, Object>> formData(@RequestParam("img") MultipartFile img) throws Exception {
+    public FormData formData(@RequestParam("img") MultipartFile img) throws Exception {
 
 
         // RestTemplate restTemplate = new RestTemplate();
 
-//        String encodedImage = Base64.getEncoder().encodeToString(img.getBytes());
-//        System.out.println("encodedImage = " + encodedImage);
-//        FormData formData = new FormData(encodedImage);
+        System.out.println("image = " + img);
+        String encodedImage = Base64.getEncoder().encodeToString(img.getBytes());
+        System.out.println("encodedImage = " + encodedImage);
+        FormData formData = new FormData(encodedImage);
 
         log.info("FormData 테스트");
-        MultiValueMap<String, Object> body = new LinkedMultiValueMap<>();
-        body.add("img", img);
 
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.MULTIPART_FORM_DATA);
-
-        return ResponseEntity.ok().headers(headers).body(body);
+        return formData;
     }
 
 //    @PostMapping("/formdata_test")

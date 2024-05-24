@@ -73,21 +73,17 @@ public class AiApi {
 
         // RestTemplate restTemplate = new RestTemplate();
 
+//        String encodedImage = Base64.getEncoder().encodeToString(img.getBytes());
+//        System.out.println("encodedImage = " + encodedImage);
+//        FormData formData = new FormData(encodedImage);
+
+        log.info("FormData 테스트");
         MultiValueMap<String, Object> body = new LinkedMultiValueMap<>();
-        body.add("img", img);
+        body.add("file", img);
 
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.MULTIPART_FORM_DATA);
 
-
-// System.out.println("image = " + img);
-// String encodedImage = Base64.getEncoder().encodeToString(img.getBytes());
-// System.out.println("encodedImage = " + encodedImage);
-// FormData formData = new FormData(encodedImage);
-
-        log.info("FormData 테스트");
-
-        //return formData;
         return ResponseEntity.ok().headers(headers).body(body);
     }
 

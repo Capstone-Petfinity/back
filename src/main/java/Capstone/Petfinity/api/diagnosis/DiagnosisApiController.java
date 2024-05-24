@@ -7,13 +7,21 @@ import Capstone.Petfinity.exception.InvalidUuidException;
 import Capstone.Petfinity.exception.LoginStatusException;
 import Capstone.Petfinity.exception.NotExistException;
 import Capstone.Petfinity.exception.NullUuidException;
+import Capstone.Petfinity.service.AiService;
 import Capstone.Petfinity.service.diagnosis.DiagnosisService;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestTemplate;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDate;
+import java.util.Base64;
 import java.util.List;
 
 @RestController
@@ -23,20 +31,101 @@ public class DiagnosisApiController {
 
     @Autowired
     private final DiagnosisService diagnosisService;
+    @Autowired
+    private final AiService aiService;
 
     NormalResDto result;
-
     DiagnosisListResDto resultDiagnosisList;
-
     InfoDiagnosisResDto resultDiagnosis;
 
+    public String requestToFlask() throws Exception {
+
+        String aiServerUrl = "http://203.250.148.132:5000/hello";
+
+        RestTemplate restTemplate = new RestTemplate();
+
+//        // Header set
+//        HttpHeaders httpHeaders = new HttpHeaders();
+//        httpHeaders.setContentType(MediaType.APPLICATION_JSON);
+//
+//        // Body set
+//        MultiValueMap<String, String> body = new LinkedMultiValueMap<>();
+//        String imageFileString = getBase64String(file);
+//        body.add("filename", fileName);
+//        body.add("image", imageFileString);
+//
+//        // Message
+//        HttpEntity<?> requestMessage = new HttpEntity<>(body, httpHeaders);
+
+        // Request
+        ResponseEntity<String> response = restTemplate.getForEntity(aiServerUrl, String.class);
+
+        // JSON 문자열을 파싱하여 JsonNode 객체로 변환
+        ObjectMapper objectMapper = new ObjectMapper();
+        JsonNode jsonNode = objectMapper.readTree(response.getBody());
+
+        // "message" 필드의 값 추출
+        String message = jsonNode.get("message").asText();
+
+        System.out.println("Message from Flask server: " + message);
+        log.info("Hello 확인");
+
+//        // Response 파싱
+//        ObjectMapper objectMapper = new ObjectMapper();
+//        objectMapper.configure(DeserializationFeature.ACCEPT_EMPTY_STRING_AS_NULL_OBJECT, true);
+//        FlaskResponseDto dto = objectMapper.readValue(response.getBody(), FlaskResponseDto.class);
+
+        return message;
+    }
+
+    @PostMapping("user/receive/diagnosis")
+    public ResponseEntity<String> sendToAi(@RequestParam("userUuid") String userUuid,
+                                           @RequestParam("user_type") String user_type,
+                                           @RequestParam("disease_area") String disease_area,
+                                           @RequestParam("type") String type,
+                                           @RequestParam("position") String position,
+                                           @RequestParam("detail_type") String detail_area,
+                                           @RequestParam("disease") String disease,
+                                           @RequestParam("img") MultipartFile img) {
+
+        log.info("ai서버에 데이터 전송");
+        try {
+            // AI 서버로 데이터 전송
+            String result = aiService.sendDataToAiServer(userUuid, user_type, disease_area, type, position, detail_area, disease, img);
+            return new ResponseEntity<>(result, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>("Failed to process file", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @PostMapping("user/send/diagnosis")
+    public AiResDto sendToFront(@RequestParam("userUuid") String userUuid,
+                                              @RequestParam("disease_name") String disease_name,
+                                              @RequestParam("percent") Double percent,
+                                              @RequestParam("content") String content) {
+
+
+        log.info("DB에 저장 후 프론트에 데이터 전송");
+        try {
+
+            SaveDiagnosisReqDto request = new SaveDiagnosisReqDto(userUuid, disease_name, LocalDate.now(), percent, content);
+            diagnosisService.saveDiagnosis(request);
+
+            // 프론트로 데이터 전송
+            return new AiResDto("200", "ai 진단 성공", userUuid, disease_name, percent, content);
+        } catch (Exception e) {
+
+            return new AiResDto("400", "에러", null, null, null, null);
+        }
+    }
+
     @PostMapping("/user/savediagnosis")
-    public NormalResDto savediagnosis(@RequestHeader("auth") String auth,
-                                  @RequestParam("disease_name") String disease_name,
-                                  @RequestParam("userUuid") String userUuid,
-                                  @RequestParam("date") LocalDate date,
-                                  @RequestParam("percent") Double percent,
-                                  @RequestParam("content") String content) {
+    public NormalResDto saveDiagnosis(@RequestHeader("auth") String auth,
+                                      @RequestParam("userUuid") String userUuid,
+                                      @RequestParam("disease_name") String disease_name,
+                                      @RequestParam("date") LocalDate date,
+                                      @RequestParam("percent") Double percent,
+                                      @RequestParam("content") String content) {
 
         log.info("권한 확인");
         if (!auth.equals("bVAtkPtiVGpWuO3dWEnvr51cEb6r7oF8")) {
@@ -83,11 +172,11 @@ public class DiagnosisApiController {
 
             resultDiagnosisList = new DiagnosisListResDto("200", "진단 리스트 조회 성공", diagnoses);
             return resultDiagnosisList;
-        }catch (NotExistException e) {
+        } catch (NotExistException e) {
 
             resultDiagnosisList = new DiagnosisListResDto("404", "존재하지 않는 회원", null);
             return resultDiagnosisList;
-        }catch (LoginStatusException e) {
+        } catch (LoginStatusException e) {
 
             resultDiagnosisList = new DiagnosisListResDto("406", "로그아웃 상태", null);
             return resultDiagnosisList;
@@ -105,13 +194,13 @@ public class DiagnosisApiController {
         }
 
         log.info("진단 리스트 조회");
-        try{
+        try {
 
             Diagnosis diagnosis = diagnosisService.infoDiagnosis(request);
 
             resultDiagnosis = new InfoDiagnosisResDto("200", "진단 조회 성공", diagnosis.getDisease_name(), diagnosis.getDate(), diagnosis.getPercent(), diagnosis.getContent());
             return resultDiagnosis;
-        }catch (NullUuidException e) {
+        } catch (NullUuidException e) {
 
             resultDiagnosis = new InfoDiagnosisResDto("403", "입력되지 않은 uuid", null, null, null, null);
             return resultDiagnosis;

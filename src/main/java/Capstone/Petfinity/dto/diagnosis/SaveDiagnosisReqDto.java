@@ -19,7 +19,7 @@ public class SaveDiagnosisReqDto {
     private Double percent;
     private String content;
 
-    public SaveDiagnosisReqDto(String disease_name, String userUuid, LocalDate date, Double percent, String content) {
+    public SaveDiagnosisReqDto(String userUuid, String disease_name, LocalDate date, Double percent, String content) {
         this.disease_name = disease_name;
         this.userUuid = userUuid;
         this.date = date;

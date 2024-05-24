@@ -46,7 +46,7 @@ public class AiService {
         return response.getBody();
     }
 
-    public String sendDataToAiServer(String userUuid, String user_type, String disease_area, String type, String position, String detail_area, String disease, String img) throws Exception {
+    public String sendDataToAiServer(String userUuid, String user_type, String disease_area, String type, String position, String detail_area, String disease, MultipartFile img) throws Exception {
 
         RestTemplate restTemplate = new RestTemplate();
 
@@ -65,7 +65,7 @@ public class AiService {
         body.add("position", position);
         body.add("detail_area", detail_area);
         body.add("disease", disease);
-        body.add("img", getBase64String(img));
+        body.add("img", img);
 
         // Request Entity 생성
         HttpEntity<MultiValueMap<String, Object>> requestEntity = new HttpEntity<>(body, headers);

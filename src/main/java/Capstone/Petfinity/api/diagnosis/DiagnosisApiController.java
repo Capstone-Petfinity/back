@@ -78,15 +78,17 @@ public class DiagnosisApiController {
         return message;
     }
 
+    // 프론트에서 formdata 형식으로 데이터 받아서 ai 서버에 전송(RequestParam으로 받아야 함)
+    // 이미지: MultipartFile로 받아서 그대로 ai 서버에 전송
     @PostMapping("user/receive/diagnosis")
-    public ResponseEntity<String> sendToAi(@RequestBody String userUuid,
-                                           @RequestBody String user_type,
-                                           @RequestBody String disease_area,
-                                           @RequestBody String type,
-                                           @RequestBody String position,
-                                           @RequestBody String detail_area,
-                                           @RequestBody String disease,
-                                           @RequestBody String img) {
+    public ResponseEntity<String> sendToAi(@RequestParam("userUuid") String userUuid,
+                                           @RequestParam("user_type") String user_type,
+                                           @RequestParam("disease_area") String disease_area,
+                                           @RequestParam("type") String type,
+                                           @RequestParam("position") String position,
+                                           @RequestParam("detail_type") String detail_area,
+                                           @RequestParam("disease") String disease,
+                                           @RequestParam("img") MultipartFile img) {
 
         log.info("ai서버에 데이터 전송");
         try {
@@ -98,6 +100,7 @@ public class DiagnosisApiController {
         }
     }
 
+    // ai 서버에서 json 형식으로 데이터 받아서 프론트에 전송
     @PostMapping("user/send/diagnosis")
     public AiResDto sendToFront(@RequestParam("userUuid") String userUuid,
                                 @RequestParam("disease_name") String disease_name,

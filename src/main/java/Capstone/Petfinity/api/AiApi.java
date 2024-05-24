@@ -64,16 +64,15 @@ public class AiApi {
     }
 
     @PostMapping("/diagnosis/receive/test")
-    public FormData formData(@RequestParam("user_uuid") String user_uuid,
-                           @RequestParam("img") MultipartFile image) throws Exception {
+    public FormData formData(@RequestParam("img") MultipartFile img) throws Exception {
 
 
         // RestTemplate restTemplate = new RestTemplate();
 
-        System.out.println("image = " + image);
-        String encodedImage = Base64.getEncoder().encodeToString(image.getBytes());
+        System.out.println("image = " + img);
+        String encodedImage = Base64.getEncoder().encodeToString(img.getBytes());
         System.out.println("encodedImage = " + encodedImage);
-        FormData formData = new FormData(user_uuid, encodedImage);
+        FormData formData = new FormData(encodedImage);
 
         log.info("FormData 테스트");
 

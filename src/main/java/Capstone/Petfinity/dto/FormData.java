@@ -12,11 +12,9 @@ import org.springframework.web.multipart.MultipartFile;
 @Builder
 public class FormData {
 
-    String user_uuid;
     String image;
 
-    public FormData(String user_uuid, String image) {
-        this.user_uuid = user_uuid;
+    public FormData(String image) {
         this.image = image;
     }
 }

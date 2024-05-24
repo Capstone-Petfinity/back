@@ -93,7 +93,7 @@ public class DiagnosisService {
 
     public Diagnosis infoDiagnosis(InfoDiagnosisReqDto request) {
 
-        String diagnosisUuid = request.getUuid();
+        String diagnosisUuid = request.getDiagnosisUuid();
 
         checkDiagnosis(diagnosisUuid);
 
@@ -104,7 +104,7 @@ public class DiagnosisService {
     private void checkDiagnosis(String uuid) {
 
         if(uuid.isEmpty()) {
-            log.warn("hospitalUuid가 비어있습니다");
+            log.warn("diagnosisUuid가 비어있습니다");
             throw new NullUuidException();
         }
         if (containsWhitespace(uuid) || uuid.length() != 36) {
@@ -112,7 +112,7 @@ public class DiagnosisService {
             throw new InvalidUuidException();
         }
         if (diagnosisRepository.findDiagnosis(uuid) == null) {
-            log.warn("해당 병원이 존재하지 않습니다");
+            log.warn("해당 진단이 존재하지 않습니다");
             throw new NotExistException();
         }
     }

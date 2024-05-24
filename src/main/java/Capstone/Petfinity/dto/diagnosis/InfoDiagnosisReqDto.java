@@ -9,5 +9,5 @@ import lombok.ToString;
 @ToString
 public class InfoDiagnosisReqDto {
 
-    private String uuid;
+    private String diagnosisUuid;
 }

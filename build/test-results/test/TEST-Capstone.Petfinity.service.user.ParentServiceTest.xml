@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="Capstone.Petfinity.service.user.ParentServiceTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2024-05-24T11:39:57" hostname="MacBookAir.local" time="0.333">
+<testsuite name="Capstone.Petfinity.service.user.ParentServiceTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2024-05-26T14:39:39" hostname="MacBookAir.local" time="0.31">
   <properties/>
-  <testcase name="회원가입()" classname="Capstone.Petfinity.service.user.ParentServiceTest" time="0.333"/>
-  <system-out><![CDATA[2024-05-24T20:39:57.786+09:00  INFO 61447 --- [Petfinity] [    Test worker] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [Capstone.Petfinity.service.user.ParentServiceTest]: ParentServiceTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
-2024-05-24T20:39:57.807+09:00  INFO 61447 --- [Petfinity] [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration Capstone.Petfinity.PetfinityApplication for test class Capstone.Petfinity.service.user.ParentServiceTest
-encodedPw = $2a$10$SJcVB8/MNN7HilkuTMrDEuUgr0VhJTFcxrV7X3YrWSD3Dhyd0NSai
-2024-05-24T20:39:58.143+09:00  INFO 61447 --- [Petfinity] [    Test worker] p6spy                                    : #1716550798143 | took 0ms | rollback | connection 3| url jdbc:mysql://localhost:3306/petfinity
+  <testcase name="회원가입()" classname="Capstone.Petfinity.service.user.ParentServiceTest" time="0.31"/>
+  <system-out><![CDATA[2024-05-26T23:39:39.474+09:00  INFO 69182 --- [Petfinity] [    Test worker] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [Capstone.Petfinity.service.user.ParentServiceTest]: ParentServiceTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2024-05-26T23:39:39.494+09:00  INFO 69182 --- [Petfinity] [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration Capstone.Petfinity.PetfinityApplication for test class Capstone.Petfinity.service.user.ParentServiceTest
+encodedPw = $2a$10$uHIky3sEF1hunc9HJRzgpO1UFkUUhPeOlyHzLASwOe3E0COMpOUqS
+2024-05-26T23:39:39.806+09:00  INFO 69182 --- [Petfinity] [    Test worker] p6spy                                    : #1716734379806 | took 0ms | rollback | connection 3| url jdbc:mysql://localhost:3306/petfinity
 
 ;
 ]]></system-out>

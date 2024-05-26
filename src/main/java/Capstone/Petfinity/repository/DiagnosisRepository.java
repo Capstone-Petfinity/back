@@ -1,14 +1,13 @@
 package Capstone.Petfinity.repository;
 
 import Capstone.Petfinity.domain.Diagnosis;
+import Capstone.Petfinity.dto.diagnosis.DiagnosisDto;
 import Capstone.Petfinity.dto.diagnosis.DiagnosisListDto;
-import Capstone.Petfinity.dto.diagnosis.SaveDiagnosisReqDto;
 import jakarta.persistence.EntityManager;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
-import org.springframework.web.multipart.MultipartFile;
 
-import java.util.Base64;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
 
@@ -18,18 +17,17 @@ public class DiagnosisRepository {
 
     private final EntityManager em;
 
-    public void save(SaveDiagnosisReqDto saveDiagnosisReqDto) {
+    public void save(DiagnosisDto response) {
 
         Diagnosis diagnosis = new Diagnosis();
 
         diagnosis.setUuid(UUID.randomUUID().toString());
-        System.out.println("diagnosis = " + diagnosis);
-        diagnosis.setDisease_name(saveDiagnosisReqDto.getDisease_name());
-        diagnosis.setUser(saveDiagnosisReqDto.getUserUuid());
-        diagnosis.setDate(saveDiagnosisReqDto.getDate());
-        diagnosis.setPercent(saveDiagnosisReqDto.getPercent());
-        diagnosis.setContent(saveDiagnosisReqDto.getContent());
-        diagnosis.setImage(saveDiagnosisReqDto.getImage());
+        diagnosis.setUser(response.getUser_uuid());
+        diagnosis.setDisease_name(response.getDisease_name());
+        diagnosis.setDate(LocalDate.now());
+        diagnosis.setPercent(response.getPercent());
+        diagnosis.setContent(response.getContent());
+        diagnosis.setInsert_id(response.getInsert_id());
 
         em.persist(diagnosis);
     }
@@ -43,13 +41,8 @@ public class DiagnosisRepository {
                 .getResultList();
     }
 
-    public Diagnosis findDiagnosis(String diagnosisUuid) {
+    public Diagnosis findDiagnosis(String uuid) {
 
-        return em.find(Diagnosis.class, diagnosisUuid);
-    }
-
-    private String getBase64String(MultipartFile multipartFile) throws Exception {
-        byte[] bytes = multipartFile.getBytes();
-        return Base64.getEncoder().encodeToString(bytes);
+        return em.find(Diagnosis.class, uuid);
     }
 }

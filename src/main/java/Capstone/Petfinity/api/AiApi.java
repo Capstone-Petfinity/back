@@ -1,23 +1,17 @@
 package Capstone.Petfinity.api;
 
-import Capstone.Petfinity.dto.FormData;
-import Capstone.Petfinity.service.AiService;
+import Capstone.Petfinity.service.diagnosis.AiService;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.multipart.MultipartFile;
-
-import java.awt.event.WindowFocusListener;
-import java.util.Base64;
 
 @RestController
 @RequiredArgsConstructor

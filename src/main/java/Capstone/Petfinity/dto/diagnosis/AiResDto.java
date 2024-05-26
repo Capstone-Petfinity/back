@@ -4,7 +4,6 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
-import org.springframework.web.bind.annotation.RequestParam;
 
 @Getter
 @NoArgsConstructor
@@ -14,17 +13,19 @@ public class AiResDto {
 
     private String statusCode;
     private String message;
-    String userUuid;
-    String disease_name;
-    Double percent;
-    String content;
+    private String user_uuid;
+    private String disease_name;
+    private Double percent;
+    private String content;
+    private String insert_id;
 
-    public AiResDto(String statusCode, String message, String userUuid, String disease_name, Double percent, String content) {
+    public AiResDto(String statusCode, String message, String user_uuid, String disease_name, Double percent, String content, String insert_id) {
         this.statusCode = statusCode;
         this.message = message;
-        this.userUuid = userUuid;
+        this.user_uuid = user_uuid;
         this.disease_name = disease_name;
         this.percent = percent;
         this.content = content;
+        this.insert_id = insert_id;
     }
 }

@@ -13,19 +13,19 @@ import java.time.LocalDate;
 @Builder
 public class SaveDiagnosisReqDto {
 
+    private String user_uuid;
     private String disease_name;
-    private String userUuid;
     private LocalDate date;
     private Double percent;
     private String content;
-    private byte[] image;
+    private String insert_id;
 
-    public SaveDiagnosisReqDto(String disease_name, String userUuid, LocalDate date, Double percent, String content, byte[] image) {
+    public SaveDiagnosisReqDto(String user_uuid, String disease_name, LocalDate date, Double percent, String content, String insert_id) {
+        this.user_uuid = user_uuid;
         this.disease_name = disease_name;
-        this.userUuid = userUuid;
         this.date = date;
         this.percent = percent;
         this.content = content;
-        this.image = image;
+        this.insert_id = insert_id;
     }
 }

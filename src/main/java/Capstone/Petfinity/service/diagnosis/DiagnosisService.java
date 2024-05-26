@@ -15,9 +15,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.multipart.MultipartFile;
 
-import java.util.Base64;
 import java.util.List;
 
 import static org.springframework.util.StringUtils.containsWhitespace;
@@ -33,9 +31,9 @@ public class DiagnosisService {
     private final DiagnosisRepository diagnosisRepository;
 
     @Transactional
-    public void saveDiagnosis(SaveDiagnosisReqDto diagnosis) {
+    public void saveDiagnosis(DiagnosisDto diagnosis) {
 
-        String userUuid = diagnosis.getUserUuid();
+        String userUuid = diagnosis.getUser_uuid();
 
         userExistCheck(userUuid);
         checkLoginStatus(userUuid);
@@ -82,6 +80,7 @@ public class DiagnosisService {
     }
 
     public List<DiagnosisListDto> diagnosisList(DiagnosisListReqDto request){
+
         String userUuid = request.getUserUuid();
 
         userExistCheck(userUuid);
@@ -89,7 +88,7 @@ public class DiagnosisService {
 
         List<DiagnosisListDto> result = diagnosisRepository.findDiagnoses(request.getUserUuid());
 
-        log.info("진단리스트 확인 성공");
+        log.info("진단 리스트 조회 성공");
         return result;
     }
 
@@ -99,14 +98,14 @@ public class DiagnosisService {
 
         checkDiagnosis(diagnosisUuid);
 
-        log.info("질병 정보 조회 성공");
+        log.info("진단 정보 조회 성공");
         return diagnosisRepository.findDiagnosis(diagnosisUuid);
     }
 
     private void checkDiagnosis(String uuid) {
 
-        if(uuid.isEmpty()) {
-            log.warn("diagnosisUuid가 비어있습니다");
+        if (uuid.isEmpty()) {
+            log.warn("uuid가 비어있습니다");
             throw new NullUuidException();
         }
         if (containsWhitespace(uuid) || uuid.length() != 36) {
@@ -114,7 +113,7 @@ public class DiagnosisService {
             throw new InvalidUuidException();
         }
         if (diagnosisRepository.findDiagnosis(uuid) == null) {
-            log.warn("해당 진단이 존재하지 않습니다");
+            log.warn("해당 진단결과가 존재하지 않습니다");
             throw new NotExistException();
         }
     }

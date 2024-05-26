@@ -7,21 +7,17 @@ import Capstone.Petfinity.exception.InvalidUuidException;
 import Capstone.Petfinity.exception.LoginStatusException;
 import Capstone.Petfinity.exception.NotExistException;
 import Capstone.Petfinity.exception.NullUuidException;
-import Capstone.Petfinity.service.AiService;
+import Capstone.Petfinity.service.diagnosis.AiService;
 import Capstone.Petfinity.service.diagnosis.DiagnosisService;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
-import org.springframework.web.multipart.MultipartFile;
 
-import java.time.LocalDate;
-import java.util.Base64;
 import java.util.List;
 
 @RestController
@@ -78,84 +74,37 @@ public class DiagnosisApiController {
         return message;
     }
 
-    // 프론트에서 formdata 형식으로 데이터 받아서 ai 서버에 전송(RequestParam으로 받아야 함)
-    // 이미지: MultipartFile로 받아서 그대로 ai 서버에 전송
-    @PostMapping("user/receive/diagnosis")
-    public ResponseEntity<String> sendToAi(@RequestParam("user_uuid") String user_uuid,
-                             @RequestParam("user_type") String user_type,
-                             @RequestParam("disease_area") String disease_area,
-                             @RequestParam("type") String type,
-                             @RequestParam("position") String position,
-                             @RequestParam("detail_type") String detail_area,
-                             @RequestParam("disease") String disease,
-                             @RequestParam("img") MultipartFile img) {
+    @PostMapping("user/send/ai")
+    public String sendToAi(@RequestBody AiReqDto request) {
 
         log.info("ai서버에 데이터 전송");
         try {
             // AI 서버로 데이터 전송
-            String result = aiService.sendDataToAiServer(user_uuid, user_type, disease_area, type, position, detail_area, disease, img);
-            return new ResponseEntity<>(result, HttpStatus.OK);
+            return aiService.sendDataToAi(request);
         } catch (Exception e) {
-            return new ResponseEntity<>("Failed to process file", HttpStatus.INTERNAL_SERVER_ERROR);
+            return "Failed to send data";
         }
     }
 
     // ai 서버에서 json 형식으로 데이터 받아서 프론트에 전송
-    @PostMapping("user/send/diagnosis")
-    public AiResDto sendToFront(@RequestParam("userUuid") String userUuid,
-                                @RequestParam("disease_name") String disease_name,
-                                @RequestParam("percent") Double percent,
-                                @RequestParam("content") String content,
-                                @RequestParam("img") byte[] img) {
+    @PostMapping("user/send/front")
+    public AiResDto sendToFront() {
+
+        DiagnosisDto diagnosis;
 
         log.info("DB에 저장 후 프론트에 데이터 전송");
         try {
 
-            SaveDiagnosisReqDto request = new SaveDiagnosisReqDto(userUuid, disease_name, LocalDate.now(), percent, content, img);
-            diagnosisService.saveDiagnosis(request);
+            diagnosis = aiService.sendDataToFront();
+            diagnosisService.saveDiagnosis(diagnosis);
 
             // 프론트로 데이터 전송
-            return new AiResDto("200", "ai 진단 성공", userUuid, disease_name, percent, content);
+            return new AiResDto("200", "ai 진단 성공", diagnosis.getUser_uuid(), diagnosis.getDisease_name(), diagnosis.getPercent(), diagnosis.getContent(), diagnosis.getInsert_id());
         } catch (Exception e) {
 
-            return new AiResDto("400", "에러", null, null, null, null);
+            return new AiResDto("400", "에러 발생", null, null, null, null, null);
         }
     }
-
-//    @PostMapping("/user/savediagnosis")
-//    public NormalResDto saveDiagnosis(@RequestHeader("auth") String auth,
-//                                      @RequestParam("userUuid") String userUuid,
-//                                      @RequestParam("disease_name") String disease_name,
-//                                      @RequestParam("date") LocalDate date,
-//                                      @RequestParam("percent") Double percent,
-//                                      @RequestParam("content") String content) {
-//
-//        log.info("권한 확인");
-//        if (!auth.equals("bVAtkPtiVGpWuO3dWEnvr51cEb6r7oF8")) {
-//
-//            log.warn("권한이 없습니다");
-//            result = new NormalResDto("400", "권한 없음");
-//            return result;
-//        }
-//
-//        log.info("질병 정보 저장");
-//        try {
-//
-//            SaveDiagnosisReqDto request = new SaveDiagnosisReqDto(disease_name, userUuid, date, percent, content);
-//            diagnosisService.saveDiagnosis(request);
-//
-//            result = new NormalResDto("200", "질병 정보 저장 성공");
-//            return result;
-//        } catch (NotExistException e) {
-//
-//            result = new NormalResDto("404", "존재하지 않는 회원");
-//            return result;
-//        } catch (LoginStatusException e) {
-//
-//            result = new NormalResDto("406", "로그아웃 상태");
-//            return result;
-//        }
-//    }
 
     @PostMapping("/user/diagnosislist")
     public DiagnosisListResDto diagnosisList(@RequestHeader("auth") String auth,
@@ -169,7 +118,7 @@ public class DiagnosisApiController {
         }
 
         log.info("진단 리스트 조회");
-        try{
+        try {
 
             List<DiagnosisListDto> diagnoses = diagnosisService.diagnosisList(request);
 

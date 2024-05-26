@@ -17,15 +17,16 @@ public class Diagnosis {
     private String uuid;
 
     @NotNull
-    private String disease_name;
-    @NotNull
     @Column(name = "user_id")
     private String user;
+    @NotNull
+    private String disease_name;
     @NotNull
     private LocalDate date;
     @NotNull
     private Double percent;
     @NotNull
     private String content;
-    private byte[] image;
+    @NotNull
+    private String insert_id;
 }

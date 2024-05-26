@@ -123,6 +123,7 @@ loginStatus(406)
 - LoginStatusException: 로그인 상태
 
 
+
 # LogoutApiController
 
 ## Logout
@@ -246,6 +247,7 @@ exist(404)
 - NotExistException: 존재하지 않는 예약
 
 
+
 # AddressApiController
 
 ## returnCityList
@@ -308,6 +310,8 @@ exist(404)
 loginStatus(406)
 - NotLoginStatusException: 로그아웃 상태
 
+
+
 # ReservationApiController
 
 ## reservation
@@ -338,25 +342,35 @@ loginStatus(406)
 
 # DiagnosisApiController
 
-## diagnosis
-#### /user/diagnosis : POST
+## sendToAi
+#### /user/send/ai : POST
 
 **Param**
-- String disease_name;
-- String userUuid;
-- LocalDate date;
-- Double percent;
-- String content;
-- byte[] image;
+- String user_uuid; 
+- String user_type; 
+- String disease_area; 
+- String type; 
+- String position; 
+- String detail_area; 
+- String disease; 
+- String insert_id;
 
 ### possible error
-auth(400): 권한 없음
+Failed to send data
 
-exist(404)
-- NotExistException: 존재하지 않는 회원
 
-loginStatus(406)
-- NotLoginStatusException: 로그아웃 상태
+## sendToFront
+#### /user/send/front : POST
+
+**Param**
+- String user_uuid; 
+- String disease_name; 
+- Double percent; 
+- String content; 
+- String insert_id;
+
+### possible error
+400: 에러 발생
 
 
 ## diagnosisList

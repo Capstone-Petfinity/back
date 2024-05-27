@@ -363,7 +363,9 @@ loginStatus(406)
 - String insert_id;
 
 ### possible error
-401: 에러 발생
+auth(400): 권한 없음
+
+error(401): 에러 발생
 
 
 ## diagnosisList

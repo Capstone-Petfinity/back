@@ -75,14 +75,20 @@ public class DiagnosisApiController {
     }
 
     @PostMapping("user/diagnosis")
-    public AiResDto diagnosis(@RequestBody AiReqDto request) {
+    public AiResDto diagnosis(@RequestHeader("auth") String auth,
+                              @RequestBody AiReqDto request) {
 
-        DiagnosisDto diagnosis;
+        log.info("권한 확인");
+        if (!auth.equals("bVAtkPtiVGpWuO3dWEnvr51cEb6r7oF8")) {
+
+            log.warn("권한이 없습니다");
+            return new AiResDto("400", "권한 없음", null, null, null, null, null);
+        }
 
         log.info("ai서버에 데이터 전송");
         try {
             // AI 서버로 데이터 전송
-            diagnosis = aiService.sendDataToAi(request);
+            DiagnosisDto diagnosis = aiService.sendDataToAi(request);
             // DB에 진단결과 저장
             log.info("DB에 진단결과 저장");
             diagnosisService.saveDiagnosis(diagnosis);

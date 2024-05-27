@@ -87,7 +87,7 @@ public class DiagnosisApiController {
     }
 
     // ai 서버에서 json 형식으로 데이터 받아서 프론트에 전송
-    @PostMapping("user/send/front")
+    @GetMapping("user/send/front")
     public AiResDto sendToFront() {
 
         DiagnosisDto diagnosis;

@@ -343,9 +343,11 @@ loginStatus(406)
 # DiagnosisApiController
 
 ## sendToAi
-#### /user/send/ai : POST
+#### /user/send/ai : GET
+#### http://203.250.148.132:5000/send_ai : POST
 
 **Param**
+- auth 없음
 - String user_uuid; 
 - String user_type; 
 - String disease_area; 
@@ -361,8 +363,10 @@ Failed to send data
 
 ## sendToFront
 #### /user/send/front : POST
+#### http://203.250.148.132:5000/send_front : GET
 
 **Param**
+- auth 없음
 - String user_uuid; 
 - String disease_name; 
 - Double percent; 

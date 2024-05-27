@@ -16,5 +16,5 @@ public class AiReqDto {
     private String position;
     private String detail_area;
     private String disease;
-    private String insert_id;
+    private String img_url;
 }

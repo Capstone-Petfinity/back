@@ -102,7 +102,7 @@ public class DiagnosisApiController {
             return new AiResDto("200", "ai 진단 성공", diagnosis.getUser_uuid(), diagnosis.getDisease_name(), diagnosis.getPercent(), diagnosis.getContent(), diagnosis.getInsert_id());
         } catch (Exception e) {
 
-            return new AiResDto("400", "에러 발생", null, null, null, null, null);
+            return new AiResDto("401", "에러 발생", null, null, null, null, null);
         }
     }
 

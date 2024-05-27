@@ -353,7 +353,7 @@ loginStatus(406)
 - String position; 
 - String detail_area; 
 - String disease; 
-- String insert_id;
+- String img_url;
 
 ### possible error
 Failed to send data
@@ -370,7 +370,7 @@ Failed to send data
 - String insert_id;
 
 ### possible error
-400: 에러 발생
+401: 에러 발생
 
 
 ## diagnosisList

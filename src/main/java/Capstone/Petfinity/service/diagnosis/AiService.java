@@ -39,7 +39,7 @@ public class AiService {
         String param = objectMapper.writeValueAsString(request);
 
         // Request Entity 생성
-        HttpEntity<String> requestEntity = new HttpEntity<String>(param, headers);
+        HttpEntity<String> requestEntity = new HttpEntity<>(param, headers);
 
         // AI 서버로 요청 전송
         return restTemplate.postForObject(aiServerUrl, requestEntity, String.class);

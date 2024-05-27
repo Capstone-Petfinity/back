@@ -74,31 +74,18 @@ public class DiagnosisApiController {
         return message;
     }
 
-    @PostMapping("user/send/ai")
-    public String sendToAi(@RequestBody AiReqDto request) {
+    @PostMapping("user/diagnosis")
+    public AiResDto diagnosis(@RequestBody AiReqDto request) {
+
+        DiagnosisDto diagnosis;
 
         log.info("ai서버에 데이터 전송");
         try {
             // AI 서버로 데이터 전송
-            return aiService.sendDataToAi(request);
-        } catch (Exception e) {
-            return "Failed to send data";
-        }
-    }
-
-    // ai 서버에서 json 형식으로 데이터 받아서 프론트에 전송
-    @GetMapping("user/send/front")
-    public AiResDto sendToFront() {
-
-        DiagnosisDto diagnosis;
-
-        log.info("DB에 저장 후 프론트에 데이터 전송");
-        try {
-
-            diagnosis = aiService.sendDataToFront();
+            diagnosis = aiService.sendDataToAi(request);
+            // DB에 진단결과 저장
+            log.info("DB에 진단결과 저장");
             diagnosisService.saveDiagnosis(diagnosis);
-
-            // 프론트로 데이터 전송
             return new AiResDto("200", "ai 진단 성공", diagnosis.getUser_uuid(), diagnosis.getDisease_name(), diagnosis.getPercent(), diagnosis.getContent(), diagnosis.getInsert_id());
         } catch (Exception e) {
 

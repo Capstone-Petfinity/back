@@ -24,7 +24,7 @@ public class Diagnosis {
     @NotNull
     private LocalDate date;
     @NotNull
-    private Double percent;
+    private String percent;
     @NotNull
     private String content;
     @NotNull

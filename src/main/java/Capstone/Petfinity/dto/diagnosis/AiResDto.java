@@ -15,11 +15,11 @@ public class AiResDto {
     private String message;
     private String user_uuid;
     private String disease_name;
-    private Double percent;
+    private String percent;
     private String content;
     private String insert_id;
 
-    public AiResDto(String statusCode, String message, String user_uuid, String disease_name, Double percent, String content, String insert_id) {
+    public AiResDto(String statusCode, String message, String user_uuid, String disease_name, String percent, String content, String insert_id) {
         this.statusCode = statusCode;
         this.message = message;
         this.user_uuid = user_uuid;

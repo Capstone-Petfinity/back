@@ -14,7 +14,6 @@ import java.time.LocalDate;
 public class DiagnosisListDto {
 
     private String disease_name;
-
     private LocalDate date;
 
     public DiagnosisListDto (String disease_name, LocalDate date){

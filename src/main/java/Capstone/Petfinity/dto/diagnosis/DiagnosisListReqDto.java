@@ -9,6 +9,6 @@ import lombok.ToString;
 @ToString
 public class DiagnosisListReqDto {
 
-    private String userUuid; // userUuid나 진단Uuid
+    private String user_uuid; // user_uuid나 진단 uuid
 
 }

@@ -17,11 +17,10 @@ public class InfoDiagnosisResDto {
     private String message;
     private String disease_name;
     private LocalDate date;
-    private Double percent;
+    private String percent;
     private String content;
 
-    public InfoDiagnosisResDto (String statusCode, String message, String disease_name,
-                                LocalDate date, Double percent, String content) {
+    public InfoDiagnosisResDto(String statusCode, String message, String disease_name, LocalDate date, String percent, String content) {
         this.statusCode = statusCode;
         this.message = message;
         this.disease_name = disease_name;

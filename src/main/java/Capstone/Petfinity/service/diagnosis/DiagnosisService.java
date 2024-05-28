@@ -81,12 +81,12 @@ public class DiagnosisService {
 
     public List<DiagnosisListDto> diagnosisList(DiagnosisListReqDto request){
 
-        String userUuid = request.getUser_uuid();
+        String uuid = request.getUuid();
 
-        userExistCheck(userUuid);
-        checkLoginStatus(userUuid);
+        userExistCheck(uuid);
+        checkLoginStatus(uuid);
 
-        List<DiagnosisListDto> result = diagnosisRepository.findDiagnoses(request.getUser_uuid());
+        List<DiagnosisListDto> result = diagnosisRepository.findDiagnoses(request.getUuid());
 
         log.info("진단 리스트 조회 성공");
         return result;
@@ -94,7 +94,7 @@ public class DiagnosisService {
 
     public Diagnosis infoDiagnosis(InfoDiagnosisReqDto request) {
 
-        String diagnosisUuid = request.getDiagnosis_uuid();
+        String diagnosisUuid = request.getUuid();
 
         checkDiagnosis(diagnosisUuid);
 

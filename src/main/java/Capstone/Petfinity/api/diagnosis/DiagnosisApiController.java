@@ -77,7 +77,7 @@ public class DiagnosisApiController {
             return resultDiagnosisList;
         }
 
-        log.info("진단 리스트 조회");
+        log.info("진단결과 리스트 조회");
         try {
             List<DiagnosisListDto> diagnoses = diagnosisService.diagnosisList(request);
 
@@ -105,7 +105,7 @@ public class DiagnosisApiController {
             return resultDiagnosis;
         }
 
-        log.info("진단 리스트 조회");
+        log.info("진단결과 정보 조회");
         try {
             Diagnosis diagnosis = diagnosisService.infoDiagnosis(request);
 

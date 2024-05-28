@@ -372,7 +372,7 @@ error(401): 에러 발생
 ### /user/diagnosislist : POST
 
 **Body**
-- String userUuid;
+- String uuid;
 
 ### possible error
 auth(400): 권한 없음
@@ -388,7 +388,7 @@ loginStatus(406)
 ### /user/infodiagnosis : POST
 
 **Body**
-- String diagnosisUuid;
+- String uuid;
 
 ### possible error
 auth(400): 권한 없음

@@ -54,10 +54,9 @@ public class AesService {
         return "";
     }
 
-    String decypt_AES(String ID) {
+    String decrypt_AES(String ID) {
 
         try {
-
             Cipher cipher = Cipher.getInstance(algorithms);
 
             SecretKeySpec keySpec = new SecretKeySpec(AESKey.getBytes(), "AES");

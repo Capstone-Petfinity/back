@@ -26,6 +26,7 @@ public class AiService {
 
     public DiagnosisDto sendDataToAi(AiReqDto request) throws Exception {
 
+        log.info("-----Ai 데이터 전송 시작-----");
         // 외부 API를 사용하기 위해
         RestTemplate restTemplate = new RestTemplate();
 
@@ -42,11 +43,14 @@ public class AiService {
         // Request Message 설정
         HttpEntity<?> requestMessage = new HttpEntity<>(body, headers);
 
-        // AI 서버로 요청 전송
+        log.info("AI서버로 요청 전송");
+        // AI서버로 요청 전송
         HttpEntity<String> response = restTemplate.postForEntity(aiServerUrl, requestMessage, String.class);
 
-        // DB에 저장
+        log.info("JSON에서 값 추출");
+        // JSON에서 값 추출
         JsonNode jsonNode = objectMapper.readTree(response.getBody());
+        System.out.println("response.getBody() = " + response.getBody());
 
         String user_uuid = jsonNode.get("user_uuid").asText();
         String disease_name = jsonNode.get("disease_name").asText();
@@ -54,6 +58,7 @@ public class AiService {
         String content = jsonNode.get("content").asText();
         String insert_id = jsonNode.get("insert_id").asText();
 
+        log.info("-----AI 데이터 전송 완료-----");
         return new DiagnosisDto(user_uuid, disease_name, percent, content, insert_id);
     }
 }

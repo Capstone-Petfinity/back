@@ -34,49 +34,8 @@ public class DiagnosisApiController {
     @Value("${auth.key}")
     private String authKey;
 
-    NormalResDto result;
     DiagnosisListResDto resultDiagnosisList;
     InfoDiagnosisResDto resultDiagnosis;
-
-    public String requestToFlask() throws Exception {
-
-        String aiServerUrl = "http://203.250.148.132:5000/hello";
-
-        RestTemplate restTemplate = new RestTemplate();
-
-//        // Header set
-//        HttpHeaders httpHeaders = new HttpHeaders();
-//        httpHeaders.setContentType(MediaType.APPLICATION_JSON);
-//
-//        // Body set
-//        MultiValueMap<String, String> body = new LinkedMultiValueMap<>();
-//        String imageFileString = getBase64String(file);
-//        body.add("filename", fileName);
-//        body.add("image", imageFileString);
-//
-//        // Message
-//        HttpEntity<?> requestMessage = new HttpEntity<>(body, httpHeaders);
-
-        // Request
-        ResponseEntity<String> response = restTemplate.getForEntity(aiServerUrl, String.class);
-
-        // JSON 문자열을 파싱하여 JsonNode 객체로 변환
-        ObjectMapper objectMapper = new ObjectMapper();
-        JsonNode jsonNode = objectMapper.readTree(response.getBody());
-
-        // "message" 필드의 값 추출
-        String message = jsonNode.get("message").asText();
-
-        System.out.println("Message from Flask server: " + message);
-        log.info("Hello 확인");
-
-//        // Response 파싱
-//        ObjectMapper objectMapper = new ObjectMapper();
-//        objectMapper.configure(DeserializationFeature.ACCEPT_EMPTY_STRING_AS_NULL_OBJECT, true);
-//        FlaskResponseDto dto = objectMapper.readValue(response.getBody(), FlaskResponseDto.class);
-
-        return message;
-    }
 
     @PostMapping("user/diagnosis")
     public AiResDto diagnosis(@RequestHeader("auth") String auth,
@@ -89,16 +48,18 @@ public class DiagnosisApiController {
             return new AiResDto("400", "권한 없음", null, null, null, null, null);
         }
 
-        log.info("ai서버에 데이터 전송");
+        log.info("AI서버에 데이터 전송");
         try {
-            // AI 서버로 데이터 전송
-//            DiagnosisDto diagnosis = aiService.sendDataToAi(request);
-            // DB에 진단결과 저장
-//            log.info("DB에 진단결과 저장");
-//            diagnosisService.saveDiagnosis(diagnosis);
             System.out.println("request = " + request);
-            return new AiResDto("201", "test 성공", null, null, null, null, null);
-//            return new AiResDto("200", "ai 진단 성공", diagnosis.getUser_uuid(), diagnosis.getDisease_name(), diagnosis.getPercent(), diagnosis.getContent(), diagnosis.getInsert_id());
+            // AI 서버로 데이터 전송
+            DiagnosisDto diagnosis = aiService.sendDataToAi(request);
+            System.out.println("diagnosis = " + diagnosis);
+            // DB에 진단결과 저장
+            log.info("DB에 진단결과 저장");
+            diagnosisService.saveDiagnosis(diagnosis);
+
+//            return new AiResDto("201", "test 성공", null, null, null, null, null);
+            return new AiResDto("200", "ai 진단 성공", diagnosis.getUser_uuid(), diagnosis.getDisease_name(), diagnosis.getPercent(), diagnosis.getContent(), diagnosis.getInsert_id());
         } catch (Exception e) {
 
             return new AiResDto("401", "에러 발생", null, null, null, null, null);
@@ -118,7 +79,6 @@ public class DiagnosisApiController {
 
         log.info("진단 리스트 조회");
         try {
-
             List<DiagnosisListDto> diagnoses = diagnosisService.diagnosisList(request);
 
             resultDiagnosisList = new DiagnosisListResDto("200", "진단 리스트 조회 성공", diagnoses);
@@ -133,6 +93,7 @@ public class DiagnosisApiController {
             return resultDiagnosisList;
         }
     }
+
     @PostMapping("/user/infodiagnosis")
     public InfoDiagnosisResDto infoDiagnosis(@RequestHeader("auth") String auth,
                                              @RequestBody InfoDiagnosisReqDto request){
@@ -146,7 +107,6 @@ public class DiagnosisApiController {
 
         log.info("진단 리스트 조회");
         try {
-
             Diagnosis diagnosis = diagnosisService.infoDiagnosis(request);
 
             resultDiagnosis = new InfoDiagnosisResDto("200", "진단 조회 성공", diagnosis.getDisease_name(), diagnosis.getDate(), diagnosis.getPercent(), diagnosis.getContent());
@@ -164,6 +124,28 @@ public class DiagnosisApiController {
             resultDiagnosis = new InfoDiagnosisResDto("404", "존재하지 않는 진단", null, null, null, null);
             return resultDiagnosis;
         }
+    }
+
+    public String requestToFlask() throws Exception {
+
+        String aiServerUrl = "http://203.250.148.132:5000/hello";
+
+        RestTemplate restTemplate = new RestTemplate();
+
+        // Request
+        ResponseEntity<String> response = restTemplate.getForEntity(aiServerUrl, String.class);
+
+        // JSON 문자열을 파싱하여 JsonNode 객체로 변환
+        ObjectMapper objectMapper = new ObjectMapper();
+        JsonNode jsonNode = objectMapper.readTree(response.getBody());
+
+        // "message" 필드의 값 추출
+        String message = jsonNode.get("message").asText();
+
+        System.out.println("Message from Flask server: " + message);
+        log.info("Hello 확인");
+
+        return message;
     }
 }
 

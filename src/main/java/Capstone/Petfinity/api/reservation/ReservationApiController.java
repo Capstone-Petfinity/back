@@ -26,6 +26,7 @@ public class ReservationApiController {
 
     NormalResDto result;
 
+    @PostMapping("/user/reservation")
     public NormalResDto reservation(@RequestHeader("auth") String auth,
                                     @RequestBody ReservationReqDto request) {
 

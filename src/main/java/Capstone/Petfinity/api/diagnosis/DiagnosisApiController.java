@@ -48,7 +48,7 @@ public class DiagnosisApiController {
             return new AiResDto("400", "권한 없음", null, null, null, null, null);
         }
 
-        log.info("ai서버에 데이터 전송");
+        log.info("AI서버에 데이터 전송");
         try {
             System.out.println("request = " + request);
             // AI 서버로 데이터 전송

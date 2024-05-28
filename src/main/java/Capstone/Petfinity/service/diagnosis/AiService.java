@@ -43,11 +43,11 @@ public class AiService {
         // Request Message 설정
         HttpEntity<?> requestMessage = new HttpEntity<>(body, headers);
 
-        log.info("Ai서버로 요청 전송");
+        log.info("AI서버로 요청 전송");
         // AI서버로 요청 전송
         HttpEntity<String> response = restTemplate.postForEntity(aiServerUrl, requestMessage, String.class);
 
-        log.info("json에서 값 추출");
+        log.info("JSON에서 값 추출");
         // JSON에서 값 추출
         JsonNode jsonNode = objectMapper.readTree(response.getBody());
 
@@ -57,7 +57,7 @@ public class AiService {
         String content = jsonNode.get("content").asText();
         String insert_id = jsonNode.get("insert_id").asText();
 
-        log.info("Ai 데이터 전송 완료");
+        log.info("AI 데이터 전송 완료");
         return new DiagnosisDto(user_uuid, disease_name, percent, content, insert_id);
     }
 }

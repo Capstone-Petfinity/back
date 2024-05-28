@@ -19,6 +19,9 @@ logging:
     org.hibernate.SQL: debug
     #org.hibernate.orm.jdbc.bind: trace
 
+auth:
+  key: "bVAtkPtiVGpWuO3dWEnvr51cEb6r7oF8"
+
 server:
   port: 8080
   address: 0.0.0.0

@@ -25,7 +25,7 @@ public class AesService {
 
     public static String algorithms = "AES/CBC/PKCS5Padding";
 
-    private final static String AESKey = "abcdefghabcdefghadcdefghabcdefgh";
+    private final static String AESKey = "abcdefghabcdefghabcdefghabcdefgh";
 
     private final static String AESIv = "0123456789abcdef";
 

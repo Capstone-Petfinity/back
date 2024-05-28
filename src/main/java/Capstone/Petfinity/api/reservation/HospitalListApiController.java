@@ -11,6 +11,7 @@ import Capstone.Petfinity.service.user.ParentService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
@@ -26,6 +27,9 @@ public class HospitalListApiController {
     @Autowired
     ParentService parentService;
 
+    @Value("${auth.key}")
+    private String authKey;
+
     HospitalListResDto resultHospitalList;
 
     // 병원 리스트 API
@@ -33,7 +37,7 @@ public class HospitalListApiController {
     public HospitalListResDto hospitalList(@RequestHeader("auth") String auth,
                                            @RequestBody HospitalListReqDto request) {
         log.info("권한 확인");
-        if (!auth.equals("bVAtkPtiVGpWuO3dWEnvr51cEb6r7oF8")) {
+        if (!auth.equals(authKey)) {
 
             log.warn("권한이 없습니다");
             resultHospitalList = new HospitalListResDto("400", "권한 없음", null);

@@ -12,6 +12,7 @@ import Capstone.Petfinity.service.user.VetService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
@@ -25,6 +26,9 @@ public class SignupVetApiController {
     @Autowired
     private final VetService vetService;
 
+    @Value("${auth.key}")
+    private String authKey;
+
     NormalResDto result;
 
     @PostMapping("/user/signup/vet")
@@ -32,7 +36,7 @@ public class SignupVetApiController {
                                      @RequestBody SignupVetReqDto request) {
 
         log.info("권한 확인");
-        if (!auth.equals("bVAtkPtiVGpWuO3dWEnvr51cEb6r7oF8")) {
+        if (!auth.equals(authKey)) {
 
             log.warn("권한이 없습니다");
             result = new NormalResDto("400", "권한 없음");

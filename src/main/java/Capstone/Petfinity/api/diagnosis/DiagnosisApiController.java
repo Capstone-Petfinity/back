@@ -31,12 +31,12 @@ public class DiagnosisApiController {
     @Autowired
     private final AiService aiService;
 
+    @Value("${auth.key}")
+    private String authKey;
+
     NormalResDto result;
     DiagnosisListResDto resultDiagnosisList;
     InfoDiagnosisResDto resultDiagnosis;
-
-    @Value("${auth.key}")
-    private String authKey;
 
     public String requestToFlask() throws Exception {
 
@@ -109,7 +109,7 @@ public class DiagnosisApiController {
     public DiagnosisListResDto diagnosisList(@RequestHeader("auth") String auth,
                                              @RequestBody DiagnosisListReqDto request){
         log.info("권한 확인");
-        if (!auth.equals("bVAtkPtiVGpWuO3dWEnvr51cEb6r7oF8")) {
+        if (!auth.equals(authKey)) {
 
             log.warn("권한이 없습니다");
             resultDiagnosisList = new DiagnosisListResDto("400", "권한 없음", null);
@@ -137,7 +137,7 @@ public class DiagnosisApiController {
     public InfoDiagnosisResDto infoDiagnosis(@RequestHeader("auth") String auth,
                                              @RequestBody InfoDiagnosisReqDto request){
         log.info("권한 확인");
-        if (!auth.equals("bVAtkPtiVGpWuO3dWEnvr51cEb6r7oF8")) {
+        if (!auth.equals(authKey)) {
 
             log.warn("권한이 없습니다");
             resultDiagnosis = new InfoDiagnosisResDto("400", "권한 없음", null, null, null, null);

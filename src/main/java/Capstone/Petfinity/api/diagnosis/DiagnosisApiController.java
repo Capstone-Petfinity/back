@@ -14,6 +14,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
@@ -33,6 +34,9 @@ public class DiagnosisApiController {
     NormalResDto result;
     DiagnosisListResDto resultDiagnosisList;
     InfoDiagnosisResDto resultDiagnosis;
+
+    @Value("${auth.key}")
+    private String authKey;
 
     public String requestToFlask() throws Exception {
 
@@ -79,7 +83,7 @@ public class DiagnosisApiController {
                               @RequestBody AiReqDto request) {
 
         log.info("권한 확인");
-        if (!auth.equals("bVAtkPtiVGpWuO3dWEnvr51cEb6r7oF8")) {
+        if (!auth.equals(authKey)) {
 
             log.warn("권한이 없습니다");
             return new AiResDto("400", "권한 없음", null, null, null, null, null);

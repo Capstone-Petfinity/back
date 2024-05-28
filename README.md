@@ -343,7 +343,7 @@ loginStatus(406)
 # DiagnosisApiController
 
 ## diagnosis
-#### /user/send/ai : POST
+#### /user/diagnosis : POST
 #### http://203.250.148.132:5000/diagnosis : POST
 
 **Param(toAi)**

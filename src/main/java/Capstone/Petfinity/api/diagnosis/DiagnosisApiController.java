@@ -58,7 +58,6 @@ public class DiagnosisApiController {
             log.info("DB에 진단결과 저장");
             diagnosisService.saveDiagnosis(diagnosis);
 
-//            return new AiResDto("201", "test 성공", null, null, null, null, null);
             return new AiResDto("200", "ai 진단 성공", diagnosis.getUser_uuid(), diagnosis.getDisease_name(), diagnosis.getPercent(), diagnosis.getContent(), diagnosis.getInsert_id());
         } catch (Exception e) {
 
@@ -81,7 +80,7 @@ public class DiagnosisApiController {
         try {
             List<DiagnosisListDto> diagnoses = diagnosisService.diagnosisList(request);
 
-            resultDiagnosisList = new DiagnosisListResDto("200", "진단 리스트 조회 성공", diagnoses);
+            resultDiagnosisList = new DiagnosisListResDto("200", "진단결과 리스트 조회 성공", diagnoses);
             return resultDiagnosisList;
         } catch (NotExistException e) {
 
@@ -109,7 +108,7 @@ public class DiagnosisApiController {
         try {
             Diagnosis diagnosis = diagnosisService.infoDiagnosis(request);
 
-            resultDiagnosis = new InfoDiagnosisResDto("200", "진단 조회 성공", diagnosis.getDisease_name(), diagnosis.getDate(), diagnosis.getPercent(), diagnosis.getContent());
+            resultDiagnosis = new InfoDiagnosisResDto("200", "진단결과 정보 조회 성공", diagnosis.getDisease_name(), diagnosis.getDate(), diagnosis.getPercent(), diagnosis.getContent());
             return resultDiagnosis;
         } catch (NullUuidException e) {
 
@@ -126,6 +125,7 @@ public class DiagnosisApiController {
         }
     }
 
+    // Flask API Test
     public String requestToFlask() throws Exception {
 
         String aiServerUrl = "http://203.250.148.132:5000/hello";

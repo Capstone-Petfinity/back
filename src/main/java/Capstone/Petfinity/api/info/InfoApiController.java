@@ -70,7 +70,7 @@ public class InfoApiController {
         try {
             Parent parent = parentService.infoParent(request);
 
-            resultParent = new InfoParentResDto("200", "회원 정보 조회 성공", parent.getUuid(), parent.getId(), parent.getName(), parent.getPhone_number(), parent.getCity());
+            resultParent = new InfoParentResDto("200", "보호자 정보 조회 성공", parent.getUuid(), parent.getId(), parent.getName(), parent.getPhone_number(), parent.getCity());
             return resultParent;
         } catch (NullUuidException e) {
 
@@ -108,7 +108,7 @@ public class InfoApiController {
         try {
             List<Pet> pets = petService.infoPet(request);
 
-            resultPet = new InfoPetsResDto("200", "회원 정보 조회 성공", pets);
+            resultPet = new InfoPetsResDto("200", "반려동물 정보 조회 성공", pets);
             return resultPet;
         } catch (NotLoginStatusException e) {
 
@@ -145,7 +145,7 @@ public class InfoApiController {
         try {
             Vet vet = vetService.infoVet(request);
 
-            resultVet = new InfoVetResDto("200", "회원 정보 조회 성공", vet.getUuid(), vet.getId(), vet.getName(), vet.getPhone_number());
+            resultVet = new InfoVetResDto("200", "수의사 정보 조회 성공", vet.getUuid(), vet.getId(), vet.getName(), vet.getPhone_number());
             return resultVet;
         } catch (NotLoginStatusException e) {
 
@@ -215,7 +215,7 @@ public class InfoApiController {
         try {
             List<ReservationDto> reservations = reservationService.infoReservation(request);
 
-            resultReservation = new InfoReservationResDto("200", "예약 조회 성공", reservations);
+            resultReservation = new InfoReservationResDto("200", "예약 정보 조회 성공", reservations);
             return resultReservation;
         } catch (NullUuidException e) {
 

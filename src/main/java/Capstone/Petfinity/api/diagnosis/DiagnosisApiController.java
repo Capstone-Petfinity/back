@@ -88,12 +88,13 @@ public class DiagnosisApiController {
         log.info("ai서버에 데이터 전송");
         try {
             // AI 서버로 데이터 전송
-            DiagnosisDto diagnosis = aiService.sendDataToAi(request);
+//            DiagnosisDto diagnosis = aiService.sendDataToAi(request);
             // DB에 진단결과 저장
 //            log.info("DB에 진단결과 저장");
 //            diagnosisService.saveDiagnosis(diagnosis);
             System.out.println("request = " + request);
-            return new AiResDto("200", "ai 진단 성공", diagnosis.getUser_uuid(), diagnosis.getDisease_name(), diagnosis.getPercent(), diagnosis.getContent(), diagnosis.getInsert_id());
+            return new AiResDto("201", "test 성공", null, null, null, null, null);
+//            return new AiResDto("200", "ai 진단 성공", diagnosis.getUser_uuid(), diagnosis.getDisease_name(), diagnosis.getPercent(), diagnosis.getContent(), diagnosis.getInsert_id());
         } catch (Exception e) {
 
             return new AiResDto("401", "에러 발생", null, null, null, null, null);

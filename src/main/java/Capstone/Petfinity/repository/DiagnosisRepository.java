@@ -35,7 +35,7 @@ public class DiagnosisRepository {
     public List<DiagnosisListDto> findDiagnoses(String uuid) {
 
         return em.createQuery("select new Capstone.Petfinity.dto.diagnosis.DiagnosisListDto" +
-                        "(r.disease_name, r.date) " +
+                        "(r.uuid, r.disease_name, r.date) " +
                         "from Diagnosis r where r.user = :uuid", DiagnosisListDto.class)
                 .setParameter("uuid", uuid)
                 .getResultList();

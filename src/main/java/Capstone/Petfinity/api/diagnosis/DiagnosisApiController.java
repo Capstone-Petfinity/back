@@ -90,8 +90,9 @@ public class DiagnosisApiController {
             // AI 서버로 데이터 전송
             DiagnosisDto diagnosis = aiService.sendDataToAi(request);
             // DB에 진단결과 저장
-            log.info("DB에 진단결과 저장");
-            diagnosisService.saveDiagnosis(diagnosis);
+//            log.info("DB에 진단결과 저장");
+//            diagnosisService.saveDiagnosis(diagnosis);
+            System.out.println("request = " + request);
             return new AiResDto("200", "ai 진단 성공", diagnosis.getUser_uuid(), diagnosis.getDisease_name(), diagnosis.getPercent(), diagnosis.getContent(), diagnosis.getInsert_id());
         } catch (Exception e) {
 

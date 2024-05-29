@@ -1,16 +1,13 @@
 package Capstone.Petfinity.dto.diagnosis;
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 
 import java.time.LocalDate;
 
 @Getter
+@Setter
 @NoArgsConstructor
 @ToString
-@Builder
 public class DiagnosisListDto {
 
     private String uuid;
@@ -18,6 +15,7 @@ public class DiagnosisListDto {
     private LocalDate date;
     private String percent;
     private String insert_id;
+    private String img_url;
 
     public DiagnosisListDto(String uuid, String disease_name, LocalDate date, String percent, String insert_id) {
         this.uuid = uuid;

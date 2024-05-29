@@ -90,6 +90,8 @@ public class DiagnosisApiController {
 
             resultDiagnosisList = new DiagnosisListResDto("406", "로그아웃 상태", null);
             return resultDiagnosisList;
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
     }
 

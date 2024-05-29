@@ -11,11 +11,20 @@ import Capstone.Petfinity.exception.NullUuidException;
 import Capstone.Petfinity.repository.DiagnosisRepository;
 import Capstone.Petfinity.repository.ParentRepository;
 import Capstone.Petfinity.repository.VetRepository;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.client.RestTemplate;
 
+import java.util.Collections;
 import java.util.List;
 
 import static org.springframework.util.StringUtils.containsWhitespace;
@@ -29,6 +38,7 @@ public class DiagnosisService {
     private final ParentRepository parentRepository;
     private final VetRepository vetRepository;
     private final DiagnosisRepository diagnosisRepository;
+    private final ObjectMapper objectMapper;
 
     @Transactional
     public void saveDiagnosis(DiagnosisDto diagnosis) {
@@ -39,6 +49,73 @@ public class DiagnosisService {
         checkLoginStatus(userUuid);
         diagnosisRepository.save(diagnosis);
         log.info("진단결과 저장 성공");
+    }
+
+    public List<DiagnosisListDto> diagnosisList(DiagnosisListReqDto request) throws Exception {
+
+        String uuid = request.getUuid();
+
+        userExistCheck(uuid);
+        checkLoginStatus(uuid);
+
+        List<DiagnosisListDto> result = diagnosisRepository.findDiagnoses(request.getUuid());
+
+        for (DiagnosisListDto diagnosis : result) {
+            String img_url = imageUrl(diagnosis.getInsert_id());
+            diagnosis.setImg_url(img_url);
+        }
+
+        log.info("진단결과 리스트 조회 성공");
+        return result;
+    }
+
+    public Diagnosis infoDiagnosis(InfoDiagnosisReqDto request) {
+
+        String diagnosisUuid = request.getUuid();
+
+        checkDiagnosis(diagnosisUuid);
+
+        log.info("진단결과 정보 조회 성공");
+        return diagnosisRepository.findDiagnosis(diagnosisUuid);
+    }
+
+    public String imageUrl(String postSeq) throws Exception {
+
+        log.info("=====이미지 url 변환 시작=====");
+        RestTemplate restTemplate = new RestTemplate();
+
+        String imageUrl = "https://blog-back.donghyuns.com/post/url";
+
+        // Header 설정
+        HttpHeaders headers = new HttpHeaders();
+        // 파라미터로 들어온 dto를 JSON 객체로 변환
+        headers.setContentType(MediaType.APPLICATION_JSON);
+
+        // Body 설정
+        String body = objectMapper.writeValueAsString(Collections.singletonMap("postSeq", postSeq));
+//        String body = objectMapper.writeValueAsString(postSeq);
+
+        // Request Message 설정
+        HttpEntity<?> requestMessage = new HttpEntity<>(body, headers);
+
+        // 이미지 변환 요청
+        log.info("이미지 변환 요청");
+        ResponseEntity<String> response = restTemplate.postForEntity(imageUrl, requestMessage, String.class);
+
+        System.out.println("response = " + response);
+
+        ImageUrlReqDto imageUrlReqDto = objectMapper.readValue(response.getBody(), ImageUrlReqDto.class);
+        System.out.println("imageUrlReqDto = " + imageUrlReqDto);
+        String img_url = imageUrlReqDto.getResult().get(0);
+
+        // JSON에서 값 추출
+        System.out.println("response.getBody() = " + img_url);
+
+        //List<String>
+//        String insert_id = jsonNode.get("result[0]").asText();
+
+        log.info("=====이미지 url 변환 종료=====");
+        return img_url;
     }
 
     private void userExistCheck(String uuid) {
@@ -77,29 +154,6 @@ public class DiagnosisService {
                 throw new LoginStatusException();
             }
         }
-    }
-
-    public List<DiagnosisListDto> diagnosisList(DiagnosisListReqDto request){
-
-        String uuid = request.getUuid();
-
-        userExistCheck(uuid);
-        checkLoginStatus(uuid);
-
-        List<DiagnosisListDto> result = diagnosisRepository.findDiagnoses(request.getUuid());
-
-        log.info("진단결과 리스트 조회 성공");
-        return result;
-    }
-
-    public Diagnosis infoDiagnosis(InfoDiagnosisReqDto request) {
-
-        String diagnosisUuid = request.getUuid();
-
-        checkDiagnosis(diagnosisUuid);
-
-        log.info("진단결과 정보 조회 성공");
-        return diagnosisRepository.findDiagnosis(diagnosisUuid);
     }
 
     private void checkDiagnosis(String uuid) {

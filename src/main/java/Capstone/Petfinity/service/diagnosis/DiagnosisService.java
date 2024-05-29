@@ -88,7 +88,7 @@ public class DiagnosisService {
 
         List<DiagnosisListDto> result = diagnosisRepository.findDiagnoses(request.getUuid());
 
-        log.info("진단 리스트 조회 성공");
+        log.info("진단결과 리스트 조회 성공");
         return result;
     }
 
@@ -98,7 +98,7 @@ public class DiagnosisService {
 
         checkDiagnosis(diagnosisUuid);
 
-        log.info("진단 정보 조회 성공");
+        log.info("진단결과 정보 조회 성공");
         return diagnosisRepository.findDiagnosis(diagnosisUuid);
     }
 

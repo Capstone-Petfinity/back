@@ -88,12 +88,12 @@ public class DiagnosisService {
 
         // Header 설정
         HttpHeaders headers = new HttpHeaders();
+
         // 파라미터로 들어온 dto를 JSON 객체로 변환
         headers.setContentType(MediaType.APPLICATION_JSON);
 
         // Body 설정
         String body = objectMapper.writeValueAsString(Collections.singletonMap("postSeq", postSeq));
-//        String body = objectMapper.writeValueAsString(postSeq);
 
         // Request Message 설정
         HttpEntity<?> requestMessage = new HttpEntity<>(body, headers);
@@ -101,18 +101,14 @@ public class DiagnosisService {
         // 이미지 변환 요청
         log.info("이미지 변환 요청");
         ResponseEntity<String> response = restTemplate.postForEntity(imageUrl, requestMessage, String.class);
-
         System.out.println("response = " + response);
 
         ImageUrlReqDto imageUrlReqDto = objectMapper.readValue(response.getBody(), ImageUrlReqDto.class);
         System.out.println("imageUrlReqDto = " + imageUrlReqDto);
+
+        // 결과값 추출
         String img_url = imageUrlReqDto.getResult().get(0);
-
-        // JSON에서 값 추출
         System.out.println("response.getBody() = " + img_url);
-
-        //List<String>
-//        String insert_id = jsonNode.get("result[0]").asText();
 
         log.info("=====이미지 url 변환 종료=====");
         return img_url;

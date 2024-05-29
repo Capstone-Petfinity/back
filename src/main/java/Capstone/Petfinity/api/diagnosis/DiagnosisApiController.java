@@ -100,7 +100,7 @@ public class DiagnosisApiController {
         if (!auth.equals(authKey)) {
 
             log.warn("권한이 없습니다");
-            resultDiagnosis = new InfoDiagnosisResDto("400", "권한 없음", null, null, null, null);
+            resultDiagnosis = new InfoDiagnosisResDto("400", "권한 없음", null, null, null, null, null);
             return resultDiagnosis;
         }
 
@@ -108,19 +108,19 @@ public class DiagnosisApiController {
         try {
             Diagnosis diagnosis = diagnosisService.infoDiagnosis(request);
 
-            resultDiagnosis = new InfoDiagnosisResDto("200", "진단결과 정보 조회 성공", diagnosis.getDisease_name(), diagnosis.getDate(), diagnosis.getPercent(), diagnosis.getContent());
+            resultDiagnosis = new InfoDiagnosisResDto("200", "진단결과 정보 조회 성공", diagnosis.getDisease_name(), diagnosis.getDate(), diagnosis.getPercent(), diagnosis.getContent(), diagnosis.getInsert_id());
             return resultDiagnosis;
         } catch (NullUuidException e) {
 
-            resultDiagnosis = new InfoDiagnosisResDto("403", "입력되지 않은 uuid", null, null, null, null);
+            resultDiagnosis = new InfoDiagnosisResDto("403", "입력되지 않은 uuid", null, null, null, null, null);
             return resultDiagnosis;
         } catch (InvalidUuidException e) {
 
-            resultDiagnosis = new InfoDiagnosisResDto("401", "유효하지 않은 uuid", null, null, null, null);
+            resultDiagnosis = new InfoDiagnosisResDto("401", "유효하지 않은 uuid", null, null, null, null, null);
             return resultDiagnosis;
         } catch (NotExistException e) {
 
-            resultDiagnosis = new InfoDiagnosisResDto("404", "존재하지 않는 진단", null, null, null, null);
+            resultDiagnosis = new InfoDiagnosisResDto("404", "존재하지 않는 진단", null, null, null, null, null);
             return resultDiagnosis;
         }
     }

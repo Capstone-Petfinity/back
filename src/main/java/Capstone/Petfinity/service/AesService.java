@@ -1,5 +1,6 @@
 package Capstone.Petfinity.service;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.encrypt.AesBytesEncryptor;
@@ -11,25 +12,20 @@ import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
 import java.nio.charset.StandardCharsets;
 import java.util.Base64;
+import java.util.Map;
 
-//@Service
-//@Transactional(readOnly = true)
-//@RequiredArgsConstructor
-//@Slf4j
-//public class AesService {
-//
-//    AesBytesEncryptor
-//}
-
+@Service
+@Transactional(readOnly = true)
+@RequiredArgsConstructor
+@Slf4j
 public class AesService {
 
     public static String algorithms = "AES/CBC/PKCS5Padding";
-
     private final static String AESKey = "abcdefghabcdefghabcdefghabcdefgh";
-
     private final static String AESIv = "0123456789abcdef";
+    private final ObjectMapper objectMapper = new ObjectMapper();
 
-    public String encrypt_AES(String ID) {
+    public String encryptAES(String ID) {
 
         try {
             String result;
@@ -44,9 +40,10 @@ public class AesService {
 
             byte[] encrypted = cipher.doFinal(ID.getBytes(StandardCharsets.UTF_8));
             result = Base64.getEncoder().encodeToString(encrypted);
+            System.out.println("result = " + result);
 
             return result;
-        } catch (Exception e){
+        } catch (Exception e) {
 
             System.out.println("암호화 중 오류 발생");
             e.printStackTrace();
@@ -54,7 +51,7 @@ public class AesService {
         return "";
     }
 
-    String decrypt_AES(String ID) {
+    String decryptAES(String ID) {
 
         try {
             Cipher cipher = Cipher.getInstance(algorithms);
@@ -67,6 +64,7 @@ public class AesService {
 
             byte[] decodeBytes = Base64.getDecoder().decode(ID);
             byte[] decrypted = cipher.doFinal(decodeBytes);
+            System.out.println("decrypted = " + decrypted);
 
             return new String(decrypted, StandardCharsets.UTF_8);
         } catch (Exception e){
@@ -76,5 +74,27 @@ public class AesService {
         }
 
         return "";
+    }
+
+    public String encryptJson(Map<String, Object> jsonMap) {
+        try {
+            String jsonString = objectMapper.writeValueAsString(jsonMap);
+            System.out.println("jsonString = " + jsonString);
+            return encryptAES(jsonString);
+        } catch (Exception e) {
+            log.info("Error occurred while encrypting JSON data", e);
+            return "";
+        }
+    }
+
+    public Map<String, Object> decryptJson(String encryptedJson) {
+        try {
+            String decryptedJson = decryptAES(encryptedJson);
+            System.out.println("decryptedJson = " + decryptedJson);
+            return objectMapper.readValue(decryptedJson, Map.class);
+        } catch (Exception e) {
+            log.error("Error occurred while decrypting JSON data", e);
+            return null;
+        }
     }
 }

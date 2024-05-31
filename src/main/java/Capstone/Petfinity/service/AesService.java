@@ -75,26 +75,4 @@ public class AesService {
 
         return "";
     }
-
-    public String encryptJson(Map<String, Object> jsonMap) {
-        try {
-            String jsonString = objectMapper.writeValueAsString(jsonMap);
-            System.out.println("jsonString = " + jsonString);
-            return encryptAES(jsonString);
-        } catch (Exception e) {
-            log.info("Error occurred while encrypting JSON data", e);
-            return "";
-        }
-    }
-
-    public Map<String, Object> decryptJson(String encryptedJson) {
-        try {
-            String decryptedJson = decryptAES(encryptedJson);
-            System.out.println("decryptedJson = " + decryptedJson);
-            return objectMapper.readValue(decryptedJson, Map.class);
-        } catch (Exception e) {
-            log.error("Error occurred while decrypting JSON data", e);
-            return null;
-        }
-    }
 }

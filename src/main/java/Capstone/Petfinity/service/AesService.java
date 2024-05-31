@@ -51,7 +51,7 @@ public class AesService {
         return "";
     }
 
-    String decryptAES(String ID) {
+    public String decryptAES(String ID) {
 
         try {
             Cipher cipher = Cipher.getInstance(algorithms);

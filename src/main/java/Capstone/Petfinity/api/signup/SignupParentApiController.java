@@ -9,6 +9,9 @@ import Capstone.Petfinity.exception.InvalidPhoneNumberException;
 import Capstone.Petfinity.exception.InvalidPwException;
 import Capstone.Petfinity.service.AesService;
 import Capstone.Petfinity.service.user.ParentService;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +27,8 @@ public class SignupParentApiController {
     private final ParentService parentService;
     @Autowired
     private final AesService aesService;
+    @Autowired
+    private final ObjectMapper objectMapper;
 
     @Value("${auth.key}")
     private String authKey;
@@ -32,7 +37,7 @@ public class SignupParentApiController {
 
     @PostMapping("/user/signup/parent")
     public NormalResDto signupParent(@RequestHeader("auth") String auth,
-                               @RequestBody SignupParentReqDto request) {
+                                     @RequestBody String request) {
 
         log.info("권한 확인");
         if (!auth.equals(authKey)) {
@@ -44,7 +49,9 @@ public class SignupParentApiController {
 
         log.info("보호자 회원가입 시작");
         try {
-            parentService.signup(request);
+            String decryptedRequest = aesService.decryptAES(request);
+            SignupParentReqDto reqDto = objectMapper.readValue(decryptedRequest, SignupParentReqDto.class);
+            parentService.signup(reqDto);
 
             log.info("보호자 회원가입 성공");
             result = new NormalResDto(aesService.encryptAES("200"), aesService.encryptAES("보호자 회원가입 성공"));
@@ -85,6 +92,8 @@ public class SignupParentApiController {
 
             result = new NormalResDto("403", "입력되지 않은 도시");
             return result;
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
         }
     }
 }

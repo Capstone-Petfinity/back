@@ -3,7 +3,7 @@
 
 # SignupParentApiController
 
-## signupParent
+## signupParent(AES)
 #### /user/signup/parent: POST
 
 **Body**
@@ -35,7 +35,7 @@ null(403)
 
 # SignupVetApiController
 
-## signupVet
+## signupVet(AES)
 #### /user/signup/vet: POST
 
 **Body**
@@ -99,7 +99,7 @@ duplicate(402)
 
 # LoginApiController
 
-## Login
+## Login(AES)
 #### /user/login: POST
 
 **Body**

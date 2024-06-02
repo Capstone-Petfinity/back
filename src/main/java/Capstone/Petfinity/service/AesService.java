@@ -21,7 +21,7 @@ import java.util.Map;
 public class AesService {
 
     public static String algorithms = "AES/CBC/PKCS5Padding";
-    private final static String AESKey = "capstoneprincesspetfinityfightingg";
+    private final static String AESKey = "12345678901234567890123456789012";
     private final static String AESIv = "0123456789abcdef";
     private final ObjectMapper objectMapper = new ObjectMapper();
 

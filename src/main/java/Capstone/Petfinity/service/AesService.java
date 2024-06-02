@@ -20,7 +20,7 @@ import java.util.Map;
 @Slf4j
 public class AesService {
 
-    public static String algorithms = "AES/CBC/PKCS7Padding";
+    public static String algorithms = "AES/CBC/PKCS5Padding";
     private final static String AESKey = "abcdefghabcdefghabcdefghabcdefgh";
     private final static String AESIv = "0123456789abcdef";
     private final ObjectMapper objectMapper = new ObjectMapper();

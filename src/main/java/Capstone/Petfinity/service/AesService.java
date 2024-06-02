@@ -26,6 +26,36 @@ public class AesService {
     private final ObjectMapper objectMapper = new ObjectMapper();
 
     public String encryptAES(String ID) {
+        try {
+
+            Cipher cipher = Cipher.getInstance(algorithms);
+            SecretKeySpec keySpec = new SecretKeySpec(AESKey.getBytes(StandardCharsets.UTF_8), "AES");
+            IvParameterSpec ivParameterSpec = new IvParameterSpec(AESIv.getBytes(StandardCharsets.UTF_8));
+            cipher.init(Cipher.ENCRYPT_MODE, keySpec, ivParameterSpec);
+            byte[] encryptedBytes = cipher.doFinal(ID.getBytes(StandardCharsets.UTF_8));
+            return Base64.getEncoder().encodeToString(encryptedBytes);
+        } catch (Exception e) {
+
+            e.printStackTrace();
+            throw new RuntimeException("암호화 중 오류", e);
+        }
+    }
+
+    public String decryptAES(String ID) {
+        try {
+            Cipher cipher = Cipher.getInstance(algorithms);
+            SecretKeySpec keySpec = new SecretKeySpec(AESKey.getBytes(StandardCharsets.UTF_8), "AES");
+            IvParameterSpec ivParameterSpec = new IvParameterSpec(AESIv.getBytes(StandardCharsets.UTF_8));
+            cipher.init(Cipher.DECRYPT_MODE, keySpec, ivParameterSpec);
+            byte[] decodedBytes = Base64.getDecoder().decode(ID);
+            byte[] decryptedBytes = cipher.doFinal(decodedBytes);
+            return new String(decryptedBytes, StandardCharsets.UTF_8);
+        } catch(Exception e) {
+            e.printStackTrace();
+            throw new RuntimeException("복호화 중 오류", e);
+        }
+    }
+    /*public String encryptAES(String ID) {
 
         try {
             String result;
@@ -74,5 +104,5 @@ public class AesService {
         }
 
         return "";
-    }
+    }*/
 }

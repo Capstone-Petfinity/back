@@ -43,7 +43,7 @@ public class SignupParentApiController {
         if (!auth.equals(authKey)) {
 
             log.warn("권한이 없습니다");
-            result = new NormalResDto(aesService.encryptAES("400"), aesService.encryptAES("권한 없음"));
+            result = new NormalResDto("400", "권한 없음");
             return result;
         }
 
@@ -54,7 +54,7 @@ public class SignupParentApiController {
             parentService.signup(reqDto);
 
             log.info("보호자 회원가입 성공");
-            result = new NormalResDto(aesService.encryptAES("200"), aesService.encryptAES("보호자 회원가입 성공"));
+            result = new NormalResDto("200", "보호자 회원가입 성공");
             return result;
         } catch (InvalidIdException e) {
 
@@ -69,7 +69,6 @@ public class SignupParentApiController {
             result = new NormalResDto("401", "유효하지 않은 이름");
             return result;
         } catch (InvalidPhoneNumberException e) {
-
             result = new NormalResDto("401", "유효하지 않은 전화번호");
             return result;
         } catch (DuplicateIdException e) {

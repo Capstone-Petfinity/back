@@ -14,6 +14,7 @@ import Capstone.Petfinity.exception.InvalidNameException;
 import Capstone.Petfinity.exception.InvalidPhoneNumberException;
 import Capstone.Petfinity.exception.InvalidPwException;
 import Capstone.Petfinity.repository.ParentRepository;
+import Capstone.Petfinity.service.AesService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -30,6 +31,8 @@ import static org.springframework.util.StringUtils.containsWhitespace;
 public class ParentService {
 
     private final ParentRepository parentRepository;
+
+    private final AesService aesService;
 
     @Transactional
     public void signup(SignupParentReqDto parent) {

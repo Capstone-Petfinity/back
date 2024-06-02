@@ -2,8 +2,13 @@ package Capstone.Petfinity.api.loginout;
 
 import Capstone.Petfinity.dto.loginout.LoginReqDto;
 import Capstone.Petfinity.dto.loginout.LoginResDto;
+import Capstone.Petfinity.dto.signup.parent.SignupParentReqDto;
 import Capstone.Petfinity.exception.*;
+import Capstone.Petfinity.service.AesService;
 import Capstone.Petfinity.service.loginout.LoginService;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +25,10 @@ public class LoginApiController {
 
     @Autowired
     private final LoginService loginService;
+    @Autowired
+    private final AesService aesService;
+    @Autowired
+    private final ObjectMapper objectMapper;
 
     @Value("${auth.key}")
     private String authKey;
@@ -28,7 +37,7 @@ public class LoginApiController {
 
     @PostMapping("/user/login")
     public LoginResDto Login(@RequestHeader("auth") String auth,
-                             @RequestBody LoginReqDto request) {
+                             @RequestBody String request) {
 
         log.info("권한 확인");
         if (!auth.equals(authKey)) {
@@ -40,8 +49,11 @@ public class LoginApiController {
 
         try {
             log.info("로그인 시작");
-            String uuid = loginService.login(request);
-            Boolean isParent = loginService.isParent(request);
+            String decryptedRequest = aesService.decryptAES(request);
+            LoginReqDto reqDto = objectMapper.readValue(decryptedRequest, LoginReqDto.class);
+
+            String uuid = loginService.login(reqDto);
+            Boolean isParent = loginService.isParent(reqDto);
 
             log.info("로그인 성공");
             result = new LoginResDto("200", "로그인 성공", uuid, isParent);
@@ -66,6 +78,8 @@ public class LoginApiController {
 
             result = new LoginResDto("406", "이미 로그인된 계정", null, null);
             return result;
+        }  catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
         }
     }
 }

@@ -64,7 +64,7 @@ public class AesService {
 
             byte[] decodeBytes = Base64.getDecoder().decode(ID);
             byte[] decrypted = cipher.doFinal(decodeBytes);
-            System.out.println("decrypted = " + decrypted);
+            System.out.println("decrypted = " + new String(decrypted, StandardCharsets.UTF_8));
 
             return new String(decrypted, StandardCharsets.UTF_8);
         } catch (Exception e){
